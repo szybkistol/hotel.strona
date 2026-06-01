@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Canine Comfort Hotel - Luksusowy Hotel dla Twojego Psa</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet">
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface": "#1b1c1c",
+                        "on-secondary": "#ffffff",
+                        "secondary": "#7d562d",
+                        "primary": "#14422d",
+                        "on-secondary-fixed-variant": "#623f18",
+                        "surface-container-low": "#f5f3f3",
+                        "tertiary-fixed": "#e2e3de",
+                        "surface-container-high": "#eae8e7",
+                        "error": "#ba1a1a",
+                        "surface-bright": "#fbf9f8",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed": "#bceecf",
+                        "on-tertiary-container": "#c4c5c0",
+                        "on-tertiary-fixed-variant": "#454744",
+                        "surface-container": "#efeded",
+                        "on-background": "#1b1c1c",
+                        "background": "#fbf9f8",
+                        "inverse-surface": "#303030",
+                        "on-primary-fixed-variant": "#224f39",
+                        "primary-fixed-dim": "#a1d1b4",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#50524e",
+                        "on-error": "#ffffff",
+                        "outline-variant": "#c0c9c1",
+                        "secondary-container": "#ffca98",
+                        "inverse-on-surface": "#f2f0f0",
+                        "on-secondary-fixed": "#2c1600",
+                        "on-secondary-container": "#7a532a",
+                        "on-primary-fixed": "#002112",
+                        "on-primary-container": "#9fcfb2",
+                        "secondary-fixed-dim": "#f0bd8b",
+                        "surface-dim": "#dbd9d9",
+                        "tertiary": "#393b38",
+                        "surface": "#fbf9f8",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed-dim": "#c6c7c2",
+                        "inverse-primary": "#a1d1b4",
+                        "surface-variant": "#e4e2e2",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#2d5a43",
+                        "surface-container-highest": "#e4e2e2",
+                        "on-surface-variant": "#414943",
+                        "outline": "#717973",
+                        "secondary-fixed": "#ffdcbd",
+                        "surface-tint": "#3a674f",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#1a1c19"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "stack-sm": "12px",
+                        "stack-lg": "48px",
+                        "base": "8px",
+                        "margin-desktop": "40px",
+                        "margin-mobile": "16px",
+                        "container-max": "1280px",
+                        "stack-md": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-xl": ["Quicksand"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Quicksand"],
+                        "headline-md": ["Quicksand"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Quicksand"],
+                        "body-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-xl": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .soft-card-shadow {
+            box-shadow: 0 16px 32px -4px rgba(20, 66, 45, 0.08);
+        }
+
+        .hover-card-shadow:hover {
+            box-shadow: 0 20px 40px -4px rgba(125, 86, 45, 0.12);
+            transform: translateY(-4px);
+            transition: all 0.3s ease;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .premium-calendar-day:hover:not(.occupied) {
+            background-color: #f0bd8b20;
+            transform: scale(1.05);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .date-selected {
+            background: linear-gradient(135deg, #7d562d 0%, #623f18 100%);
+            box-shadow: 0 8px 16px -4px rgba(125, 86, 45, 0.4);
+            color: #ffffff !important;
+            font-weight: 700;
+        }
+
+        .date-in-range {
+            background-color: #ffdcbd !important;
+            color: #2c1600 !important;
+        }
+    </style>
+</head>
+
+<body class="bg-background text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed pb-0">
+    <!-- Navigation Shell -->
+    <nav class="fixed top-0 w-full z-50 bg-surface-bright/90 backdrop-blur-md shadow-sm shadow-primary/5">
+        <div class="flex justify-between items-center max-w-[1280px] mx-auto px-margin-desktop py-4">
+            <div class="font-headline-md text-headline-md font-bold text-primary">Canine Comfort Hotel</div>
+            <div class="hidden md:flex gap-gutter items-center">
+                <a class="font-label-md text-label-md transition-colors duration-200 text-on-surface-variant"
+                    href="#about">O nas</a>
+                <a class="font-label-md text-label-md hover:text-secondary transition-colors duration-200 text-on-surface-variant"
+                    href="#requirements">Wymagania</a>
+                <a class="font-label-md text-label-md hover:text-secondary transition-colors duration-200 text-on-surface-variant"
+                    href="#pricing">Cennik</a>
+                <a class="font-label-md text-label-md hover:text-secondary transition-colors duration-200 text-on-surface-variant"
+                    href="#booking">Rezerwacja</a>
+                <a class="font-label-md text-label-md hover:text-secondary transition-colors duration-200 text-on-surface-variant"
+                    href="#contact">Kontakt</a>
+                <a class="font-label-md text-label-md hover:text-secondary transition-colors duration-200 text-primary border-b-2 border-secondary pb-1"
+                    href="#gallery">Galeria</a>
+                <button
+                    class="bg-primary text-on-primary px-6 py-2 rounded-lg font-label-md text-label-md active:scale-95 transition-transform">Zarezerwuj
+                    Pobyt</button>
+            </div>
+            <div class="md:hidden">
+                <span class="material-symbols-outlined text-primary cursor-pointer">menu</span>
+            </div>
+        </div>
+    </nav>
+    <main class="pt-20">
+        <!-- Hero Section -->
+        <section class="relative h-[85vh] flex items-center overflow-hidden">
+            <div class="absolute inset-0 z-0">
+                <img class="w-full h-full object-cover"
+                    data-alt="The background image of a peaceful forest clearing for a dog hotel website. Modify the existing image so that the grass is taller, lush, and more natural, like a wild meadow. Keep the same soft lighting, depth of field, and serene forest atmosphere. Use the existing color palette of forest greens and earthy tones from the design system."
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBuuPuKqSBRKjs-xDxI_NEnp1-uigByVhy3z4-4sAkWbFNh38rD2RtuWBsV3fXhEwLEFsGJC4kvLChMmhn1jyMgbjtq00OqldoFu4ByKpzEkabI2i0Kz-tT1G-cyk8xLN2JmZ6PRNw_Wc6bKmqXitP_jb9WgiEFN4U4edlCpqx1BK715oTPvjmDZiePYnHzaIFMbkcVmTHy74odTNhFFTiXA1xPUy_bW3JY4xzI04gW2SY15SJaXo0FJgkqFvLgG95npXObdF1NtQ">
+                <div class="absolute inset-0 bg-gradient-to-r from-primary/60 to-transparent"></div>
+            </div>
+            <div class="relative z-10 max-w-[1280px] mx-auto px-margin-desktop w-full">
+                <div class="max-w-2xl text-on-primary">
+                    <h1 class="font-headline-xl text-headline-xl mb-stack-sm">Drugi ddd<div>Dla Twojego Przyjaciela
+                        </div>
+                    </h1>
+                    <p class="font-body-lg text-body-lg mb-stack-lg opacity-90">Zapewniamy profesjonalną opiekę, miłość
+                        i bezpieczeństwo w luksusowych warunkach. Bo każdy pies zasługuje na wakacje.</p>
+                    <div class="flex gap-4">
+                        <a class="bg-primary text-on-primary px-8 py-4 rounded-lg font-label-md text-label-md hover:bg-primary-container transition-colors shadow-lg border-2 border-white/30"
+                            href="#booking">Zarezerwuj Pobyt</a>
+                        <a class="bg-transparent border-2 border-on-primary text-on-primary px-8 py-4 rounded-lg font-label-md text-label-md hover:bg-on-primary/10 transition-colors"
+                            href="#about">Dowiedz się więcej</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- O Nas Section -->
+        <section class="py-stack-lg bg-surface-bright" id="about">
+            <div class="max-w-[1280px] mx-auto px-margin-desktop grid md:grid-cols-2 gap-stack-lg items-center">
+                <div class="relative">
+                    <div class="absolute -top-4 -left-4 w-24 h-24 bg-secondary-container rounded-full -z-10"></div>
+                    <img class="rounded-xl soft-card-shadow w-full h-[450px] object-cover"
+                        data-alt="A professional pet caregiver sitting on a soft rug, gently petting a calm Labrador in a bright, modern interior room with large windows. The room is decorated with minimalist furniture and warm wooden accents, conveying a professional yet cozy home-like atmosphere. Soft natural light fills the space, highlighting the bond of trust between the human and the dog in this premium hospitality environment."
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAN9-Bme86Q3KNMiygotxrRjid40m_vfdPpk0Rtf-p12i66bENz-svowlgcfCHIRLAf-lROT4uwlEFWJfSaInxEf9HV55clcaihpPuH0qyADXiMBZ_xL0eOHE84AJ2JDA8VNYVYqnrd996XrOR5SYLu5jJfs9aQh5h3MLg1aDbzrQiD8-WW7ILHOSVTXM-FdpMBm8ari6F9GKI2wv_wic_lufweI39DtGwxB8x8c6V030klOkMLmgJ7egYY6AlcbkLF2zQZQHXt1Q">
+                </div>
+                <div>
+                    <span class="text-secondary font-label-md uppercase tracking-wider mb-2 block">Nasza Misja</span>
+                    <h2 class="font-headline-lg text-headline-lg text-primary mb-stack-sm">Z Miłości do Merdających
+                        Ogonów</h2>
+                    <p class="font-body-md text-body-md text-on-surface-variant mb-stack-md leading-relaxed">
+                        Canine Comfort Hotel powstał z pasji do psów i potrzeby stworzenia miejsca, które nie będzie
+                        tylko przechowalnią, ale prawdziwym domem tymczasowym. Od 2018 roku dbamy o to, by każdy nasz
+                        gość czuł się u nas jak u siebie.
+                    </p>
+                    <div class="grid grid-cols-2 gap-stack-sm">
+                        <div class="flex items-start gap-2">
+                            <span class="material-symbols-outlined text-primary">pets</span>
+                            <div>
+                                <h4 class="font-label-md text-primary">Indywidualne podejście</h4>
+                                <p class="text-label-sm text-on-surface-variant">Znamy imię i nawyki każdego gościa.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <span class="material-symbols-outlined text-primary">health_and_safety</span>
+                            <div>
+                                <h4 class="font-label-md text-primary">Certyfikowana kadra</h4>
+                                <p class="text-label-sm text-on-surface-variant">Opiekunowie z pasją i wiedzą.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Wymagania Section -->
+        <section class="py-stack-lg bg-surface-container-low" id="requirements">
+            <div class="max-w-[1280px] mx-auto px-margin-desktop">
+                <div class="text-center mb-stack-lg">
+                    <h2 class="font-headline-lg text-headline-lg text-primary">Wymagania i Wyprawka</h2>
+                    <p class="font-body-md text-body-md text-on-surface-variant max-w-xl mx-auto mt-stack-sm">
+                        Bezpieczeństwo wszystkich naszych gości jest dla nas priorytetem. Prosimy o przygotowanie
+                        poniższych dokumentów i rzeczy.</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-gutter">
+                    <div
+                        class="bg-surface-container-lowest p-stack-md rounded-xl soft-card-shadow border-l-4 border-primary">
+                        <h3 class="font-headline-md text-headline-md text-primary mb-stack-sm flex items-center gap-2">
+                            <span class="material-symbols-outlined">medical_services</span> Zdrowie i Dokumenty
+                        </h3>
+                        <ul class="space-y-stack-sm">
+                            <li class="flex items-center gap-3 font-body-md text-on-surface-variant">
+                                <span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+                                Aktualna książeczka zdrowia z wpisem o szczepieniu przeciw wściekliźnie.
+                            </li>
+                            <li class="flex items-center gap-3 font-body-md text-on-surface-variant">
+                                <span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+                                Szczepienie przeciwko kaszlowi kenelowemu (zalecane).
+                            </li>
+                            <li class="flex items-center gap-3 font-body-md text-on-surface-variant">
+                                <span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+                                Profilaktyka przeciw pchłom i kleszczom (podana max 2 tyg. wcześniej).
+                            </li>
+                            <li class="flex items-center gap-3 font-body-md text-on-surface-variant">
+                                <span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+                                Aktualne odrobaczenie (potwierdzone w książeczce).
+                            </li>
+                        </ul>
+                    </div>
+                    <div
+                        class="bg-surface-container-lowest p-stack-md rounded-xl soft-card-shadow border-l-4 border-secondary">
+                        <h3
+                            class="font-headline-md text-headline-md text-secondary mb-stack-sm flex items-center gap-2">
+                            <span class="material-symbols-outlined">luggage</span> Co zabrać ze sobą?
+                        </h3>
+                        <ul class="space-y-stack-sm">
+                            <li class="flex items-center gap-3 font-body-md text-on-surface-variant">
+                                <span class="material-symbols-outlined text-secondary text-[20px]">shopping_bag</span>
+                                Karma, którą pies je na co dzień (aby uniknąć rewolucji żołądkowych).
+                            </li>
+                            <li class="flex items-center gap-3 font-body-md text-on-surface-variant">
+                                <span class="material-symbols-outlined text-secondary text-[20px]">bed</span>
+                                Ulubione legowisko lub kocyk (pachnący domem).
+                            </li>
+                            <li class="flex items-center gap-3 font-body-md text-on-surface-variant">
+                                <span class="material-symbols-outlined text-secondary text-[20px]">toys</span>
+                                Dwie ulubione zabawki.
+                            </li>
+                            <li class="flex items-center gap-3 font-body-md text-on-surface-variant">
+                                <span class="material-symbols-outlined text-secondary text-[20px]">info</span>
+                                Instrukcja dawkowania karmy i ewentualnych leków.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Cennik Section -->
+        <section class="py-stack-lg bg-surface-bright" id="pricing">
+            <div class="max-w-[1280px] mx-auto px-margin-desktop">
+                <div class="text-center mb-stack-md">
+                    <h2 class="font-headline-lg text-headline-lg text-primary">Cennik</h2>
+                    <p class="font-label-sm text-on-surface-variant opacity-70 mt-2 italic">Przy pobytach powyżej 14 dni
+                        oferujemy 10% rabatu.</p>
+                </div>
+                <div class="flex flex-wrap justify-center gap-gutter">
+                    <div
+                        class="bg-surface-container-low p-6 rounded-xl text-center flex flex-col items-center justify-center w-full max-w-[280px] border border-transparent hover:border-outline-variant transition-all">
+                        <h3 class="font-headline-md text-headline-md text-primary mb-1">Mały Pies</h3>
+                        <p class="text-label-sm text-on-surface-variant mb-4">Waga do 10 kg</p>
+                        <div class="text-headline-lg text-secondary">80 PLN <span
+                                class="text-body-md text-on-surface-variant font-normal">/ doba</span></div>
+                    </div>
+                    <div
+                        class="bg-surface-container-low p-6 rounded-xl text-center flex flex-col items-center justify-center w-full max-w-[280px] border border-transparent hover:border-outline-variant transition-all">
+                        <h3 class="font-headline-md text-headline-md text-primary mb-1">Średni Pies</h3>
+                        <p class="text-label-sm text-on-surface-variant mb-4">Waga 10 - 25 kg</p>
+                        <div class="text-headline-lg text-secondary">100 PLN <span
+                                class="text-body-md text-on-surface-variant font-normal">/ doba</span></div>
+                    </div>
+                    <div
+                        class="bg-surface-container-low p-6 rounded-xl text-center flex flex-col items-center justify-center w-full max-w-[280px] border border-transparent hover:border-outline-variant transition-all">
+                        <h3 class="font-headline-md text-headline-md text-primary mb-1">Duży Pies</h3>
+                        <p class="text-label-sm text-on-surface-variant mb-4">Waga powyżej 25 kg</p>
+                        <div class="text-headline-lg text-secondary">120 PLN <span
+                                class="text-body-md text-on-surface-variant font-normal">/ doba</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Redesigned Rezerwacja Section -->
+        <section class="py-stack-lg bg-surface-container relative overflow-hidden" id="booking">
+            <div class="absolute top-0 right-0 w-96 h-96 bg-primary-fixed/20 rounded-full blur-3xl -mr-48 -mt-48"></div>
+            <div
+                class="absolute bottom-0 left-0 w-96 h-96 bg-secondary-container/20 rounded-full blur-3xl -ml-48 -mb-48">
+            </div>
+            <div class="max-w-[1280px] mx-auto px-margin-desktop relative z-10">
+                <div class="max-w-4xl mx-auto text-center mb-stack-lg">
+                    <span class="text-secondary font-label-md uppercase tracking-[0.2em] mb-3 block">Rezerwacja
+                        Online</span>
+                    <h2 class="font-headline-xl text-headline-xl text-primary mb-4">Zaplanuj Wymarzony Pobyt</h2>
+                    <p class="font-body-lg text-on-surface-variant leading-relaxed">
+                        Wybierz termin w naszym interaktywnym kalendarzu i prześlij zgłoszenie.
+                        Skontaktujemy się z Tobą w ciągu 24h, aby potwierdzić dostępność.
+                    </p>
+                </div>
+                <div
+                    class="bg-surface-bright rounded-[2rem] shadow-2xl overflow-hidden border border-white/40 backdrop-blur-sm grid lg:grid-cols-12 gap-0">
+                    <!-- Left: Interactive Calendar -->
+                    <div class="p-8 md:p-12 border-r border-outline-variant/20 lg:col-span-8" id="calendar-container">
+                        <div class="flex justify-between items-center mb-10">
+                            <div>
+                                <h3 class="font-headline-md text-primary text-2xl">Grudzień 2024</h3>
+                                <p class="text-label-sm text-on-surface-variant opacity-70">Wybierz datę przyjazdu i
+                                    wyjazdu</p>
+                            </div>
+                            <div class="flex gap-2">
+                                <button
+                                    class="w-11 h-11 flex items-center justify-center rounded-full border border-outline-variant/30 hover:bg-surface-container hover:border-primary transition-all">
+                                    <span class="material-symbols-outlined text-primary">chevron_left</span>
+                                </button>
+                                <button
+                                    class="w-11 h-11 flex items-center justify-center rounded-full border border-outline-variant/30 hover:bg-surface-container hover:border-primary transition-all">
+                                    <span class="material-symbols-outlined text-primary">chevron_right</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-7 gap-3 mb-4" id="calendar-grid">
+                            <div class="text-center font-label-md text-on-surface-variant/60 pb-4">Pon</div>
+                            <div class="text-center font-label-md text-on-surface-variant/60 pb-4">Wt</div>
+                            <div class="text-center font-label-md text-on-surface-variant/60 pb-4">Śr</div>
+                            <div class="text-center font-label-md text-on-surface-variant/60 pb-4">Czw</div>
+                            <div class="text-center font-label-md text-on-surface-variant/60 pb-4">Pt</div>
+                            <div class="text-center font-label-md text-on-surface-variant/60 pb-4">Sob</div>
+                            <div class="text-center font-label-md text-on-surface-variant/60 pb-4">Ndz</div>
+                            <!-- Row 1: Past Month -->
+                            <div class="aspect-square flex items-center justify-center text-on-surface-variant/20">25
+                            </div>
+                            <div class="aspect-square flex items-center justify-center text-on-surface-variant/20">26
+                            </div>
+                            <div class="aspect-square flex items-center justify-center text-on-surface-variant/20">27
+                            </div>
+                            <div class="aspect-square flex items-center justify-center text-on-surface-variant/20">28
+                            </div>
+                            <div class="aspect-square flex items-center justify-center text-on-surface-variant/20">29
+                            </div>
+                            <div class="aspect-square flex items-center justify-center text-on-surface-variant/20">30
+                            </div>
+                            <div class="aspect-square flex items-center justify-center premium-calendar-day cursor-pointer rounded-2xl border border-transparent"
+                                data-day="1">1</div>
+                            <!-- Row 2 -->
+                            <div class="aspect-square flex items-center justify-center premium-calendar-day cursor-pointer rounded-2xl border border-transparent"
+                                data-day="2">2</div>
+                            <div class="aspect-square flex items-center justify-center premium-calendar-day cursor-pointer rounded-2xl border border-transparent date-selected"
+                                data-day="3">3</div>
+                            <div class="aspect-square flex items-center justify-center premium-calendar-day cursor-pointer rounded-2xl border border-transparent date-in-range"
+                                data-day="4">4</div>
+                            <div class="aspect-square flex items-center justify-center premium-calendar-day cursor-pointer rounded-2xl border border-transparent date-in-range"
+                                data-day="5">5</div>
+                            <div class="aspect-square flex items-center justify-center premium-calendar-day cursor-pointer rounded-2xl border border-transparent date-in-range"
+                                data-day="6">6</div>
+                            <div class="aspect-square flex items-center justify-center premium-calendar-day cursor-pointer rounded-2xl border border-transparent date-in-range"
+                                data-day="7">7</div>
+                            <div class="aspect-square flex items-center justify-center premium-calendar-day cursor-pointer rounded-2xl border border-transparent date-in-range"
+                                data-day="8">8</div>
+                            <!-- Row 3 -->
+                            <div class="aspect-square flex items-center justify-center premium-calendar-day cursor-pointer rounded-2xl border border-transparent date-in-range"
+                                data-day="9">9</div>
+                            <div class="aspect-square flex items-center justify-center premium-calendar-day cursor-pointer rounded-2xl border border-transparent date-in-range"
+                                data-day="10">10</div>
+                            <div class="aspect-square flex items-center justify-center premium-calendar-day cursor-pointer rounded-2xl border border-transparent date-selected"
+                                data-day="11">11</div>
+                            <div class="aspect-square flex items-center justify-center premium-calendar-day cursor-pointer rounded-2xl border border-transparent"
+                                data-day="12">12</div>
+                            <div class="aspect-square flex items-center justify-center premium-calendar-day cursor-pointer rounded-2xl border border-transparent"
+                                data-day="13">13</div>
+                            <div class="aspect-square flex items-center justify-center premium-calendar-day cursor-pointer rounded-2xl border border-transparent"
+                                data-day="14">14</div>
+                            <div class="aspect-square flex items-center justify-center premium-calendar-day cursor-pointer rounded-2xl border border-transparent"
+                                data-day="15">15</div>
+                            <!-- Row 4 -->
+                            <div class="aspect-square flex items-center justify-center premium-calendar-day cursor-pointer rounded-2xl border border-transparent"
+                                data-day="16">16</div>
+                            <div class="aspect-square flex items-center justify-center premium-calendar-day cursor-pointer rounded-2xl border border-transparent"
+                                data-day="17">17</div>
+                            <div class="aspect-square flex items-center justify-center premium-calendar-day cursor-pointer rounded-2xl border border-transparent"
+                                data-day="18">18</div>
+                            <div class="aspect-square flex items-center justify-center premium-calendar-day cursor-pointer rounded-2xl border border-transparent"
+                                data-day="19">19</div>
+                            <div class="aspect-square flex items-center justify-center premium-calendar-day cursor-pointer rounded-2xl border border-transparent"
+                                data-day="20">20</div>
+                            <div class="aspect-square flex items-center justify-center premium-calendar-day cursor-pointer rounded-2xl border border-transparent"
+                                data-day="21">21</div>
+                            <div class="aspect-square flex items-center justify-center premium-calendar-day cursor-pointer rounded-2xl border border-transparent"
+                                data-day="22">22</div>
+                        </div>
+                        <div class="mt-8 pt-8 border-t border-outline-variant/20 flex flex-wrap gap-6">
+                            <div class="flex items-center gap-2"><span
+                                    class="w-2.5 h-2.5 bg-secondary rounded-full shadow-sm shadow-secondary/50"></span>
+                                <span class="text-label-sm text-on-surface-variant font-medium">Twój wybór</span></div>
+                            <div class="flex items-center gap-2"><span
+                                    class="w-2.5 h-2.5 bg-error/40 rounded-full"></span> <span
+                                    class="text-label-sm text-on-surface-variant font-medium">Brak miejsc</span></div>
+                            <div class="flex items-center gap-2"><span
+                                    class="w-2.5 h-2.5 bg-surface-container rounded-full border border-outline-variant/30"></span>
+                                <span class="text-label-sm text-on-surface-variant font-medium">Dostępne</span></div>
+                        </div>
+                    </div>
+                    <!-- Right: Smooth Form -->
+                    <div class="bg-surface-container-low/50 p-8 md:p-12 lg:col-span-4">
+                        <h3 class="font-headline-md text-primary mb-8">Uzupełnij Dane</h3>
+                        <form class="space-y-6">
+                            <div class="space-y-2">
+                                <label class="font-label-md text-on-surface-variant flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-[18px] text-primary">person</span> Imię
+                                    i Nazwisko Opiekuna
+                                </label>
+                                <input
+                                    class="w-full bg-white border-outline-variant/20 rounded-xl p-4 focus:ring-2 focus:ring-primary focus:border-transparent transition-all shadow-sm"
+                                    placeholder="Jan Kowalski" type="text">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="font-label-md text-on-surface-variant flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-[18px] text-primary">call</span> Numer
+                                    Telefonu
+                                </label>
+                                <input
+                                    class="w-full bg-white border-outline-variant/20 rounded-xl p-4 focus:ring-2 focus:ring-primary focus:border-transparent transition-all shadow-sm"
+                                    placeholder="+48 000 000 000" type="tel">
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="space-y-2">
+                                    <label class="font-label-md text-on-surface-variant flex items-center gap-2">
+                                        <span
+                                            class="material-symbols-outlined text-[18px] text-primary">calendar_today</span>
+                                        Przyjazd
+                                    </label>
+                                    <input
+                                        class="w-full bg-white border-outline-variant/20 rounded-xl p-4 focus:ring-2 focus:ring-primary focus:border-transparent transition-all shadow-sm text-sm"
+                                        id="check-in" type="date" value="2024-12-03">
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="font-label-md text-on-surface-variant flex items-center gap-2">
+                                        <span class="material-symbols-outlined text-[18px] text-primary">event</span>
+                                        Wyjazd
+                                    </label>
+                                    <input
+                                        class="w-full bg-white border-outline-variant/20 rounded-xl p-4 focus:ring-2 focus:ring-primary focus:border-transparent transition-all shadow-sm text-sm"
+                                        id="check-out" type="date" value="2024-12-11">
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <label class="font-label-md text-on-surface-variant flex items-center gap-2"><span
+                                        class="material-symbols-outlined text-[18px] text-primary">notes</span> Opis i
+                                    dodatkowe uwagi (imię, rasa, wielkość psa itp.)</label>
+                                <textarea
+                                    class="w-full bg-white border-outline-variant/20 rounded-xl p-4 h-24 focus:ring-2 focus:ring-primary focus:border-transparent transition-all shadow-sm resize-none"
+                                    placeholder="Imię psa, rasa, wielkość, dieta, leki, charakterystyka..."></textarea>
+                            </div>
+                            <button
+                                class="w-full bg-primary text-on-primary py-5 rounded-2xl font-headline-md text-lg shadow-xl shadow-primary/20 hover:bg-primary-container hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-3 mt-4"
+                                type="submit">
+                                Wyślij Zapytanie <span class="material-symbols-outlined">send</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Kontakt Section -->
+        <section class="py-stack-lg bg-surface-bright" id="contact">
+            <div class="max-w-[1280px] mx-auto px-margin-desktop">
+                <div class="grid md:grid-cols-2 gap-stack-lg">
+                    <div>
+                        <h2 class="font-headline-lg text-headline-lg text-primary mb-stack-md">Skontaktuj się z nami
+                        </h2>
+                        <div class="space-y-stack-md">
+                            <div class="flex gap-4">
+                                <div
+                                    class="w-12 h-12 bg-primary-fixed rounded-full flex items-center justify-center text-primary">
+                                    <span class="material-symbols-outlined">call</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-label-md text-primary">Zadzwoń do nas</h4>
+                                    <p class="font-body-md text-on-surface-variant">+48 123 456 789</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <div
+                                    class="w-12 h-12 bg-primary-fixed rounded-full flex items-center justify-center text-primary">
+                                    <span class="material-symbols-outlined">mail</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-label-md text-primary">Napisz maila</h4>
+                                    <p class="font-body-md text-on-surface-variant">kontakt@caninecomfort.pl</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <div
+                                    class="w-12 h-12 bg-primary-fixed rounded-full flex items-center justify-center text-primary">
+                                    <span class="material-symbols-outlined">location_on</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-label-md text-primary">Adres</h4>
+                                    <p class="font-body-md text-on-surface-variant">ul. Psia 15, 05-800 Pruszków</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-stack-lg flex gap-4">
+                            <a class="w-10 h-10 bg-secondary rounded-full flex items-center justify-center text-white hover:scale-110 transition-transform"
+                                href="#"><span class="material-symbols-outlined">social_leaderboard</span></a>
+                            <a class="w-10 h-10 bg-secondary rounded-full flex items-center justify-center text-white hover:scale-110 transition-transform"
+                                href="#"><span class="material-symbols-outlined">photo_camera</span></a>
+                        </div>
+                    </div>
+                    <div
+                        class="h-[400px] bg-surface-container rounded-2xl overflow-hidden soft-card-shadow border-4 border-white">
+                        <div class="w-full h-full relative">
+                            <img class="w-full h-full object-cover"
+                                data-alt="A stylized aerial view map of a quiet residential suburban area in Poland with green parks and winding roads. The map is presented in a clean, modern aesthetic with soft muted colors and a high-contrast location marker shaped like a dog paw in forest green. The overall lighting is bright and clear, matching a professional business directory look."
+                                data-location="Warsaw, Poland"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuC34JjS2fX-ZaPXPF2Z8Gh25wbR8_fCUXW22MNhqFF4eXAnFyqOIkS4TcZyNP2MFYeXtrm2O1tjPwfxyVG6z-z3HAYsSJr3y3tFDpeB0LDNlVB196vvROpmeMFa9kXyJW7SWRqNPjxNeyokRMVD_XYUA_SDfNaOMOcr2suMZm-sXDqBt9V9T2RB1k8ZtmiP3EllToeIzHOPGctgLSRJ3RVXKkZtEPmHPQ0e42TxG4brrbnuBCDdgR2tHdUIv5Yh3lBTbWtp4AGHUg">
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div
+                                    class="bg-primary text-on-primary px-4 py-2 rounded-full shadow-lg flex items-center gap-2">
+                                    <span class="material-symbols-outlined"
+                                        style="font-variation-settings: 'FILL' 1;">location_on</span>
+                                    <span class="font-label-md">Znajdź nas tutaj</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Footer Shell -->
+    <footer class="bg-surface-container-high">
+        <div class="max-w-[1280px] mx-auto px-margin-desktop py-stack-lg">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="text-center md:text-left">
+                    <div class="font-headline-sm text-headline-sm font-bold text-primary mb-2">Canine Comfort Hotel
+                    </div>
+                    <p class="font-body-md text-body-md text-on-surface-variant max-w-sm">Profesjonalny hotel dla psów,
+                        gdzie komfort i bezpieczeństwo Twojego pupila są naszym priorytetem.</p>
+                </div>
+                <div class="flex flex-col items-center md:items-end gap-4">
+                    <div class="flex gap-6">
+                        <a class="text-label-sm text-on-surface-variant hover:text-secondary underline transition-all"
+                            href="#">Privacy Policy</a>
+                        <a class="text-label-sm text-on-surface-variant hover:text-secondary underline transition-all"
+                            href="#">Terms of Service</a>
+                    </div>
+                    <p class="font-label-sm text-label-sm text-on-surface-variant opacity-70">© 2024 Canine Comfort Dog
+                        Hotel. Built with warmth and care.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Calendar Interaction Logic
+        let startDate = null;
+        let endDate = null;
+        const year = 2024;
+        const month = 11; // December (0-indexed)
+
+        const calendarDays = document.querySelectorAll('.premium-calendar-day');
+        const checkInInput = document.getElementById('check-in');
+        const checkOutInput = document.getElementById('check-out');
+
+        function formatDateForInput(day) {
+            const d = new Date(year, month, day);
+            const yyyy = d.getFullYear();
+            const mm = String(d.getMonth() + 1).padStart(2, '0');
+            const dd = String(d.getDate()).padStart(2, '0');
+            return `${yyyy}-${mm}-${dd}`;
+        }
+
+        function updateCalendarVisuals() {
+            calendarDays.forEach(cell => {
+                const day = parseInt(cell.getAttribute('data-day'));
+                cell.classList.remove('date-selected', 'date-in-range');
+
+                if (startDate === day || endDate === day) {
+                    cell.classList.add('date-selected');
+                } else if (startDate && endDate && day > Math.min(startDate, endDate) && day < Math.max(startDate, endDate)) {
+                    cell.classList.add('date-in-range');
+                }
+            });
+        }
+
+        calendarDays.forEach(cell => {
+            cell.addEventListener('click', () => {
+                const day = parseInt(cell.getAttribute('data-day'));
+
+                if (!startDate || (startDate && endDate)) {
+                    // Reset or start new selection
+                    startDate = day;
+                    endDate = null;
+                    checkInInput.value = formatDateForInput(day);
+                    checkOutInput.value = ""; // Clear checkout until second click
+                } else {
+                    // Second click
+                    if (day < startDate) {
+                        // If clicked day is before start, swap them
+                        endDate = startDate;
+                        startDate = day;
+                    } else if (day === startDate) {
+                        // Do nothing or reset
+                        return;
+                    } else {
+                        endDate = day;
+                    }
+
+                    checkInInput.value = formatDateForInput(startDate);
+                    checkOutInput.value = formatDateForInput(endDate);
+                }
+
+                updateCalendarVisuals();
+            });
+        });
+
+        // Initial sync from input values if needed
+        window.addEventListener('load', () => {
+            const initialStart = new Date(checkInInput.value);
+            const initialEnd = new Date(checkOutInput.value);
+
+            if (initialStart.getMonth() === month && initialStart.getFullYear() === year) {
+                startDate = initialStart.getDate();
+            }
+            if (initialEnd.getMonth() === month && initialEnd.getFullYear() === year) {
+                endDate = initialEnd.getDate();
+            }
+            updateCalendarVisuals();
+        });
+
+        // Navigation micro-interaction
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                document.querySelectorAll('nav a').forEach(l => {
+                    l.classList.remove('text-primary', 'border-b-2', 'border-secondary', 'pb-1');
+                    l.classList.add('text-on-surface-variant');
+                });
+                if (!e.target.classList.contains('bg-primary')) {
+                    e.target.classList.add('text-primary', 'border-b-2', 'border-secondary', 'pb-1');
+                    e.target.classList.remove('text-on-surface-variant');
+                }
+            });
+        });
+    </script>
+
+
+</body>
+
+</html>
