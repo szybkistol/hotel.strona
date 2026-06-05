@@ -366,7 +366,7 @@ export default function Home() {
             <img
               className="w-full h-full object-cover"
               alt="Budynek ekskluzywnego hotelu dla psów Hotel z Lasów Corso"
-              src="/hero-bg.jpg"
+              src="/zdjecie-hero.png"
               decoding="async"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-primary/70 via-primary/40 to-transparent"></div>
