@@ -362,14 +362,22 @@
             }
             
             modal.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+            const nav = document.querySelector('nav');
+            if (nav) nav.classList.add('hidden');
         }
 
-        modalClose.addEventListener('click', () => {
+        function closeModal() {
             modal.classList.add('hidden');
-        });
+            document.body.classList.remove('overflow-hidden');
+            const nav = document.querySelector('nav');
+            if (nav) nav.classList.remove('hidden');
+        }
+
+        modalClose.addEventListener('click', closeModal);
         modal.addEventListener('click', (e) => {
             if (e.target === modal) {
-                modal.classList.add('hidden');
+                closeModal();
             }
         });
 

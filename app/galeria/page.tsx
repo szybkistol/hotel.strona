@@ -33,6 +33,18 @@ export default function GalleryPage() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (selectedItem) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+    };
+  }, [selectedItem]);
+
   const navLinks = [
     { label: "O nas", href: "/#about" },
     { label: "Wymagania", href: "/#requirements" },
@@ -85,9 +97,11 @@ export default function GalleryPage() {
       
       {/* Navigation Shell */}
       <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled || isMobileMenuOpen
-          ? "bg-surface-bright/95 backdrop-blur-md border-b border-outline-variant/20 shadow-md shadow-primary/5 py-4"
-          : "bg-transparent border-b border-transparent py-6"
+        selectedItem
+          ? "hidden"
+          : isScrolled || isMobileMenuOpen
+            ? "bg-surface-bright/95 backdrop-blur-md border-b border-outline-variant/20 shadow-md shadow-primary/5 py-4"
+            : "bg-transparent border-b border-transparent py-6"
       }`}>
         <div className="flex justify-between items-center max-w-[1280px] mx-auto px-margin-desktop w-full">
           <Link
