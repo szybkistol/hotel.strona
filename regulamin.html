@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Regulamin - Hotel z Lasów Corso</title>
+    <meta name="description" content="Poznaj regulamin i warunki pobytu gości w Hotelu z Lasów Corso. Informacje o rezerwacjach, wyżywieniu i opiece weterynaryjnej.">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet">
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface": "#1b1c1c",
+                        "on-secondary": "#ffffff",
+                        "secondary": "#7d562d",
+                        "primary": "#14422d",
+                        "on-secondary-fixed-variant": "#623f18",
+                        "surface-container-low": "#f5f3f3",
+                        "tertiary-fixed": "#e2e3de",
+                        "surface-container-high": "#eae8e7",
+                        "error": "#ba1a1a",
+                        "surface-bright": "#fbf9f8",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed": "#bceecf",
+                        "on-tertiary-container": "#c4c5c0",
+                        "on-tertiary-fixed-variant": "#454744",
+                        "surface-container": "#efeded",
+                        "on-background": "#1b1c1c",
+                        "background": "#fbf9f8",
+                        "inverse-surface": "#303030",
+                        "on-primary-fixed-variant": "#224f39",
+                        "primary-fixed-dim": "#a1d1b4",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#50524e",
+                        "on-error": "#ffffff",
+                        "outline-variant": "#c0c9c1",
+                        "secondary-container": "#ffca98",
+                        "inverse-on-surface": "#f2f0f0",
+                        "on-secondary-fixed": "#2c1600",
+                        "on-secondary-container": "#7a532a",
+                        "on-primary-fixed": "#002112",
+                        "on-primary-container": "#9fcfb2",
+                        "secondary-fixed-dim": "#f0bd8b",
+                        "surface-dim": "#dbd9d9",
+                        "tertiary": "#393b38",
+                        "surface": "#fbf9f8",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed-dim": "#c6c7c2",
+                        "inverse-primary": "#a1d1b4",
+                        "surface-variant": "#e4e2e2",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#2d5a43",
+                        "surface-container-highest": "#e4e2e2",
+                        "on-surface-variant": "#414943",
+                        "outline": "#717973",
+                        "secondary-fixed": "#ffdcbd",
+                        "surface-tint": "#3a674f",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#1a1c19"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "stack-sm": "12px",
+                        "stack-lg": "48px",
+                        "base": "8px",
+                        "margin-desktop": "40px",
+                        "margin-mobile": "16px",
+                        "container-max": "1280px",
+                        "stack-md": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-xl": ["Quicksand"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Quicksand"],
+                        "headline-md": ["Quicksand"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Quicksand"],
+                        "body-lg": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-xl": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .soft-card-shadow {
+            box-shadow: 0 16px 32px -4px rgba(20, 66, 45, 0.08);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body class="bg-background text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed pb-0 overflow-x-hidden">
+    <!-- Navigation Shell -->
+    <nav class="fixed top-0 w-full z-50 transition-all duration-300 bg-transparent border-b border-transparent py-6">
+        <div class="flex justify-between items-center max-w-[1280px] mx-auto px-margin-desktop w-full">
+            <a href="home.html" class="font-headline-md text-headline-md font-bold text-white tracking-tight transition-colors duration-300">Hotel z Lasów Corso</a>
+            <div class="hidden md:flex gap-gutter items-center">
+                <a class="font-label-md text-label-md transition-all duration-300 text-white/80 hover:text-white"
+                    href="home.html#about">O nas</a>
+                <a class="font-label-md text-label-md transition-all duration-300 text-white/80 hover:text-white"
+                    href="home.html#requirements">Wymagania</a>
+                <a class="font-label-md text-label-md transition-all duration-300 text-white/80 hover:text-white"
+                    href="home.html#pricing">Cennik</a>
+                <a class="font-label-md text-label-md transition-all duration-300 text-white/80 hover:text-white"
+                    href="home.html#booking">Rezerwacja</a>
+                <a class="font-label-md text-label-md transition-all duration-300 text-white/80 hover:text-white"
+                    href="home.html#contact">Kontakt</a>
+                <a class="font-label-md text-label-md transition-all duration-300 text-white/80 hover:text-white"
+                    href="galeria.html">Galeria</a>
+                <a class="font-label-md text-label-md transition-all duration-300 text-white/80 hover:text-white"
+                    href="certyfikaty.html">Certyfikaty</a>
+                <a href="home.html#booking"
+                    class="bg-white text-primary px-6 py-2 rounded-lg font-label-md text-label-md active:scale-95 transition-all duration-300 hover:bg-white/90 shadow-sm">Zarezerwuj
+                    Pobyt</a>
+            </div>
+            <div class="md:hidden">
+                <span class="material-symbols-outlined text-white cursor-pointer text-3xl select-none transition-colors duration-300">menu</span>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative h-[35vh] min-h-[320px] flex items-center overflow-hidden">
+            <div class="absolute inset-0 z-0">
+                <img class="w-full h-full object-cover"
+                    src="public/hero-bg.jpg">
+                <div class="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/70 to-primary/30"></div>
+                <!-- Smooth transition bottom fade to light green -->
+                <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#eef4f0] to-transparent pointer-events-none"></div>
+            </div>
+            <div class="relative z-10 max-w-[1280px] mx-auto px-margin-desktop w-full pt-28 md:pt-12">
+                <div class="max-w-2xl text-on-primary">
+                    <span class="text-secondary-fixed-dim font-label-md uppercase tracking-[0.2em] mb-2 block font-semibold">
+                        Regulamin i Warunki
+                    </span>
+                    <h1 class="font-headline-xl text-[38px] md:text-[56px] lg:text-[68px] mb-stack-sm leading-tight">
+                        Regulamin Hotelu
+                    </h1>
+                    <p class="font-body-lg text-[16px] md:text-[20px] lg:text-[22px] opacity-90 leading-relaxed max-w-xl">
+                        Zasady pobytu, rezerwacji oraz bezpieczeństwa naszych merdających gości.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Content Section -->
+        <section id="content" class="py-stack-lg bg-gradient-to-b from-[#eef4f0] to-surface-bright">
+            <div class="max-w-[1280px] mx-auto px-margin-desktop">
+                
+                <div class="grid lg:grid-cols-12 gap-gutter items-start">
+                    
+                    <!-- Table of Contents - Sidebar -->
+                    <div class="lg:col-span-4 bg-white p-6 rounded-2xl border border-outline-variant/15 soft-card-shadow sticky top-28 hidden lg:block">
+                        <h3 class="font-headline-md text-primary font-bold mb-4 text-lg">Spis Treści</h3>
+                        <nav class="flex flex-col gap-2" id="desktop-toc">
+                            <!-- Populated by script -->
+                        </nav>
+                    </div>
+
+                    <!-- Mobile Table of Contents -->
+                    <div class="lg:hidden bg-white p-6 rounded-2xl border border-outline-variant/15 soft-card-shadow mb-6">
+                        <h3 class="font-headline-md text-primary font-bold mb-3 text-base">Przejdź do sekcji:</h3>
+                        <div class="flex flex-wrap gap-2" id="mobile-toc">
+                            <!-- Populated by script -->
+                        </div>
+                    </div>
+
+                    <!-- Legal Text - Main Card -->
+                    <div class="lg:col-span-8 bg-white rounded-3xl p-8 md:p-12 soft-card-shadow border border-outline-variant/10 space-y-12" id="regulations-container">
+                        <!-- Populated by script -->
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Shell -->
+    <footer class="bg-surface-container-high border-t border-outline-variant/10">
+        <div class="max-w-[1280px] mx-auto px-margin-desktop py-stack-lg">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+                <div class="text-center md:text-left space-y-2">
+                    <div class="font-headline-sm text-headline-sm font-bold text-primary">
+                        Hotel z Lasów Corso
+                    </div>
+                    <p class="font-body-md text-body-md text-on-surface-variant max-w-sm leading-relaxed">
+                        Profesjonalny hotel dla psów, gdzie komfort i bezpieczeństwo Twojego pupila są naszym priorytetem.
+                    </p>
+                </div>
+                
+                <div class="flex flex-col items-center md:items-end gap-3 text-center md:text-right">
+                    <div class="flex gap-6">
+                        <a href="certyfikaty.html" class="text-label-sm text-on-surface-variant hover:text-secondary underline transition-all font-medium">
+                            Certyfikaty i Szkolenia
+                        </a>
+                        <a href="regulamin.html" class="text-label-sm text-on-surface-variant hover:text-secondary underline transition-all font-medium">
+                            Regulamin Usług
+                        </a>
+                    </div>
+                    <p class="font-label-sm text-label-sm text-on-surface-variant opacity-70">
+                        © <span id="year-placeholder">2026</span> Hotel z Lasów Corso. Built with warmth and care.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Set year in footer
+        document.getElementById('year-placeholder').innerText = new Date().getFullYear();
+
+        const regulations = [
+            {
+                id: "postanowienia-ogolne",
+                title: "§ 1. Postanowienia Ogólne",
+                paragraphs: [
+                    "Niniejszy regulamin określa zasady świadczenia usług opieki nad psami przez Hotel z Lasów Corso, zwany dalej „Hotelem”.",
+                    "Klientem hotelu może być każda osoba fizyczna, która jest właścicielem psa lub występuje w imieniu właściciela (zwana dalej „Właścicielem”).",
+                    "Pozostawienie psa pod opieką Hotelu jest równoznaczne z akceptacją warunków określonych w niniejszym regulaminie.",
+                    "Hotel zobowiązuje się do sprawowania opieki nad powierzonym psem z najwyższą starannością, dbając o jego bezpieczeństwo, zdrowie oraz dobre samopoczucie."
+                ]
+            },
+            {
+                id: "warunki-przyjecia",
+                title: "§ 2. Warunki Przyjęcia Psa do Hotelu",
+                paragraphs: [
+                    "Do Hotelu przyjmowane są wyłącznie psy zdrowe, posiadające aktualną książeczkę zdrowia z wpisem o szczepieniu przeciwko wściekliźnie oraz podstawowym chorobom zakaźnym (nosówka, parwowiroza, choroba Rubartha).",
+                    "Właściciel ma obowiązek dostarczyć dowód wykonania odrobaczenia (nie starsze niż 3 miesiące) oraz zabezpieczenia psa przed pchłami i kleszczami.",
+                    "Hotel nie przyjmuje psów wykazujących agresję wobec ludzi lub skrajnie agresywnych wobec innych psów, ze względu na bezpieczeństwo naszych pozostałych gości.",
+                    "Właściciel zobowiązany jest poinformować obsługę Hotelu o wszelkich problemach zdrowotnych, lękach, alergiach oraz nietypowych nawykach psa przed rozpoczęciem pobytu."
+                ]
+            },
+            {
+                id: "rezerwacje-platnosci",
+                title: "§ 3. Rezerwacja i Płatności",
+                paragraphs: [
+                    "Rezerwacja pobytu psa w Hotelu odbywa się drogą elektroniczną (formularz rezerwacji, e-mail) lub telefonicznie.",
+                    "Cena za pobyt naliczana jest zgodnie z aktualnym cennikiem opublikowanym na stronie głównej.",
+                    "Doba hotelowa rozpoczyna się i kończy w godzinach indywidualnie ustalonych przy rezerwacji. Przedłużenie doby wymaga wcześniejszego uzgodnienia z obsługą Hotelu.",
+                    "W przypadku rezygnacji z rezerwacji na mniej niż 48 godzin przed planowanym rozpoczęciem pobytu, zadatek pobrany przy rezerwacji nie podlega zwrotowi."
+                ]
+            },
+            {
+                id: "wyzywienie-pielegnacja",
+                title: "§ 4. Wyżywienie i Pielęgnacja",
+                paragraphs: [
+                    "W trosce o układ pokarmowy psa i uniknięcie problemów gastrycznych związanych z nagłą zmianą diety, Właściciel zobowiązany jest do dostarczenia własnej karmy na cały okres pobytu psa w ilości pokrywającej zapotrzebowanie.",
+                    "Karma powinna być dostarczona w szczelnym opakowaniu wraz z dokładną instrukcją porcjowania i częstotliwości karmienia.",
+                    "Hotel zapewnia stały dostęp do świeżej wody pitnej oraz realizuje codzienne spacery i zabawy na zabezpieczonym wybiegu dostosowane do wieku oraz kondycji fizycznej psa."
+                ]
+            },
+            {
+                id: "opieka-weterynaryjna",
+                title: "§ 5. Opieka Weterynaryjna",
+                paragraphs: [
+                    "W przypadku nagłego pogorszenia się stanu zdrowia psa, urazu lub objawów choroby, Hotel niezwłocznie informuje o tym Właściciela.",
+                    "W sytuacjach wymagających pilnej pomocy medycznej, Hotel przetransportuje psa do współpracującej kliniki weterynaryjnej w celu podjęcia niezbędnego leczenia.",
+                    "Wszelkie udokumentowane koszty opieki weterynaryjnej oraz transportu do lecznicy pokrywa w całości Właściciel psa po zakończeniu pobytu.",
+                    "Hotel nie ponosi odpowiedzialności za ujawnienie się ukrytych chorób przewlekłych w trakcie pobytu psa, o których Właściciel nie poinformował przy przekazywaniu zwierzęcia."
+                ]
+            },
+            {
+                id: "postanowienia-koncowe",
+                title: "§ 6. Postanowienia Końcowe",
+                paragraphs: [
+                    "Właściciel oświadcza, że dane podane w formularzu rezerwacyjnym są zgodne z prawdą.",
+                    "Sprawy nieuregulowane niniejszym regulaminem będą rozstrzygane polubownie, a w przypadku braku porozumienia – przez właściwy sąd powszechny.",
+                    "Regulamin obowiązuje od dnia 1 stycznia 2024 roku."
+                ]
+            }
+        ];
+
+        // Populate Table of Contents and Main Content
+        const desktopToc = document.getElementById('desktop-toc');
+        const mobileToc = document.getElementById('mobile-toc');
+        const contentContainer = document.getElementById('regulations-container');
+
+        regulations.forEach(sec => {
+            // Desktop TOC
+            const dLink = document.createElement('a');
+            dLink.href = `#${sec.id}`;
+            dLink.className = "text-sm font-label-md text-on-surface-variant hover:text-secondary py-2 border-b border-surface-container transition-colors";
+            const titleParts = sec.title.split(".");
+            dLink.innerText = titleParts[0] + "." + titleParts[1];
+            dLink.addEventListener('click', (e) => scrollToSection(e, sec.id));
+            desktopToc.appendChild(dLink);
+
+            // Mobile TOC
+            const mLink = document.createElement('a');
+            mLink.href = `#${sec.id}`;
+            mLink.className = "text-xs px-3 py-1.5 bg-surface-container hover:bg-secondary-container/20 text-on-surface-variant rounded-full transition-all";
+            mLink.innerText = titleParts[0] + ".";
+            mLink.addEventListener('click', (e) => scrollToSection(e, sec.id));
+            mobileToc.appendChild(mLink);
+
+            // Main Text Block
+            const sectionDiv = document.createElement('div');
+            sectionDiv.id = sec.id;
+            sectionDiv.className = "scroll-mt-28 space-y-4";
+            
+            let paragraphsHtml = "";
+            sec.paragraphs.forEach(p => {
+                paragraphsHtml += `
+                    <div class="flex gap-3 items-start">
+                        <span class="text-secondary font-bold shrink-0 mt-0.5">•</span>
+                        <p>${p}</p>
+                    </div>
+                `;
+            });
+
+            sectionDiv.innerHTML = `
+                <h2 class="font-headline-lg text-primary font-bold border-b border-secondary/15 pb-2">
+                    ${sec.title}
+                </h2>
+                <div class="space-y-4 text-on-surface-variant text-sm md:text-base leading-relaxed">
+                    ${paragraphsHtml}
+                </div>
+            `;
+            contentContainer.appendChild(sectionDiv);
+        });
+
+        function scrollToSection(e, id) {
+            e.preventDefault();
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+        }
+
+        // Scroll listener for transparent/opaque navbar
+        let isScrolled = false;
+        function handleScroll() {
+            const nav = document.querySelector('nav');
+            const brand = document.querySelector('nav a.font-headline-md');
+            const links = document.querySelectorAll('nav div a');
+            const button = document.querySelector('nav div a.bg-white, nav div a.bg-primary');
+            const menuIcon = document.querySelector('nav .material-symbols-outlined');
+            
+            const contentSection = document.getElementById('content');
+            const navbarHeight = 80;
+            const scrolled = contentSection ? (contentSection.getBoundingClientRect().top <= navbarHeight) : (window.scrollY > 50);
+            if (scrolled === isScrolled && nav.classList.contains('bg-surface-bright/95') === scrolled) return;
+            isScrolled = scrolled;
+
+            if (isScrolled) {
+                nav.className = "fixed top-0 w-full z-50 transition-all duration-300 bg-surface-bright/95 backdrop-blur-md border-b border-outline-variant/20 shadow-md shadow-primary/5 py-4";
+                brand.className = "font-headline-md text-headline-md font-bold text-primary tracking-tight transition-colors duration-300";
+                if (menuIcon) menuIcon.className = "material-symbols-outlined text-primary cursor-pointer text-3xl select-none transition-colors duration-300";
+                button.className = "bg-primary text-on-primary px-6 py-2 rounded-lg font-label-md text-label-md active:scale-95 transition-all duration-300 hover:bg-primary-container shadow-sm";
+                
+                links.forEach(link => {
+                    link.className = "font-label-md text-label-md transition-all duration-300 cursor-pointer text-on-surface-variant hover:text-secondary";
+                });
+            } else {
+                nav.className = "fixed top-0 w-full z-50 transition-all duration-300 bg-transparent border-b border-transparent py-6";
+                brand.className = "font-headline-md text-headline-md font-bold text-white tracking-tight transition-colors duration-300";
+                if (menuIcon) menuIcon.className = "material-symbols-outlined text-white cursor-pointer text-3xl select-none transition-colors duration-300";
+                button.className = "bg-white text-primary px-6 py-2 rounded-lg font-label-md text-label-md active:scale-95 transition-all duration-300 hover:bg-white/90 shadow-sm";
+                
+                links.forEach(link => {
+                    link.className = "font-label-md text-label-md transition-all duration-300 cursor-pointer text-white/80 hover:text-white";
+                });
+            }
+        }
+
+        window.addEventListener('scroll', handleScroll);
+        handleScroll();
+    </script>
+</body>
+
+</html>

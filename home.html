@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Canine Comfort Hotel - Luksusowy Hotel dla Twojego Psa</title>
+    <title>Hotel z Lasów Corso - Luksusowy Hotel dla Twojego Psa</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600&amp;display=swap"
@@ -125,10 +125,14 @@
             scroll-behavior: smooth;
         }
 
+        .premium-calendar-day {
+            will-change: transform, background-color;
+            transition: background-color 0.2s ease, transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
         .premium-calendar-day:hover:not(.occupied) {
             background-color: #f0bd8b20;
             transform: scale(1.05);
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .date-selected {
@@ -147,46 +151,48 @@
 
 <body class="bg-background text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed pb-0">
     <!-- Navigation Shell -->
-    <nav class="fixed top-0 w-full z-50 bg-surface-bright/90 backdrop-blur-md shadow-sm shadow-primary/5">
-        <div class="flex justify-between items-center max-w-[1280px] mx-auto px-margin-desktop py-4">
-            <div class="font-headline-md text-headline-md font-bold text-primary">Canine Comfort Hotel</div>
+    <nav class="fixed top-0 w-full z-50 transition-all duration-300 bg-transparent border-b border-transparent py-6">
+        <div class="flex justify-between items-center max-w-[1280px] mx-auto px-margin-desktop">
+            <div class="font-headline-md text-headline-md font-bold text-white tracking-tight transition-colors duration-300">Hotel z Lasów Corso</div>
             <div class="hidden md:flex gap-gutter items-center">
-                <a class="font-label-md text-label-md transition-colors duration-200 text-on-surface-variant"
+                <a class="font-label-md text-label-md transition-all duration-300 text-white/80 hover:text-white"
                     href="#about">O nas</a>
-                <a class="font-label-md text-label-md hover:text-secondary transition-colors duration-200 text-on-surface-variant"
+                <a class="font-label-md text-label-md transition-all duration-300 text-white/80 hover:text-white"
                     href="#requirements">Wymagania</a>
-                <a class="font-label-md text-label-md hover:text-secondary transition-colors duration-200 text-on-surface-variant"
+                <a class="font-label-md text-label-md transition-all duration-300 text-white/80 hover:text-white"
                     href="#pricing">Cennik</a>
-                <a class="font-label-md text-label-md hover:text-secondary transition-colors duration-200 text-on-surface-variant"
+                <a class="font-label-md text-label-md transition-all duration-300 text-white/80 hover:text-white"
                     href="#booking">Rezerwacja</a>
-                <a class="font-label-md text-label-md hover:text-secondary transition-colors duration-200 text-on-surface-variant"
+                <a class="font-label-md text-label-md transition-all duration-300 text-white/80 hover:text-white"
                     href="#contact">Kontakt</a>
-                <a class="font-label-md text-label-md hover:text-secondary transition-colors duration-200 text-primary border-b-2 border-secondary pb-1"
-                    href="#gallery">Galeria</a>
+                <a class="font-label-md text-label-md transition-all duration-300 text-white/80 hover:text-white"
+                    href="galeria.html">Galeria</a>
+                <a class="font-label-md text-label-md transition-all duration-300 text-white/80 hover:text-white"
+                    href="certyfikaty.html">Certyfikaty</a>
                 <button
-                    class="bg-primary text-on-primary px-6 py-2 rounded-lg font-label-md text-label-md active:scale-95 transition-transform">Zarezerwuj
+                    class="bg-white text-primary px-6 py-2 rounded-lg font-label-md text-label-md active:scale-95 transition-all duration-300 hover:bg-white/90">Zarezerwuj
                     Pobyt</button>
             </div>
             <div class="md:hidden">
-                <span class="material-symbols-outlined text-primary cursor-pointer">menu</span>
+                <span class="material-symbols-outlined text-white cursor-pointer text-3xl select-none transition-colors duration-300">menu</span>
             </div>
         </div>
     </nav>
-    <main class="pt-20">
+    <main>
         <!-- Hero Section -->
-        <section class="relative h-[85vh] flex items-center overflow-hidden">
+        <section class="relative h-[45vh] min-h-[420px] md:h-screen flex items-center overflow-hidden">
             <div class="absolute inset-0 z-0">
                 <img class="w-full h-full object-cover"
                     data-alt="The background image of a peaceful forest clearing for a dog hotel website. Modify the existing image so that the grass is taller, lush, and more natural, like a wild meadow. Keep the same soft lighting, depth of field, and serene forest atmosphere. Use the existing color palette of forest greens and earthy tones from the design system."
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBuuPuKqSBRKjs-xDxI_NEnp1-uigByVhy3z4-4sAkWbFNh38rD2RtuWBsV3fXhEwLEFsGJC4kvLChMmhn1jyMgbjtq00OqldoFu4ByKpzEkabI2i0Kz-tT1G-cyk8xLN2JmZ6PRNw_Wc6bKmqXitP_jb9WgiEFN4U4edlCpqx1BK715oTPvjmDZiePYnHzaIFMbkcVmTHy74odTNhFFTiXA1xPUy_bW3JY4xzI04gW2SY15SJaXo0FJgkqFvLgG95npXObdF1NtQ">
+                    src="public/hero-bg.jpg">
                 <div class="absolute inset-0 bg-gradient-to-r from-primary/60 to-transparent"></div>
+                <!-- Smooth transition bottom fade to light green -->
+                <div class="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#eef4f0] to-transparent pointer-events-none"></div>
             </div>
-            <div class="relative z-10 max-w-[1280px] mx-auto px-margin-desktop w-full">
+            <div class="relative z-10 max-w-[1280px] mx-auto px-margin-desktop w-full pt-28 md:pt-12">
                 <div class="max-w-2xl text-on-primary">
-                    <h1 class="font-headline-xl text-headline-xl mb-stack-sm">Drugi ddd<div>Dla Twojego Przyjaciela
-                        </div>
-                    </h1>
-                    <p class="font-body-lg text-body-lg mb-stack-lg opacity-90">Zapewniamy profesjonalną opiekę, miłość
+                    <h1 class="font-headline-xl text-[38px] md:text-[56px] lg:text-[68px] mb-stack-sm leading-tight">Drugi Dom Dla Twojego Przyjaciela</h1>
+                    <p class="font-body-lg text-[16px] md:text-[20px] lg:text-[22px] mb-stack-lg opacity-90">Zapewniamy profesjonalną opiekę, miłość
                         i bezpieczeństwo w luksusowych warunkach. Bo każdy pies zasługuje na wakacje.</p>
                     <div class="flex gap-4">
                         <a class="bg-primary text-on-primary px-8 py-4 rounded-lg font-label-md text-label-md hover:bg-primary-container transition-colors shadow-lg border-2 border-white/30"
@@ -198,12 +204,12 @@
             </div>
         </section>
         <!-- O Nas Section -->
-        <section class="py-stack-lg bg-surface-bright" id="about">
+        <section class="py-stack-lg bg-gradient-to-b from-[#eef4f0] to-surface-bright scroll-mt-20" id="about">
             <div class="max-w-[1280px] mx-auto px-margin-desktop grid md:grid-cols-2 gap-stack-lg items-center">
                 <div class="relative">
                     <div class="absolute -top-4 -left-4 w-24 h-24 bg-secondary-container rounded-full -z-10"></div>
-                    <img class="rounded-xl soft-card-shadow w-full h-[450px] object-cover"
-                        data-alt="A professional pet caregiver sitting on a soft rug, gently petting a calm Labrador in a bright, modern interior room with large windows. The room is decorated with minimalist furniture and warm wooden accents, conveying a professional yet cozy home-like atmosphere. Soft natural light fills the space, highlighting the bond of trust between the human and the dog in this premium hospitality environment."
+                    <img class="rounded-xl soft-card-shadow w-auto max-w-full h-auto max-h-[450px] mx-auto block border border-surface-container"
+                        data-alt="Zdjęcie przedstawiające opiekuna psa w hotelu Hotel z Lasów Corso"
                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuAN9-Bme86Q3KNMiygotxrRjid40m_vfdPpk0Rtf-p12i66bENz-svowlgcfCHIRLAf-lROT4uwlEFWJfSaInxEf9HV55clcaihpPuH0qyADXiMBZ_xL0eOHE84AJ2JDA8VNYVYqnrd996XrOR5SYLu5jJfs9aQh5h3MLg1aDbzrQiD8-WW7ILHOSVTXM-FdpMBm8ari6F9GKI2wv_wic_lufweI39DtGwxB8x8c6V030klOkMLmgJ7egYY6AlcbkLF2zQZQHXt1Q">
                 </div>
                 <div>
@@ -211,7 +217,7 @@
                     <h2 class="font-headline-lg text-headline-lg text-primary mb-stack-sm">Z Miłości do Merdających
                         Ogonów</h2>
                     <p class="font-body-md text-body-md text-on-surface-variant mb-stack-md leading-relaxed">
-                        Canine Comfort Hotel powstał z pasji do psów i potrzeby stworzenia miejsca, które nie będzie
+                        Hotel z Lasów Corso powstał z pasji do psów i potrzeby stworzenia miejsca, które nie będzie
                         tylko przechowalnią, ale prawdziwym domem tymczasowym. Od 2018 roku dbamy o to, by każdy nasz
                         gość czuł się u nas jak u siebie.
                     </p>
@@ -235,10 +241,10 @@
             </div>
         </section>
         <!-- Wymagania Section -->
-        <section class="py-stack-lg bg-surface-container-low" id="requirements">
+        <section class="py-stack-lg bg-surface-container-low scroll-mt-20" id="requirements">
             <div class="max-w-[1280px] mx-auto px-margin-desktop">
                 <div class="text-center mb-stack-lg">
-                    <h2 class="font-headline-lg text-headline-lg text-primary">Wymagania i Wyprawka</h2>
+                    <h2 class="font-headline-lg text-headline-lg text-primary">Wymagania i Co Spakować</h2>
                     <p class="font-body-md text-body-md text-on-surface-variant max-w-xl mx-auto mt-stack-sm">
                         Bezpieczeństwo wszystkich naszych gości jest dla nas priorytetem. Prosimy o przygotowanie
                         poniższych dokumentów i rzeczy.</p>
@@ -297,7 +303,7 @@
             </div>
         </section>
         <!-- Cennik Section -->
-        <section class="py-stack-lg bg-surface-bright" id="pricing">
+        <section class="py-stack-lg bg-surface-bright scroll-mt-20" id="pricing">
             <div class="max-w-[1280px] mx-auto px-margin-desktop">
                 <div class="text-center mb-stack-md">
                     <h2 class="font-headline-lg text-headline-lg text-primary">Cennik</h2>
@@ -330,7 +336,7 @@
             </div>
         </section>
         <!-- Redesigned Rezerwacja Section -->
-        <section class="py-stack-lg bg-surface-container relative overflow-hidden" id="booking">
+        <section class="py-stack-lg bg-surface-container relative overflow-hidden scroll-mt-20" id="booking">
             <div class="absolute top-0 right-0 w-96 h-96 bg-primary-fixed/20 rounded-full blur-3xl -mr-48 -mt-48"></div>
             <div
                 class="absolute bottom-0 left-0 w-96 h-96 bg-secondary-container/20 rounded-full blur-3xl -ml-48 -mb-48">
@@ -351,22 +357,26 @@
                     <div class="p-8 md:p-12 border-r border-outline-variant/20 lg:col-span-8" id="calendar-container">
                         <div class="flex justify-between items-center mb-10">
                             <div>
-                                <h3 class="font-headline-md text-primary text-2xl">Grudzień 2024</h3>
+                                <h3 id="calendar-month-label" class="font-headline-md text-primary text-2xl"></h3>
                                 <p class="text-label-sm text-on-surface-variant opacity-70">Wybierz datę przyjazdu i
                                     wyjazdu</p>
                             </div>
                             <div class="flex gap-2">
                                 <button
+                                    type="button"
+                                    id="prev-month"
                                     class="w-11 h-11 flex items-center justify-center rounded-full border border-outline-variant/30 hover:bg-surface-container hover:border-primary transition-all">
                                     <span class="material-symbols-outlined text-primary">chevron_left</span>
                                 </button>
                                 <button
+                                    type="button"
+                                    id="next-month"
                                     class="w-11 h-11 flex items-center justify-center rounded-full border border-outline-variant/30 hover:bg-surface-container hover:border-primary transition-all">
                                     <span class="material-symbols-outlined text-primary">chevron_right</span>
                                 </button>
                             </div>
                         </div>
-                        <div class="grid grid-cols-7 gap-3 mb-4" id="calendar-grid">
+                        <div class="grid grid-cols-7 gap-3 mb-2">
                             <div class="text-center font-label-md text-on-surface-variant/60 pb-4">Pon</div>
                             <div class="text-center font-label-md text-on-surface-variant/60 pb-4">Wt</div>
                             <div class="text-center font-label-md text-on-surface-variant/60 pb-4">Śr</div>
@@ -374,66 +384,9 @@
                             <div class="text-center font-label-md text-on-surface-variant/60 pb-4">Pt</div>
                             <div class="text-center font-label-md text-on-surface-variant/60 pb-4">Sob</div>
                             <div class="text-center font-label-md text-on-surface-variant/60 pb-4">Ndz</div>
-                            <!-- Row 1: Past Month -->
-                            <div class="aspect-square flex items-center justify-center text-on-surface-variant/20">25
-                            </div>
-                            <div class="aspect-square flex items-center justify-center text-on-surface-variant/20">26
-                            </div>
-                            <div class="aspect-square flex items-center justify-center text-on-surface-variant/20">27
-                            </div>
-                            <div class="aspect-square flex items-center justify-center text-on-surface-variant/20">28
-                            </div>
-                            <div class="aspect-square flex items-center justify-center text-on-surface-variant/20">29
-                            </div>
-                            <div class="aspect-square flex items-center justify-center text-on-surface-variant/20">30
-                            </div>
-                            <div class="aspect-square flex items-center justify-center premium-calendar-day cursor-pointer rounded-2xl border border-transparent"
-                                data-day="1">1</div>
-                            <!-- Row 2 -->
-                            <div class="aspect-square flex items-center justify-center premium-calendar-day cursor-pointer rounded-2xl border border-transparent"
-                                data-day="2">2</div>
-                            <div class="aspect-square flex items-center justify-center premium-calendar-day cursor-pointer rounded-2xl border border-transparent date-selected"
-                                data-day="3">3</div>
-                            <div class="aspect-square flex items-center justify-center premium-calendar-day cursor-pointer rounded-2xl border border-transparent date-in-range"
-                                data-day="4">4</div>
-                            <div class="aspect-square flex items-center justify-center premium-calendar-day cursor-pointer rounded-2xl border border-transparent date-in-range"
-                                data-day="5">5</div>
-                            <div class="aspect-square flex items-center justify-center premium-calendar-day cursor-pointer rounded-2xl border border-transparent date-in-range"
-                                data-day="6">6</div>
-                            <div class="aspect-square flex items-center justify-center premium-calendar-day cursor-pointer rounded-2xl border border-transparent date-in-range"
-                                data-day="7">7</div>
-                            <div class="aspect-square flex items-center justify-center premium-calendar-day cursor-pointer rounded-2xl border border-transparent date-in-range"
-                                data-day="8">8</div>
-                            <!-- Row 3 -->
-                            <div class="aspect-square flex items-center justify-center premium-calendar-day cursor-pointer rounded-2xl border border-transparent date-in-range"
-                                data-day="9">9</div>
-                            <div class="aspect-square flex items-center justify-center premium-calendar-day cursor-pointer rounded-2xl border border-transparent date-in-range"
-                                data-day="10">10</div>
-                            <div class="aspect-square flex items-center justify-center premium-calendar-day cursor-pointer rounded-2xl border border-transparent date-selected"
-                                data-day="11">11</div>
-                            <div class="aspect-square flex items-center justify-center premium-calendar-day cursor-pointer rounded-2xl border border-transparent"
-                                data-day="12">12</div>
-                            <div class="aspect-square flex items-center justify-center premium-calendar-day cursor-pointer rounded-2xl border border-transparent"
-                                data-day="13">13</div>
-                            <div class="aspect-square flex items-center justify-center premium-calendar-day cursor-pointer rounded-2xl border border-transparent"
-                                data-day="14">14</div>
-                            <div class="aspect-square flex items-center justify-center premium-calendar-day cursor-pointer rounded-2xl border border-transparent"
-                                data-day="15">15</div>
-                            <!-- Row 4 -->
-                            <div class="aspect-square flex items-center justify-center premium-calendar-day cursor-pointer rounded-2xl border border-transparent"
-                                data-day="16">16</div>
-                            <div class="aspect-square flex items-center justify-center premium-calendar-day cursor-pointer rounded-2xl border border-transparent"
-                                data-day="17">17</div>
-                            <div class="aspect-square flex items-center justify-center premium-calendar-day cursor-pointer rounded-2xl border border-transparent"
-                                data-day="18">18</div>
-                            <div class="aspect-square flex items-center justify-center premium-calendar-day cursor-pointer rounded-2xl border border-transparent"
-                                data-day="19">19</div>
-                            <div class="aspect-square flex items-center justify-center premium-calendar-day cursor-pointer rounded-2xl border border-transparent"
-                                data-day="20">20</div>
-                            <div class="aspect-square flex items-center justify-center premium-calendar-day cursor-pointer rounded-2xl border border-transparent"
-                                data-day="21">21</div>
-                            <div class="aspect-square flex items-center justify-center premium-calendar-day cursor-pointer rounded-2xl border border-transparent"
-                                data-day="22">22</div>
+                        </div>
+                        <div id="calendar-days-grid" class="grid grid-cols-7 gap-3 mb-4">
+                            <!-- Dynamic days here -->
                         </div>
                         <div class="mt-8 pt-8 border-t border-outline-variant/20 flex flex-wrap gap-6">
                             <div class="flex items-center gap-2"><span
@@ -450,15 +403,16 @@
                     <!-- Right: Smooth Form -->
                     <div class="bg-surface-container-low/50 p-8 md:p-12 lg:col-span-4">
                         <h3 class="font-headline-md text-primary mb-8">Uzupełnij Dane</h3>
-                        <form class="space-y-6">
+                        <form id="booking-form" class="space-y-6">
                             <div class="space-y-2">
                                 <label class="font-label-md text-on-surface-variant flex items-center gap-2">
                                     <span class="material-symbols-outlined text-[18px] text-primary">person</span> Imię
                                     i Nazwisko Opiekuna
                                 </label>
                                 <input
+                                    id="owner-name"
                                     class="w-full bg-white border-outline-variant/20 rounded-xl p-4 focus:ring-2 focus:ring-primary focus:border-transparent transition-all shadow-sm"
-                                    placeholder="Jan Kowalski" type="text">
+                                    placeholder="Jan Kowalski" type="text" required>
                             </div>
                             <div class="space-y-2">
                                 <label class="font-label-md text-on-surface-variant flex items-center gap-2">
@@ -466,8 +420,12 @@
                                     Telefonu
                                 </label>
                                 <input
+                                    id="phone-number"
                                     class="w-full bg-white border-outline-variant/20 rounded-xl p-4 focus:ring-2 focus:ring-primary focus:border-transparent transition-all shadow-sm"
-                                    placeholder="+48 000 000 000" type="tel">
+                                    placeholder="123 456 789"
+                                    type="tel"
+                                    pattern="(?:\+\d{1,3}[ -]?)?(?:\d[ -]?){9,12}"
+                                    title="Proszę wpisać poprawny numer telefonu (np. 123 456 789)" required>
                             </div>
                             <div class="grid grid-cols-2 gap-4">
                                 <div class="space-y-2">
@@ -478,7 +436,7 @@
                                     </label>
                                     <input
                                         class="w-full bg-white border-outline-variant/20 rounded-xl p-4 focus:ring-2 focus:ring-primary focus:border-transparent transition-all shadow-sm text-sm"
-                                        id="check-in" type="date" value="2024-12-03">
+                                        id="check-in" type="date" required>
                                 </div>
                                 <div class="space-y-2">
                                     <label class="font-label-md text-on-surface-variant flex items-center gap-2">
@@ -487,7 +445,7 @@
                                     </label>
                                     <input
                                         class="w-full bg-white border-outline-variant/20 rounded-xl p-4 focus:ring-2 focus:ring-primary focus:border-transparent transition-all shadow-sm text-sm"
-                                        id="check-out" type="date" value="2024-12-11">
+                                        id="check-out" type="date" required>
                                 </div>
                             </div>
                             <div class="space-y-2">
@@ -495,6 +453,7 @@
                                         class="material-symbols-outlined text-[18px] text-primary">notes</span> Opis i
                                     dodatkowe uwagi (imię, rasa, wielkość psa itp.)</label>
                                 <textarea
+                                    id="notes"
                                     class="w-full bg-white border-outline-variant/20 rounded-xl p-4 h-24 focus:ring-2 focus:ring-primary focus:border-transparent transition-all shadow-sm resize-none"
                                     placeholder="Imię psa, rasa, wielkość, dieta, leki, charakterystyka..."></textarea>
                             </div>
@@ -509,7 +468,7 @@
             </div>
         </section>
         <!-- Kontakt Section -->
-        <section class="py-stack-lg bg-surface-bright" id="contact">
+        <section class="py-stack-lg bg-surface-bright scroll-mt-20" id="contact">
             <div class="max-w-[1280px] mx-auto px-margin-desktop">
                 <div class="grid md:grid-cols-2 gap-stack-lg">
                     <div>
@@ -543,31 +502,45 @@
                                 </div>
                                 <div>
                                     <h4 class="font-label-md text-primary">Adres</h4>
-                                    <p class="font-body-md text-on-surface-variant">ul. Psia 15, 05-800 Pruszków</p>
+                                    <p class="font-body-md text-on-surface-variant mt-0.5">Sosnowo 20, 56-500 Wioska</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="mt-stack-lg flex gap-4">
-                            <a class="w-10 h-10 bg-secondary rounded-full flex items-center justify-center text-white hover:scale-110 transition-transform"
-                                href="#"><span class="material-symbols-outlined">social_leaderboard</span></a>
-                            <a class="w-10 h-10 bg-secondary rounded-full flex items-center justify-center text-white hover:scale-110 transition-transform"
-                                href="#"><span class="material-symbols-outlined">photo_camera</span></a>
+                        <div class="mt-8 pt-6 border-t border-surface-container space-y-4">
+                            <p class="font-body-md text-on-surface-variant leading-relaxed text-sm">
+                                <strong>Bądź na bieżąco!</strong> Wszystkie aktualności, codzienne relacje oraz zdjęcia z życia naszego hotelu i zabaw psów są publikowane na bieżąco na naszym profilu na Facebooku.
+                            </p>
+                            <a
+                                href="https://www.facebook.com/HotelZLasowCorso"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="inline-flex items-center gap-3 bg-secondary text-white px-5 py-3 rounded-xl font-label-md text-label-md hover:bg-secondary-container hover:text-on-secondary-container transition-all active:scale-95 shadow-md group cursor-pointer">
+                                <svg class="w-5 h-5 fill-current transition-transform group-hover:scale-110" viewBox="0 0 24 24">
+                                    <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75z"/>
+                                </svg>
+                                <span>Odwiedź nas na Facebooku</span>
+                                <span class="material-symbols-outlined text-[16px]">open_in_new</span>
+                            </a>
                         </div>
                     </div>
                     <div
-                        class="h-[400px] bg-surface-container rounded-2xl overflow-hidden soft-card-shadow border-4 border-white">
-                        <div class="w-full h-full relative">
-                            <img class="w-full h-full object-cover"
-                                data-alt="A stylized aerial view map of a quiet residential suburban area in Poland with green parks and winding roads. The map is presented in a clean, modern aesthetic with soft muted colors and a high-contrast location marker shaped like a dog paw in forest green. The overall lighting is bright and clear, matching a professional business directory look."
-                                data-location="Warsaw, Poland"
-                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuC34JjS2fX-ZaPXPF2Z8Gh25wbR8_fCUXW22MNhqFF4eXAnFyqOIkS4TcZyNP2MFYeXtrm2O1tjPwfxyVG6z-z3HAYsSJr3y3tFDpeB0LDNlVB196vvROpmeMFa9kXyJW7SWRqNPjxNeyokRMVD_XYUA_SDfNaOMOcr2suMZm-sXDqBt9V9T2RB1k8ZtmiP3EllToeIzHOPGctgLSRJ3RVXKkZtEPmHPQ0e42TxG4brrbnuBCDdgR2tHdUIv5Yh3lBTbWtp4AGHUg">
-                            <div class="absolute inset-0 flex items-center justify-center">
-                                <div
-                                    class="bg-primary text-on-primary px-4 py-2 rounded-full shadow-lg flex items-center gap-2">
-                                    <span class="material-symbols-outlined"
-                                        style="font-variation-settings: 'FILL' 1;">location_on</span>
-                                    <span class="font-label-md">Znajdź nas tutaj</span>
-                                </div>
+                        id="map-container"
+                        class="h-[400px] bg-surface-container rounded-2xl overflow-hidden soft-card-shadow border-4 border-white relative group cursor-pointer">
+                        <iframe
+                            id="map-iframe"
+                            src="https://maps.google.com/maps?q=Sosnowo%2020,%2056-500%20Wioska&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                            width="100%"
+                            height="100%"
+                            style="border:0;"
+                            allowfullscreen=""
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Mapa Google - Lokalizacja Hotel z Lasów Corso"
+                            class="w-full h-full pointer-events-none transition-all duration-300"></iframe>
+                        <div id="map-overlay" class="absolute inset-0 bg-black/5 hover:bg-black/10 transition-colors flex items-center justify-center pointer-events-none">
+                            <div class="bg-primary/95 text-on-primary px-5 py-2.5 rounded-full shadow-lg flex items-center gap-2">
+                                <span class="material-symbols-outlined text-white text-xl">touch_app</span>
+                                <span class="font-label-md font-semibold text-xs animate-pulse">Kliknij, aby odblokować mapę</span>
                             </div>
                         </div>
                     </div>
@@ -580,117 +553,384 @@
         <div class="max-w-[1280px] mx-auto px-margin-desktop py-stack-lg">
             <div class="flex flex-col md:flex-row justify-between items-center gap-6">
                 <div class="text-center md:text-left">
-                    <div class="font-headline-sm text-headline-sm font-bold text-primary mb-2">Canine Comfort Hotel
+                    <div class="font-headline-sm text-headline-sm font-bold text-primary mb-2">Hotel z Lasów Corso
                     </div>
                     <p class="font-body-md text-body-md text-on-surface-variant max-w-sm">Profesjonalny hotel dla psów,
                         gdzie komfort i bezpieczeństwo Twojego pupila są naszym priorytetem.</p>
                 </div>
                 <div class="flex flex-col items-center md:items-end gap-4">
                     <div class="flex gap-6">
-                        <a class="text-label-sm text-on-surface-variant hover:text-secondary underline transition-all"
-                            href="#">Privacy Policy</a>
-                        <a class="text-label-sm text-on-surface-variant hover:text-secondary underline transition-all"
-                            href="#">Terms of Service</a>
+                        <a class="text-label-sm text-on-surface-variant hover:text-secondary underline transition-all font-medium"
+                            href="certyfikaty.html">Certyfikaty i Szkolenia</a>
+                        <a class="text-label-sm text-on-surface-variant hover:text-secondary underline transition-all font-medium"
+                            href="#">Polityka Prywatności</a>
+                        <a class="text-label-sm text-on-surface-variant hover:text-secondary underline transition-all font-medium"
+                            href="regulamin.html">Regulamin Usług</a>
                     </div>
-                    <p class="font-label-sm text-label-sm text-on-surface-variant opacity-70">© 2024 Canine Comfort Dog
-                        Hotel. Built with warmth and care.</p>
+                    <p class="font-label-sm text-label-sm text-on-surface-variant opacity-70">© 2024 Hotel z Lasów Corso. Built with warmth and care.</p>
                 </div>
             </div>
         </div>
     </footer>
     <script>
-        // Calendar Interaction Logic
-        let startDate = null;
-        let endDate = null;
-        const year = 2024;
-        const month = 11; // December (0-indexed)
+        // Calendar Dynamic Rendering and Logic
+        let currentYear = new Date().getFullYear();
+        let currentMonth = new Date().getMonth(); // 0-indexed (0 = Jan, 11 = Dec)
+        
+        let startDateStr = null; // YYYY-MM-DD format
+        let endDateStr = null; // YYYY-MM-DD format
 
-        const calendarDays = document.querySelectorAll('.premium-calendar-day');
         const checkInInput = document.getElementById('check-in');
         const checkOutInput = document.getElementById('check-out');
+        const monthLabel = document.getElementById('calendar-month-label');
+        const daysGrid = document.getElementById('calendar-days-grid');
+        
+        const monthNames = [
+            "Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec",
+            "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"
+        ];
 
-        function formatDateForInput(day) {
-            const d = new Date(year, month, day);
-            const yyyy = d.getFullYear();
-            const mm = String(d.getMonth() + 1).padStart(2, '0');
-            const dd = String(d.getDate()).padStart(2, '0');
-            return `${yyyy}-${mm}-${dd}`;
+        function formatDateForInput(year, month, day) {
+            const mm = String(month + 1).padStart(2, '0');
+            const dd = String(day).padStart(2, '0');
+            return `${year}-${mm}-${dd}`;
         }
 
-        function updateCalendarVisuals() {
-            calendarDays.forEach(cell => {
-                const day = parseInt(cell.getAttribute('data-day'));
-                cell.classList.remove('date-selected', 'date-in-range');
-
-                if (startDate === day || endDate === day) {
-                    cell.classList.add('date-selected');
-                } else if (startDate && endDate && day > Math.min(startDate, endDate) && day < Math.max(startDate, endDate)) {
-                    cell.classList.add('date-in-range');
+        function renderCalendar() {
+            // Update Header
+            monthLabel.textContent = `${monthNames[currentMonth]} ${currentYear}`;
+            
+            // Clear current days
+            daysGrid.innerHTML = "";
+            
+            const firstDayIndex = (new Date(currentYear, currentMonth, 1).getDay() + 6) % 7;
+            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+            const daysInPrevMonth = new Date(currentYear, currentMonth, 0).getDate();
+            
+            // Previous month greyed-out days
+            for (let i = firstDayIndex - 1; i >= 0; i--) {
+                const dayNum = daysInPrevMonth - i;
+                const prevCell = document.createElement('div');
+                prevCell.className = "aspect-square flex items-center justify-center text-on-surface-variant/20 font-medium select-none";
+                prevCell.textContent = dayNum;
+                daysGrid.appendChild(prevCell);
+            }
+            
+            // Current month interactive days
+            for (let d = 1; d <= daysInMonth; d++) {
+                const dateStr = formatDateForInput(currentYear, currentMonth, d);
+                const button = document.createElement('button');
+                button.type = "button";
+                button.className = "aspect-square flex items-center justify-center premium-calendar-day cursor-pointer rounded-2xl border border-transparent font-semibold transition-all select-none";
+                button.textContent = d;
+                button.setAttribute('data-date', dateStr);
+                
+                // Class updates based on selection
+                if (startDateStr === dateStr || endDateStr === dateStr) {
+                    button.classList.add('date-selected');
+                } else if (startDateStr && endDateStr && dateStr > startDateStr && dateStr < endDateStr) {
+                    button.classList.add('date-in-range');
                 }
-            });
+                
+                button.addEventListener('click', () => {
+                    handleDayClick(dateStr);
+                });
+                
+                daysGrid.appendChild(button);
+            }
+            
+            // Fill remaining grid spaces
+            const totalCells = firstDayIndex + daysInMonth;
+            const remaining = (7 - (totalCells % 7)) % 7;
+            for (let nextD = 1; nextD <= remaining; nextD++) {
+                const nextCell = document.createElement('div');
+                nextCell.className = "aspect-square flex items-center justify-center text-on-surface-variant/20 font-medium select-none";
+                nextCell.textContent = nextD;
+                daysGrid.appendChild(nextCell);
+            }
         }
-
-        calendarDays.forEach(cell => {
-            cell.addEventListener('click', () => {
-                const day = parseInt(cell.getAttribute('data-day'));
-
-                if (!startDate || (startDate && endDate)) {
-                    // Reset or start new selection
-                    startDate = day;
-                    endDate = null;
-                    checkInInput.value = formatDateForInput(day);
-                    checkOutInput.value = ""; // Clear checkout until second click
+        
+        function handleDayClick(dateStr) {
+            if (!startDateStr || (startDateStr && endDateStr)) {
+                // First click or reset
+                startDateStr = dateStr;
+                endDateStr = null;
+                checkInInput.value = dateStr;
+                checkOutInput.value = ""; // Clear check-out until second click
+            } else {
+                // Second click
+                if (dateStr < startDateStr) {
+                    // Clicked date is earlier: swap
+                    endDateStr = startDateStr;
+                    startDateStr = dateStr;
+                } else if (dateStr === startDateStr) {
+                    return; // Same day: do nothing
                 } else {
-                    // Second click
-                    if (day < startDate) {
-                        // If clicked day is before start, swap them
-                        endDate = startDate;
-                        startDate = day;
-                    } else if (day === startDate) {
-                        // Do nothing or reset
-                        return;
-                    } else {
-                        endDate = day;
-                    }
-
-                    checkInInput.value = formatDateForInput(startDate);
-                    checkOutInput.value = formatDateForInput(endDate);
+                    endDateStr = dateStr;
                 }
-
-                updateCalendarVisuals();
-            });
+                
+                checkInInput.value = startDateStr;
+                checkOutInput.value = endDateStr;
+            }
+            renderCalendar();
+        }
+        
+        // Month switching logic
+        document.getElementById('prev-month').addEventListener('click', () => {
+            currentMonth--;
+            if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+            }
+            renderCalendar();
         });
+        
+        document.getElementById('next-month').addEventListener('click', () => {
+            currentMonth++;
+            if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            }
+            renderCalendar();
+        });
+        
+        // Initial call
+        renderCalendar();
 
         // Initial sync from input values if needed
         window.addEventListener('load', () => {
-            const initialStart = new Date(checkInInput.value);
-            const initialEnd = new Date(checkOutInput.value);
-
-            if (initialStart.getMonth() === month && initialStart.getFullYear() === year) {
-                startDate = initialStart.getDate();
+            if (checkInInput.value) {
+                startDateStr = checkInInput.value;
+                const dateObj = new Date(startDateStr);
+                if (!isNaN(dateObj.getTime())) {
+                    currentYear = dateObj.getFullYear();
+                    currentMonth = dateObj.getMonth();
+                }
             }
-            if (initialEnd.getMonth() === month && initialEnd.getFullYear() === year) {
-                endDate = initialEnd.getDate();
+            if (checkOutInput.value) {
+                endDateStr = checkOutInput.value;
             }
-            updateCalendarVisuals();
+            renderCalendar();
         });
+
+        // Scroll transition logic
+        let isScrolled = false;
+
+        function handleScroll() {
+            const nav = document.querySelector('nav');
+            const brand = document.querySelector('nav .font-headline-md');
+            const links = document.querySelectorAll('nav l'); // Wait! Standard link selection
+            const button = document.querySelector('nav button');
+            const menuIcon = document.querySelector('nav .material-symbols-outlined');
+            
+            const hero = document.getElementById('about');
+            const navbarHeight = 80;
+            const scrolled = hero ? (hero.getBoundingClientRect().top <= navbarHeight) : (window.scrollY > 50);
+            
+            // Select all link anchors in header
+            const navLinks = document.querySelectorAll('nav a');
+            
+            if (scrolled === isScrolled && nav.classList.contains('bg-surface-bright/95') === scrolled) return;
+            isScrolled = scrolled;
+
+            if (isScrolled) {
+                nav.className = "fixed top-0 w-full z-50 transition-all duration-300 bg-surface-bright/95 backdrop-blur-md border-b border-outline-variant/20 shadow-md shadow-primary/5 py-4";
+                brand.className = "font-headline-md text-headline-md font-bold text-primary tracking-tight transition-colors duration-300";
+                if (menuIcon) menuIcon.className = "material-symbols-outlined text-primary cursor-pointer text-3xl select-none transition-colors duration-300";
+                button.className = "bg-primary text-on-primary px-6 py-2 rounded-lg font-label-md text-label-md active:scale-95 transition-all duration-300 hover:bg-primary-container shadow-sm";
+                
+                navLinks.forEach(link => {
+                    const hash = link.getAttribute('href');
+                    const isActive = hash === window.location.hash;
+                    if (isActive) {
+                        link.className = "font-label-md text-label-md transition-all duration-300 cursor-pointer text-primary border-b-2 border-secondary pb-1";
+                    } else {
+                        link.className = "font-label-md text-label-md transition-all duration-300 cursor-pointer text-on-surface-variant hover:text-secondary";
+                    }
+                });
+            } else {
+                nav.className = "fixed top-0 w-full z-50 transition-all duration-300 bg-transparent border-b border-transparent py-6";
+                brand.className = "font-headline-md text-headline-md font-bold text-white tracking-tight transition-colors duration-300";
+                if (menuIcon) menuIcon.className = "material-symbols-outlined text-white cursor-pointer text-3xl select-none transition-colors duration-300";
+                button.className = "bg-white text-primary px-6 py-2 rounded-lg font-label-md text-label-md active:scale-95 transition-all duration-300 hover:bg-white/90 shadow-sm";
+                
+                navLinks.forEach(link => {
+                    link.className = "font-label-md text-label-md transition-all duration-300 cursor-pointer text-white/80 hover:text-white";
+                });
+            }
+        }
+
+        window.addEventListener('scroll', handleScroll);
+        handleScroll();
 
         // Navigation micro-interaction
         document.querySelectorAll('nav a').forEach(link => {
             link.addEventListener('click', (e) => {
-                document.querySelectorAll('nav a').forEach(l => {
-                    l.classList.remove('text-primary', 'border-b-2', 'border-secondary', 'pb-1');
-                    l.classList.add('text-on-surface-variant');
-                });
-                if (!e.target.classList.contains('bg-primary')) {
-                    e.target.classList.add('text-primary', 'border-b-2', 'border-secondary', 'pb-1');
-                    e.target.classList.remove('text-on-surface-variant');
-                }
+                setTimeout(() => {
+                    document.querySelectorAll('nav a').forEach(l => {
+                        const hash = l.getAttribute('href');
+                        const isActive = hash === window.location.hash;
+                        l.className = isScrolled
+                            ? (isActive 
+                                ? "font-label-md text-label-md transition-all duration-300 cursor-pointer text-primary border-b-2 border-secondary pb-1"
+                                : "font-label-md text-label-md transition-all duration-300 cursor-pointer text-on-surface-variant hover:text-secondary")
+                            : (isActive
+                                ? "font-label-md text-label-md transition-all duration-300 cursor-pointer text-white border-b-2 border-white pb-1"
+                                : "font-label-md text-label-md transition-all duration-300 cursor-pointer text-white/80 hover:text-white");
+                    });
+                }, 10);
             });
+        });
+
+        // Google Maps scroll-hijack preventer
+        const mapContainer = document.getElementById('map-container');
+        const mapIframe = document.getElementById('map-iframe');
+        const mapOverlay = document.getElementById('map-overlay');
+
+        if (mapContainer && mapIframe && mapOverlay) {
+            mapContainer.addEventListener('click', () => {
+                mapIframe.classList.remove('pointer-events-none');
+                mapIframe.classList.add('pointer-events-auto');
+                mapOverlay.classList.add('hidden');
+            });
+
+            mapContainer.addEventListener('mouseleave', () => {
+                mapIframe.classList.add('pointer-events-none');
+                mapIframe.classList.remove('pointer-events-auto');
+                mapOverlay.classList.remove('hidden');
+            });
+        }
+
+        // Form Submission Confirmation
+        const bookingForm = document.getElementById('booking-form');
+        if (bookingForm) {
+            bookingForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const ownerName = document.getElementById('owner-name').value;
+                const phoneNumber = document.getElementById('phone-number').value;
+                const checkIn = document.getElementById('check-in').value;
+                const checkOut = document.getElementById('check-out').value;
+                
+                // Populate Confirm Modal
+                document.getElementById('confirm-owner').textContent = ownerName;
+                document.getElementById('confirm-phone').textContent = phoneNumber;
+                document.getElementById('confirm-in').textContent = checkIn;
+                document.getElementById('confirm-out').textContent = checkOut;
+                
+                showModal('confirm-modal');
+            });
+        }
+
+        // Modal Action Handlers
+        function showModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.remove('hidden');
+            // Force reflow
+            modal.offsetHeight;
+            modal.classList.remove('opacity-0');
+            modal.querySelector('.transform').classList.remove('scale-95');
+        }
+
+        function hideModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.add('opacity-0');
+            modal.querySelector('.transform').classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        document.getElementById('confirm-cancel-btn').addEventListener('click', () => {
+            hideModal('confirm-modal');
+        });
+
+        document.getElementById('confirm-submit-btn').addEventListener('click', () => {
+            hideModal('confirm-modal');
+            
+            const ownerName = document.getElementById('owner-name').value;
+            const phoneNumber = document.getElementById('phone-number').value;
+            const checkIn = document.getElementById('check-in').value;
+            const checkOut = document.getElementById('check-out').value;
+            
+            // Populate Success Modal
+            document.getElementById('success-owner').textContent = ownerName;
+            document.getElementById('success-dates').textContent = `${checkIn} — ${checkOut}`;
+            document.getElementById('success-phone').textContent = phoneNumber;
+            
+            showModal('success-modal');
+            
+            // Reset Form and Calendar
+            bookingForm.reset();
+            startDateStr = null;
+            endDateStr = null;
+            renderCalendar();
+        });
+
+        document.getElementById('success-close-btn').addEventListener('click', () => {
+            hideModal('success-modal');
         });
     </script>
 
+    <!-- Custom Confirm Modal -->
+    <div id="confirm-modal" class="fixed inset-0 z-50 flex items-center justify-center px-4 bg-black/60 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl border border-surface-container text-center space-y-6 transform scale-95 transition-transform duration-300">
+            <div class="w-16 h-16 bg-secondary-fixed rounded-full flex items-center justify-center text-secondary mx-auto">
+                <span class="material-symbols-outlined text-4xl select-none">help_center</span>
+            </div>
+            <div class="space-y-3">
+                <h3 class="font-headline-md text-primary font-bold text-2xl">Potwierdź rezerwację</h3>
+                <p class="text-body-md text-on-surface-variant leading-relaxed">
+                    Czy na pewno chcesz wysłać zapytanie rezerwacyjne dla Twojego psa?
+                </p>
+                <div class="bg-surface-container-low p-4 rounded-2xl text-left text-sm space-y-2 text-on-surface">
+                    <div><strong>Opiekun:</strong> <span id="confirm-owner"></span></div>
+                    <div><strong>Telefon:</strong> <span id="confirm-phone"></span></div>
+                    <div><strong>Przyjazd:</strong> <span id="confirm-in"></span></div>
+                    <div><strong>Wyjazd:</strong> <span id="confirm-out"></span></div>
+                </div>
+            </div>
+            <div class="flex gap-4">
+                <button
+                    type="button"
+                    id="confirm-cancel-btn"
+                    class="w-1/2 border border-outline rounded-xl py-3 font-label-md text-on-surface-variant hover:bg-surface-container transition-all cursor-pointer font-bold active:scale-95">
+                    Anuluj
+                </button>
+                <button
+                    type="button"
+                    id="confirm-submit-btn"
+                    class="w-1/2 bg-primary text-on-primary rounded-xl py-3 font-label-md text-on-primary hover:bg-primary-container transition-all cursor-pointer font-bold shadow-md active:scale-95">
+                    Wyślij
+                </button>
+            </div>
+        </div>
+    </div>
 
+    <!-- Custom Success Modal -->
+    <div id="success-modal" class="fixed inset-0 z-50 flex items-center justify-center px-4 bg-black/60 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300">
+        <div class="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl border border-surface-container text-center space-y-6 transform scale-95 transition-transform duration-300">
+            <div class="w-16 h-16 bg-primary-fixed rounded-full flex items-center justify-center text-primary mx-auto">
+                <span class="material-symbols-outlined text-4xl select-none" style="font-variation-settings: 'FILL' 1">
+                    task_alt
+                </span>
+            </div>
+            <div class="space-y-2">
+                <h3 class="font-headline-md text-primary font-bold text-2xl">Zapytanie Wysłane!</h3>
+                <p class="text-body-md text-on-surface-variant leading-relaxed">
+                    Dziękujemy, <strong id="success-owner"></strong>! Otrzymaliśmy Twoje zgłoszenie rezerwacji dla pobytu w terminie:
+                    <br />
+                    <span id="success-dates" class="text-secondary font-bold"></span>.
+                    Skontaktujemy się z Tobą telefonicznie na numer <strong id="success-phone"></strong> w ciągu najbliższych 24 godzin w celu potwierdzenia.
+                </p>
+            </div>
+            <button
+                type="button"
+                id="success-close-btn"
+                class="bg-primary text-on-primary w-full py-3.5 rounded-xl font-label-md text-label-md active:scale-95 hover:bg-primary-container transition-all cursor-pointer font-bold shadow-md">
+                Zamknij okno
+            </button>
+        </div>
+    </div>
 </body>
 
 </html>

@@ -1,65 +1,975 @@
-import Image from "next/image";
+"use client";
+
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
 
 export default function Home() {
+  // Mobile menu state
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // Active navigation link state (initialized to "" as we start on the hero section)
+  const [activeLink, setActiveLink] = useState("");
+
+  // Reservation states
+  const [checkIn, setCheckIn] = useState("");
+  const [checkOut, setCheckOut] = useState("");
+  const [ownerName, setOwnerName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [notes, setNotes] = useState("");
+  
+  // Submission status
+  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+
+  // Scroll state for transparent/colored navbar
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  // State to handle Google Maps interaction overlay to prevent scroll hijacking
+  const [isMapInteractive, setIsMapInteractive] = useState(false);
+
+  // Calendar displayed month/year states
+  const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
+  const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
+
+  // ScrollSpy effect using IntersectionObserver for high-performance scroll tracking
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: "-25% 0px -55% 0px", // Trigger when the section occupies the viewport's center area
+      threshold: 0,
+    };
+
+    const sectionLabels: { [key: string]: string } = {
+      about: "O nas",
+      requirements: "Wymagania",
+      pricing: "Cennik",
+      booking: "Rezerwacja",
+      contact: "Kontakt",
+    };
+
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute("id");
+          if (id && sectionLabels[id]) {
+            setActiveLink(sectionLabels[id]);
+          }
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    const sections = ["about", "requirements", "pricing", "booking", "contact"];
+    sections.forEach((id) => {
+      const element = document.getElementById(id);
+      if (element) observer.observe(element);
+    });
+
+    // Detect scroll to the top to highlight the "Galeria" (matching screenshot highlight at the top)
+    const handleScroll = () => {
+      const hero = document.getElementById("about");
+      const navbarHeight = 80;
+      const scrolled = hero ? hero.getBoundingClientRect().top <= navbarHeight : window.scrollY > 50;
+      setIsScrolled(scrolled);
+      if (!scrolled) {
+        setActiveLink("");
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      sections.forEach((id) => {
+        const element = document.getElementById(id);
+        if (element) observer.unobserve(element);
+      });
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  // Sync inputs when calendar changes
+  const handleCalendarDayClick = (dayNum: number) => {
+    const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, "0")}-${String(dayNum).padStart(2, "0")}`;
+
+    if (!checkIn || (checkIn && checkOut)) {
+      // Start a new selection
+      setCheckIn(dateStr);
+      setCheckOut("");
+    } else {
+      // Second click
+      const startMs = new Date(checkIn).getTime();
+      const clickedMs = new Date(dateStr).getTime();
+
+      if (clickedMs < startMs) {
+        // Swap dates if clicked is earlier than check-in
+        setCheckOut(checkIn);
+        setCheckIn(dateStr);
+      } else if (dateStr === checkIn) {
+        // Reset check-out if clicked same day
+        return;
+      } else {
+        setCheckOut(dateStr);
+      }
+    }
+  };
+
+  const handlePrevMonth = () => {
+    setCurrentMonth((prev) => {
+      if (prev === 0) {
+        setCurrentYear((y) => y - 1);
+        return 11;
+      }
+      return prev - 1;
+    });
+  };
+
+  const handleNextMonth = () => {
+    setCurrentMonth((prev) => {
+      if (prev === 11) {
+        setCurrentYear((y) => y + 1);
+        return 0;
+      }
+      return prev + 1;
+    });
+  };
+
+  // Form submit handler
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!ownerName || !phoneNumber || !checkIn || !checkOut) {
+      alert("Proszę wypełnić wszystkie wymagane pola.");
+      return;
+    }
+    const phoneRegex = /^(?:\+(?:\d{1,3})[ -]?)?(?:\d[ -]?){9,12}$/;
+    if (!phoneRegex.test(phoneNumber.trim())) {
+      alert("Proszę podać poprawny numer telefonu (np. 123 456 789).");
+      return;
+    }
+    setIsConfirmModalOpen(true);
+  };
+
+  const navLinks = [
+    { label: "O nas", href: "#about" },
+    { label: "Wymagania", href: "#requirements" },
+    { label: "Cennik", href: "#pricing" },
+    { label: "Rezerwacja", href: "#booking" },
+    { label: "Kontakt", href: "#contact" },
+    { label: "Galeria", href: "/galeria" },
+    { label: "Certyfikaty", href: "/certyfikaty" },
+  ];
+
+  const monthNames = [
+    "Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec",
+    "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"
+  ];
+
+  // Calendar rendering data dynamically calculated
+  const calendarData = React.useMemo(() => {
+    const firstDayIndex = (new Date(currentYear, currentMonth, 1).getDay() + 6) % 7;
+    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+    const daysInPrevMonth = new Date(currentYear, currentMonth, 0).getDate();
+
+    const prevDays = [];
+    for (let i = firstDayIndex - 1; i >= 0; i--) {
+      prevDays.push(daysInPrevMonth - i);
+    }
+
+    const currentDays = Array.from({ length: daysInMonth }, (_, i) => i + 1);
+
+    const totalCells = firstDayIndex + daysInMonth;
+    const remaining = (7 - (totalCells % 7)) % 7;
+    const nextDays = Array.from({ length: remaining }, (_, i) => i + 1);
+
+    return { prevDays, currentDays, nextDays };
+  }, [currentYear, currentMonth]);
+
+  const getDayClass = (dayNum: number) => {
+    const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, "0")}-${String(dayNum).padStart(2, "0")}`;
+    const isSelected = checkIn === dateStr || checkOut === dateStr;
+    const isInRange =
+      checkIn &&
+      checkOut &&
+      dateStr > (checkIn < checkOut ? checkIn : checkOut) &&
+      dateStr < (checkIn < checkOut ? checkOut : checkIn);
+
+    if (isSelected) {
+      return "date-selected";
+    }
+    if (isInRange) {
+      return "date-in-range";
+    }
+    return "";
+  };
+
+  // Formatter for showing date beautifully in Polish (e.g. "3 grudnia 2024")
+  const formatPolishDate = (dateStr: string) => {
+    if (!dateStr) return "Wybierz datę";
+    const [year, month, day] = dateStr.split("-");
+    const months = [
+      "stycznia", "lutego", "marca", "kwietnia", "maja", "czerwca",
+      "lipca", "sierpnia", "września", "października", "listopada", "grudnia"
+    ];
+    const monthIndex = parseInt(month, 10) - 1;
+    if (isNaN(monthIndex) || monthIndex < 0 || monthIndex > 11) return dateStr;
+    return `${parseInt(day, 10)} ${months[monthIndex]} ${year}`;
+  };
+
+  // Smooth scroll handler
+  const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string, label: string) => {
+    if (href.startsWith("/")) {
+      setIsMobileMenuOpen(false);
+      return;
+    }
+    e.preventDefault();
+    setActiveLink(label);
+    setIsMobileMenuOpen(false);
+    const targetElement = document.querySelector(href);
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <div className="bg-background text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed pb-0 font-body-md min-h-screen">
+      
+      {/* Navigation Shell */}
+      <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        isScrolled || isMobileMenuOpen
+          ? "bg-surface-bright/95 backdrop-blur-md border-b border-outline-variant/20 shadow-md shadow-primary/5 py-4"
+          : "bg-transparent border-b border-transparent py-6"
+      }`}>
+        <div className="flex justify-between items-center max-w-[1280px] mx-auto px-margin-desktop">
+          <div className={`font-headline-md text-headline-md font-bold tracking-tight transition-colors duration-300 ${
+            isScrolled || isMobileMenuOpen ? "text-primary" : "text-white"
+          }`}>
+            Hotel z Lasów Corso
+          </div>
+          
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex gap-gutter items-center">
+            {navLinks.map((link) => {
+              const isActive = activeLink === link.label;
+              const isExternal = link.href.startsWith("/");
+              const linkClasses = `font-label-md text-label-md transition-all duration-300 cursor-pointer ${
+                isActive
+                  ? isScrolled
+                    ? "text-primary border-b-2 border-secondary pb-1"
+                    : "text-white border-b-2 border-white pb-1"
+                  : isScrolled
+                    ? "text-on-surface-variant hover:text-secondary"
+                    : "text-white/80 hover:text-white"
+              }`;
+
+              if (isExternal) {
+                return (
+                  <Link
+                    key={link.label}
+                    className={linkClasses}
+                    href={link.href}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              }
+
+              return (
+                <a
+                  key={link.label}
+                  className={linkClasses}
+                  onClick={(e) => handleScrollTo(e, link.href, link.label)}
+                  href={link.href}
+                >
+                  {link.label}
+                </a>
+              );
+            })}
+            <button
+              onClick={() => {
+                setActiveLink("Rezerwacja");
+                document.querySelector("#booking")?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className={`px-6 py-2 rounded-lg font-label-md text-label-md active:scale-95 transition-all duration-300 cursor-pointer shadow-sm ${
+                isScrolled
+                  ? "bg-primary text-on-primary hover:bg-primary-container"
+                  : "bg-white text-primary hover:bg-white/90"
+              }`}
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              Zarezerwuj Pobyt
+            </button>
+          </div>
+
+          {/* Hamburger Menu Icon */}
+          <div className="md:hidden">
+            <span
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className={`material-symbols-outlined cursor-pointer text-3xl select-none transition-colors duration-300 ${
+                isScrolled || isMobileMenuOpen ? "text-primary" : "text-white"
+              }`}
             >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+              {isMobileMenuOpen ? "close" : "menu"}
+            </span>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+
+        {/* Mobile Menu Dropdown */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden bg-surface-bright border-b border-outline-variant/20 px-margin-desktop py-6 flex flex-col gap-4 animate-fade-in shadow-lg">
+            {navLinks.map((link) => {
+              const isExternal = link.href.startsWith("/");
+              const linkClasses = `font-label-md text-label-md py-2 border-b border-surface-container-low transition-colors ${
+                activeLink === link.label ? "text-primary font-bold" : "text-on-surface-variant"
+              }`;
+
+              if (isExternal) {
+                return (
+                  <Link
+                    key={link.label}
+                    className={linkClasses}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    href={link.href}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              }
+
+              return (
+                <a
+                  key={link.label}
+                  className={linkClasses}
+                  onClick={(e) => handleScrollTo(e, link.href, link.label)}
+                  href={link.href}
+                >
+                  {link.label}
+                </a>
+              );
+            })}
+            <button
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                setActiveLink("Rezerwacja");
+                document.querySelector("#booking")?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="bg-primary text-on-primary w-full py-3 rounded-lg font-label-md text-label-md active:scale-95 mt-2"
+            >
+              Zarezerwuj Pobyt
+            </button>
+          </div>
+        )}
+      </nav>
+
+      <main>
+        
+        {/* Hero Section */}
+        <section className="relative h-[45vh] min-h-[420px] md:h-screen flex items-center overflow-hidden">
+          <div className="absolute inset-0 z-0">
+            <img
+              className="w-full h-full object-cover"
+              alt="Budynek ekskluzywnego hotelu dla psów Hotel z Lasów Corso"
+              src="/hero-bg.jpg"
+              decoding="async"
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+            <div className="absolute inset-0 bg-gradient-to-r from-primary/70 via-primary/40 to-transparent"></div>
+            {/* Smooth transition bottom fade to light green */}
+            <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#eef4f0] to-transparent pointer-events-none"></div>
+          </div>
+          <div className="relative z-10 max-w-[1280px] mx-auto px-margin-desktop w-full pt-28 md:pt-12">
+            <div className="max-w-2xl text-on-primary">
+              <h1 className="font-headline-xl text-[38px] md:text-[56px] lg:text-[68px] mb-stack-sm leading-tight">
+                Drugi Dom Dla Twojego Przyjaciela
+              </h1>
+              <p className="font-body-lg text-[16px] md:text-[20px] lg:text-[22px] mb-stack-lg opacity-90 leading-relaxed max-w-xl">
+                Zapewniamy profesjonalną opiekę, miłość i bezpieczeństwo w luksusowych warunkach.
+                Bo każdy pies zasługuje na wakacje.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <a
+                  onClick={(e) => handleScrollTo(e, "#booking", "Rezerwacja")}
+                  className="bg-primary text-on-primary px-8 py-4 rounded-lg font-label-md text-label-md hover:bg-primary-container transition-all shadow-lg border border-white/20 active:scale-95 cursor-pointer text-center"
+                  href="#booking"
+                >
+                  Zarezerwuj Pobyt
+                </a>
+                <a
+                  onClick={(e) => handleScrollTo(e, "#about", "O nas")}
+                  className="bg-transparent border-2 border-on-primary text-on-primary px-8 py-4 rounded-lg font-label-md text-label-md hover:bg-on-primary/10 transition-colors active:scale-95 cursor-pointer text-center"
+                  href="#about"
+                >
+                  Dowiedz się więcej
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+ 
+         {/* O Nas Section */}
+         <section className="py-stack-lg bg-gradient-to-b from-[#eef4f0] to-surface-bright scroll-mt-20" id="about">
+          <div className="max-w-[1280px] mx-auto px-margin-desktop grid md:grid-cols-2 gap-stack-lg items-center">
+            <div className="relative">
+              <div className="absolute -top-4 -left-4 w-24 h-24 bg-secondary-container rounded-full -z-10 opacity-60"></div>
+              <img
+                className="rounded-xl soft-card-shadow w-auto max-w-full h-auto max-h-[450px] mx-auto block border border-surface-container"
+                alt="Zdjęcie przedstawiające opiekuna psa w hotelu Hotel z Lasów Corso"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAN9-Bme86Q3KNMiygotxrRjid40m_vfdPpk0Rtf-p12i66bENz-svowlgcfCHIRLAf-lROT4uwlEFWJfSaInxEf9HV55clcaihpPuH0qyADXiMBZ_xL0eOHE84AJ2JDA8VNYVYqnrd996XrOR5SYLu5jJfs9aQh5h3MLg1aDbzrQiD8-WW7ILHOSVTXM-FdpMBm8ari6F9GKI2wv_wic_lufweI39DtGwxB8x8c6V030klOkMLmgJ7egYY6AlcbkLF2zQZQHXt1Q"
+                loading="lazy"
+              />
+            </div>
+            <div className="space-y-4">
+              <span className="text-secondary font-label-md uppercase tracking-wider mb-2 block font-semibold">
+                Nasza Misja
+              </span>
+              <h2 className="font-headline-lg text-headline-lg text-primary leading-tight font-bold">
+                Z Miłości do Merdających Ogonów
+              </h2>
+              <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                Hotel z Lasów Corso powstał z pasji do psów i potrzeby stworzenia miejsca, które nie będzie
+                tylko przechowalnią, ale prawdziwym domem tymczasowym. Od 2018 roku dbamy o to, by każdy nasz
+                gość czuł się u nas jak u siebie.
+              </p>
+              <div className="grid grid-cols-2 gap-stack-sm pt-4 border-t border-surface-container-high/60">
+                <div className="flex items-start gap-3">
+                  <span className="material-symbols-outlined text-primary text-3xl select-none">pets</span>
+                  <div>
+                    <h4 className="font-label-md text-primary font-bold">Indywidualne podejście</h4>
+                    <p className="text-label-sm text-on-surface-variant mt-1 leading-snug">
+                      Znamy imię i nawyki każdego gościa.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="material-symbols-outlined text-primary text-3xl select-none">health_and_safety</span>
+                  <div>
+                    <h4 className="font-label-md text-primary font-bold">Certyfikowana kadra</h4>
+                    <p className="text-label-sm text-on-surface-variant mt-1 leading-snug">
+                      Opiekunowie z pasją i wiedzą medyczną.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Wymagania Section */}
+        <section className="py-stack-lg bg-surface-container-low/60 scroll-mt-20" id="requirements">
+          <div className="max-w-[1280px] mx-auto px-margin-desktop">
+            <div className="text-center mb-stack-lg space-y-2">
+              <h2 className="font-headline-lg text-headline-lg text-primary font-bold">
+                Wymagania i Co Spakować
+              </h2>
+              <p className="font-body-md text-body-md text-on-surface-variant max-w-xl mx-auto leading-relaxed">
+                Bezpieczeństwo wszystkich naszych gości jest dla nas priorytetem. Prosimy o przygotowanie
+                poniższych dokumentów i rzeczy przed pobytem psa.
+              </p>
+            </div>
+            <div className="grid md:grid-cols-2 gap-gutter">
+              
+              {/* Zdrowie i Dokumenty Card */}
+              <div className="bg-surface-container-lowest p-stack-md rounded-xl soft-card-shadow border-l-4 border-primary hover-card-shadow transition-all duration-300">
+                <h3 className="font-headline-md text-headline-md text-primary mb-stack-sm flex items-center gap-3 font-semibold">
+                  <span className="material-symbols-outlined text-3xl">medical_services</span>
+                  Zdrowie i Dokumenty
+                </h3>
+                <ul className="space-y-stack-sm">
+                  {[
+                    "Aktualna książeczka zdrowia z wpisem o szczepieniu przeciw wściekliźnie.",
+                    "Szczepienie przeciwko kaszlowi kenelowemu (zalecane).",
+                    "Profilaktyka przeciw pchłom i kleszczom (podana max 2 tyg. wcześniej).",
+                    "Aktualne odrobaczenie (potwierdzone w książeczce zdrowia).",
+                  ].map((req, idx) => (
+                    <li key={idx} className="flex items-start gap-3 font-body-md text-on-surface-variant">
+                      <span className="material-symbols-outlined text-primary text-[20px] pt-0.5 select-none">
+                        check_circle
+                      </span>
+                      <span className="leading-relaxed">{req}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Co zabrać ze sobą Card */}
+              <div className="bg-surface-container-lowest p-stack-md rounded-xl soft-card-shadow border-l-4 border-secondary hover-card-shadow transition-all duration-300">
+                <h3 className="font-headline-md text-headline-md text-secondary mb-stack-sm flex items-center gap-3 font-semibold">
+                  <span className="material-symbols-outlined text-3xl">luggage</span>
+                  Co zabrać ze sobą?
+                </h3>
+                <ul className="space-y-stack-sm">
+                  {[
+                    { text: "Karma, którą pies je na co dzień (aby uniknąć rewolucji żołądkowych).", icon: "shopping_bag" },
+                    { text: "Ulubione legowisko lub kocyk (pachnący ciepłem domu).", icon: "bed" },
+                    { text: "Dwie ulubione zabawki pupila.", icon: "toys" },
+                    { text: "Instrukcja dawkowania karmy oraz ewentualnych leków.", icon: "info" },
+                  ].map((item, idx) => (
+                    <li key={idx} className="flex items-start gap-3 font-body-md text-on-surface-variant">
+                      <span className="material-symbols-outlined text-secondary text-[20px] pt-0.5 select-none">
+                        {item.icon}
+                      </span>
+                      <span className="leading-relaxed">{item.text}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Cennik Section */}
+        <section className="py-stack-lg bg-surface-bright scroll-mt-20" id="pricing">
+          <div className="max-w-[1280px] mx-auto px-margin-desktop">
+            <div className="text-center mb-stack-md">
+              <h2 className="font-headline-lg text-headline-lg text-primary font-bold">Cennik</h2>
+              <p className="font-label-sm text-on-surface-variant opacity-75 mt-2 italic font-semibold">
+                Przy pobytach powyżej 14 dni oferujemy 10% rabatu.
+              </p>
+            </div>
+            
+            <div className="flex flex-wrap justify-center gap-gutter pt-4">
+              {[
+                { title: "Mały Pies", desc: "Waga do 10 kg", price: "80 PLN" },
+                { title: "Średni Pies", desc: "Waga 10 - 25 kg", price: "100 PLN" },
+                { title: "Duży Pies", desc: "Waga powyżej 25 kg", price: "120 PLN" },
+              ].map((tier, idx) => (
+                <div
+                  key={idx}
+                  className="bg-surface-container-low p-8 rounded-xl text-center flex flex-col items-center justify-center w-full max-w-[280px] border border-transparent hover:border-outline-variant hover:scale-[1.03] hover:bg-white soft-card-shadow transition-all duration-300"
+                >
+                  <h3 className="font-headline-md text-headline-md text-primary mb-1 font-bold">
+                    {tier.title}
+                  </h3>
+                  <p className="text-label-sm text-on-surface-variant mb-5 font-medium">
+                    {tier.desc}
+                  </p>
+                  <div className="text-headline-lg text-secondary font-bold">
+                    {tier.price}{" "}
+                    <span className="text-body-md text-on-surface-variant font-normal">/ doba</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Rezerwacja Section */}
+        <section className="py-stack-lg bg-surface-container relative overflow-hidden scroll-mt-20" id="booking">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-primary-fixed/20 rounded-full blur-3xl -mr-48 -mt-48 pointer-events-none"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary-container/20 rounded-full blur-3xl -ml-48 -mb-48 pointer-events-none"></div>
+          
+          <div className="max-w-[1280px] mx-auto px-margin-desktop relative z-10">
+            <div className="max-w-4xl mx-auto text-center mb-stack-lg space-y-2">
+              <span className="text-secondary font-label-md uppercase tracking-[0.2em] mb-1 block font-semibold">
+                Rezerwacja Online
+              </span>
+              <h2 className="font-headline-xl text-headline-xl text-primary font-bold">
+                Zaplanuj Wymarzony Pobyt
+              </h2>
+              <p className="font-body-lg text-on-surface-variant leading-relaxed max-w-2xl mx-auto">
+                Wybierz termin w naszym interaktywnym kalendarzu i prześlij zgłoszenie.
+                Skontaktujemy się z Tobą w ciągu 24h, aby potwierdzić dostępność.
+              </p>
+            </div>
+
+            <div className="bg-surface-bright rounded-[2rem] shadow-2xl overflow-hidden border border-white/40 backdrop-blur-sm grid lg:grid-cols-12 gap-0 max-w-5xl mx-auto">
+              
+              {/* Left Column: Interactive Calendar */}
+              <div id="calendar-container" className="p-8 md:p-10 border-r border-outline-variant/20 lg:col-span-8 flex flex-col justify-between">
+                <div id="calendar-grid-container" className="transition-all duration-300 rounded-2xl p-2">
+                  <div className="flex justify-between items-center mb-8">
+                    <div>
+                      <h3 className="font-headline-md text-primary text-2xl font-bold">
+                        {monthNames[currentMonth]} {currentYear}
+                      </h3>
+                      <p className="text-label-sm text-on-surface-variant opacity-75 mt-0.5">
+                        Wybierz datę przyjazdu i wyjazdu na siatce dni
+                      </p>
+                    </div>
+                    <div className="flex gap-2">
+                      <button
+                        type="button"
+                        onClick={handlePrevMonth}
+                        className="w-10 h-10 flex items-center justify-center rounded-full border border-outline-variant/30 hover:bg-surface-container hover:border-primary active:scale-95 transition-all cursor-pointer"
+                      >
+                        <span className="material-symbols-outlined text-primary select-none">chevron_left</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={handleNextMonth}
+                        className="w-10 h-10 flex items-center justify-center rounded-full border border-outline-variant/30 hover:bg-surface-container hover:border-primary active:scale-95 transition-all cursor-pointer"
+                      >
+                        <span className="material-symbols-outlined text-primary select-none">chevron_right</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Calendar Grid Header */}
+                  <div className="grid grid-cols-7 gap-2 mb-2 text-center">
+                    {["Pon", "Wt", "Śr", "Czw", "Pt", "Sob", "Ndz"].map((dayName) => (
+                      <div key={dayName} className="font-label-md text-on-surface-variant/60 font-semibold pb-2 border-b border-surface-container">
+                        {dayName}
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Calendar Grid Body */}
+                  <div className="grid grid-cols-7 gap-2 pt-2">
+                    
+                    {/* Previous month days (greyed out) */}
+                    {calendarData.prevDays.map((d, idx) => (
+                      <div
+                        key={`prev-${idx}-${d}`}
+                        className="aspect-square flex items-center justify-center text-on-surface-variant/20 font-medium select-none"
+                      >
+                        {d}
+                      </div>
+                    ))}
+
+                    {/* Current month days (active interactive days) */}
+                    {calendarData.currentDays.map((d) => {
+                      const dayClass = getDayClass(d);
+                      return (
+                        <button
+                          type="button"
+                          key={`curr-${d}`}
+                          onClick={() => handleCalendarDayClick(d)}
+                          className={`aspect-square flex items-center justify-center premium-calendar-day cursor-pointer rounded-2xl border border-transparent font-semibold transition-all select-none ${dayClass}`}
+                        >
+                          {d}
+                        </button>
+                      );
+                    })}
+
+                    {/* Next month days (greyed out) */}
+                    {calendarData.nextDays.map((d, idx) => (
+                      <div
+                        key={`next-${idx}-${d}`}
+                        className="aspect-square flex items-center justify-center text-on-surface-variant/20 font-medium select-none"
+                      >
+                        {d}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Calendar Legend */}
+                <div className="mt-8 pt-6 border-t border-outline-variant/20 flex flex-wrap gap-6">
+                  <div className="flex items-center gap-2">
+                    <span className="w-3 h-3 bg-secondary rounded-full shadow-sm shadow-secondary/50"></span>
+                    <span className="text-label-sm text-on-surface-variant font-semibold">Twój wybór</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="w-3 h-3 bg-error/40 rounded-full"></span>
+                    <span className="text-label-sm text-on-surface-variant font-semibold">Brak miejsc</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="w-3 h-3 bg-surface-container rounded-full border border-outline-variant/30"></span>
+                    <span className="text-label-sm text-on-surface-variant font-semibold">Dostępne</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Column: Form */}
+              <div className="bg-surface-container-low/40 p-8 md:p-10 lg:col-span-4 flex flex-col justify-between border-t lg:border-t-0 lg:border-l border-outline-variant/20">
+                <div>
+                  <h3 className="font-headline-md text-primary mb-6 font-bold text-2xl">Uzupełnij Dane</h3>
+                  <form onSubmit={handleSubmit} className="space-y-5">
+                    
+                    {/* Owner name */}
+                    <div className="space-y-2">
+                      <label className="font-label-md text-on-surface-variant flex items-center gap-2 font-semibold">
+                        <span className="material-symbols-outlined text-[18px] text-primary">person</span>
+                        Imię i Nazwisko Opiekuna
+                      </label>
+                      <input
+                        type="text"
+                        value={ownerName}
+                        onChange={(e) => setOwnerName(e.target.value)}
+                        placeholder="Jan Kowalski"
+                        className="w-full bg-white border border-outline-variant/20 rounded-xl p-3.5 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all shadow-sm font-medium"
+                        required
+                      />
+                    </div>
+
+                    {/* Phone number */}
+                    <div className="space-y-2">
+                      <label className="font-label-md text-on-surface-variant flex items-center gap-2 font-semibold">
+                        <span className="material-symbols-outlined text-[18px] text-primary">call</span>
+                        Numer Telefonu
+                      </label>
+                      <input
+                        type="tel"
+                        value={phoneNumber}
+                        onChange={(e) => setPhoneNumber(e.target.value)}
+                        placeholder="123 456 789"
+                        pattern="(?:\+\d{1,3}[ -]?)?(?:\d[ -]?){9,12}"
+                        title="Proszę wpisać poprawny numer telefonu (np. 123 456 789)"
+                        className="w-full bg-white border border-outline-variant/20 rounded-xl p-3.5 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all shadow-sm font-medium"
+                        required
+                      />
+                    </div>
+
+                    {/* Dates block */}
+                    <div className="grid grid-cols-2 gap-4">
+                      
+                      {/* Check-in input */}
+                      <div className="space-y-2">
+                        <label className="font-label-md text-on-surface-variant flex items-center gap-1.5 font-semibold text-xs">
+                          <span className="material-symbols-outlined text-[16px] text-primary">calendar_today</span>
+                          Przyjazd
+                        </label>
+                        <div
+                          onClick={() => {
+                            document.getElementById("booking")?.scrollIntoView({ behavior: "smooth" });
+                            const grid = document.getElementById("calendar-grid-container");
+                            if (grid) {
+                              grid.classList.add("ring-4", "ring-primary/20", "bg-primary/5");
+                              setTimeout(() => {
+                                grid.classList.remove("ring-4", "ring-primary/20", "bg-primary/5");
+                              }, 1200);
+                            }
+                          }}
+                          className="w-full bg-white border border-outline-variant/20 rounded-xl px-3 py-3 hover:border-primary/60 hover:shadow-md hover:bg-surface-bright cursor-pointer transition-all shadow-sm text-xs font-bold flex justify-between items-center h-[52px] active:scale-[0.98]"
+                        >
+                          <span className="text-on-surface text-sm truncate">{formatPolishDate(checkIn)}</span>
+                          <span className="material-symbols-outlined text-primary text-lg select-none shrink-0">edit_calendar</span>
+                        </div>
+                        <input type="hidden" name="check-in" value={checkIn} required />
+                      </div>
+
+                      {/* Check-out input */}
+                      <div className="space-y-2">
+                        <label className="font-label-md text-on-surface-variant flex items-center gap-1.5 font-semibold text-xs">
+                          <span className="material-symbols-outlined text-[16px] text-primary">event</span>
+                          Wyjazd
+                        </label>
+                        <div
+                          onClick={() => {
+                            document.getElementById("booking")?.scrollIntoView({ behavior: "smooth" });
+                            const grid = document.getElementById("calendar-grid-container");
+                            if (grid) {
+                              grid.classList.add("ring-4", "ring-primary/20", "bg-primary/5");
+                              setTimeout(() => {
+                                grid.classList.remove("ring-4", "ring-primary/20", "bg-primary/5");
+                              }, 1200);
+                            }
+                          }}
+                          className="w-full bg-white border border-outline-variant/20 rounded-xl px-3 py-3 hover:border-primary/60 hover:shadow-md hover:bg-surface-bright cursor-pointer transition-all shadow-sm text-xs font-bold flex justify-between items-center h-[52px] active:scale-[0.98]"
+                        >
+                          <span className="text-on-surface text-sm truncate">{formatPolishDate(checkOut)}</span>
+                          <span className="material-symbols-outlined text-primary text-lg select-none shrink-0">edit_calendar</span>
+                        </div>
+                        <input type="hidden" name="check-out" value={checkOut} required />
+                      </div>
+                    </div>
+
+                    {/* Notes field */}
+                    <div className="space-y-2">
+                      <label className="font-label-md text-on-surface-variant flex items-center gap-2 font-semibold">
+                        <span className="material-symbols-outlined text-[18px] text-primary">notes</span>
+                        Opis pupila i uwagi
+                      </label>
+                      <textarea
+                        value={notes}
+                        onChange={(e) => setNotes(e.target.value)}
+                        placeholder="Imię psa, rasa, wielkość, dieta, leki, charakterystyka..."
+                        className="w-full bg-white border border-outline-variant/20 rounded-xl p-4 h-24 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all shadow-sm resize-none font-medium text-sm leading-relaxed"
+                      ></textarea>
+                    </div>
+
+                    <button
+                      type="submit"
+                      className="w-full bg-primary text-on-primary py-4.5 rounded-xl font-headline-md text-base shadow-xl shadow-primary/10 hover:bg-primary-container hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-3 mt-4 cursor-pointer font-bold"
+                    >
+                      Wyślij Zapytanie <span className="material-symbols-outlined font-normal select-none">send</span>
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Kontakt Section */}
+        <section className="py-stack-lg bg-surface-bright scroll-mt-20" id="contact">
+          <div className="max-w-[1280px] mx-auto px-margin-desktop">
+            <div className="grid md:grid-cols-2 gap-stack-lg items-center">
+              
+              {/* Contact details */}
+              <div className="space-y-6">
+                <h2 className="font-headline-lg text-headline-lg text-primary font-bold">
+                  Skontaktuj się z nami
+                </h2>
+                
+                <div className="space-y-5 pt-2">
+                  {[
+                    { label: "Zadzwoń do nas", val: "+48 123 456 789", icon: "call" },
+                    { label: "Napisz maila", val: "kontakt@caninecomfort.pl", icon: "mail" },
+                    { label: "Adres", val: "Sosnowo 20, 56-500 Wioska", icon: "location_on" },
+                  ].map((info, idx) => (
+                    <div key={idx} className="flex gap-4 items-start">
+                      <div className="w-12 h-12 bg-primary-fixed rounded-full flex items-center justify-center text-primary shrink-0">
+                        <span className="material-symbols-outlined text-2xl select-none">{info.icon}</span>
+                      </div>
+                      <div>
+                        <h4 className="font-label-md text-primary font-bold">{info.label}</h4>
+                        <p className="font-body-md text-on-surface-variant mt-0.5">{info.val}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-8 pt-6 border-t border-surface-container space-y-4">
+                  <p className="font-body-md text-on-surface-variant leading-relaxed text-sm">
+                    <strong>Bądź na bieżąco!</strong> Wszystkie aktualności, codzienne relacje oraz zdjęcia z życia naszego hotelu i zabaw psów są publikowane na bieżąco na naszym profilu na Facebooku.
+                  </p>
+                  <a
+                    href="https://www.facebook.com/HotelZLasowCorso"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-3 bg-secondary text-white px-5 py-3 rounded-xl font-label-md text-label-md hover:bg-secondary-container hover:text-on-secondary-container transition-all active:scale-95 shadow-md group cursor-pointer"
+                  >
+                    <svg className="w-5 h-5 fill-current transition-transform group-hover:scale-110" viewBox="0 0 24 24">
+                      <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75z"/>
+                    </svg>
+                    <span>Odwiedź nas na Facebooku</span>
+                    <span className="material-symbols-outlined text-[16px]">open_in_new</span>
+                  </a>
+                </div>
+              </div>
+
+              {/* Styled Map Widget */}
+              <div 
+                onClick={() => setIsMapInteractive(true)}
+                onMouseLeave={() => setIsMapInteractive(false)}
+                className="h-[400px] bg-surface-container rounded-2xl overflow-hidden soft-card-shadow border-4 border-white relative group cursor-pointer"
+              >
+                <iframe
+                  src="https://maps.google.com/maps?q=Sosnowo%2020,%2056-500%20Wioska&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Mapa Google - Lokalizacja Hotel z Lasów Corso"
+                  className={`w-full h-full transition-all duration-300 ${isMapInteractive ? "pointer-events-auto" : "pointer-events-none"}`}
+                ></iframe>
+                {!isMapInteractive && (
+                  <div className="absolute inset-0 bg-black/5 hover:bg-black/10 transition-colors flex items-center justify-center pointer-events-none">
+                    <div className="bg-primary/95 text-on-primary px-5 py-2.5 rounded-full shadow-lg flex items-center gap-2">
+                      <span className="material-symbols-outlined text-white text-xl">touch_app</span>
+                      <span className="font-label-md font-semibold text-xs animate-pulse">Kliknij, aby odblokować mapę</span>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
+
+      {/* Footer Shell */}
+      <footer className="bg-surface-container-high border-t border-outline-variant/10">
+        <div className="max-w-[1280px] mx-auto px-margin-desktop py-stack-lg">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-8">
+            <div className="text-center md:text-left space-y-2">
+              <div className="font-headline-sm text-headline-sm font-bold text-primary">
+                Hotel z Lasów Corso
+              </div>
+              <p className="font-body-md text-body-md text-on-surface-variant max-w-sm leading-relaxed">
+                Profesjonalny hotel dla psów, gdzie komfort i bezpieczeństwo Twojego pupila są naszym priorytetem.
+              </p>
+            </div>
+            
+            <div className="flex flex-col items-center md:items-end gap-3 text-center md:text-right">
+              <div className="flex gap-6">
+                <Link href="/certyfikaty" className="text-label-sm text-on-surface-variant hover:text-secondary underline transition-all font-medium">
+                  Certyfikaty i Szkolenia
+                </Link>
+                <a href="#" className="text-label-sm text-on-surface-variant hover:text-secondary underline transition-all font-medium">
+                  Polityka Prywatności
+                </a>
+                <Link href="/regulamin" className="text-label-sm text-on-surface-variant hover:text-secondary underline transition-all font-medium">
+                  Regulamin Usług
+                </Link>
+              </div>
+              <p className="font-label-sm text-label-sm text-on-surface-variant opacity-70">
+                © {new Date().getFullYear()} Hotel z Lasów Corso. Built with warmth and care.
+              </p>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      {/* Custom Confirm Modal */}
+      {isConfirmModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center px-4 bg-black/60 backdrop-blur-sm animate-fade-in">
+          <div className="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl border border-surface-container text-center space-y-6 animate-scale-up">
+            <div className="w-16 h-16 bg-secondary-fixed rounded-full flex items-center justify-center text-secondary mx-auto">
+              <span className="material-symbols-outlined text-4xl select-none">help_center</span>
+            </div>
+            <div className="space-y-3">
+              <h3 className="font-headline-md text-primary font-bold text-2xl">Potwierdź rezerwację</h3>
+              <p className="text-body-md text-on-surface-variant leading-relaxed">
+                Czy na pewno chcesz wysłać zapytanie rezerwacyjne dla Twojego psa?
+              </p>
+              <div className="bg-surface-container-low p-4 rounded-2xl text-left text-sm space-y-2 text-on-surface font-body-md">
+                <div><strong>Opiekun:</strong> <span>{ownerName}</span></div>
+                <div><strong>Telefon:</strong> <span>{phoneNumber}</span></div>
+                <div><strong>Przyjazd:</strong> <span>{checkIn}</span></div>
+                <div><strong>Wyjazd:</strong> <span>{checkOut}</span></div>
+              </div>
+            </div>
+            <div className="flex gap-4 w-full">
+              <button
+                type="button"
+                onClick={() => setIsConfirmModalOpen(false)}
+                className="w-1/2 border border-outline rounded-xl py-3 font-label-md text-on-surface-variant hover:bg-surface-container transition-all cursor-pointer font-bold active:scale-95"
+              >
+                Anuluj
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setIsConfirmModalOpen(false);
+                  setIsSuccessModalOpen(true);
+                }}
+                className="w-1/2 bg-primary text-on-primary rounded-xl py-3 font-label-md text-on-primary hover:bg-primary-container transition-all cursor-pointer font-bold shadow-md active:scale-95"
+              >
+                Wyślij
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Success Notification Modal */}
+      {isSuccessModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center px-4 bg-black/60 backdrop-blur-sm animate-fade-in">
+          <div className="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl border border-surface-container text-center space-y-6 animate-scale-up">
+            <div className="w-16 h-16 bg-primary-fixed rounded-full flex items-center justify-center text-primary mx-auto">
+              <span className="material-symbols-outlined text-4xl select-none" style={{ fontVariationSettings: "'FILL' 1" }}>
+                task_alt
+              </span>
+            </div>
+            <div className="space-y-2">
+              <h3 className="font-headline-md text-primary font-bold text-2xl">Zapytanie Wysłane!</h3>
+              <p className="text-body-md text-on-surface-variant leading-relaxed">
+                Dziękujemy, <strong>{ownerName}</strong>! Otrzymaliśmy Twoje zgłoszenie rezerwacji dla pobytu w terminie:
+                <br />
+                <span className="text-secondary font-bold">
+                  {checkIn} — {checkOut}
+                </span>
+                . Skontaktujemy się z Tobą telefonicznie na numer <strong>{phoneNumber}</strong> w ciągu najbliższych 24 godzin w celu potwierdzenia.
+              </p>
+            </div>
+            <button
+              onClick={() => setIsSuccessModalOpen(false)}
+              className="bg-primary text-on-primary w-full py-3.5 rounded-xl font-label-md text-label-md active:scale-95 hover:bg-primary-container transition-all cursor-pointer font-bold shadow-md"
+            >
+              Zamknij okno
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
