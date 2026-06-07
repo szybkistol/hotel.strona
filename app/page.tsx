@@ -16,7 +16,7 @@ export default function Home() {
   const [ownerName, setOwnerName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [notes, setNotes] = useState("");
-  
+
   // Submission status
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
@@ -142,7 +142,7 @@ export default function Home() {
     }
     const phoneRegex = /^(?:\+(?:\d{1,3})[ -]?)?(?:\d[ -]?){9,12}$/;
     if (!phoneRegex.test(phoneNumber.trim())) {
-      alert("Proszę podać poprawny numer telefonu (np. 123 456 789).");
+      alert("Proszę podać poprawny numer telefonu (np. 504 239 097).");
       return;
     }
     setIsConfirmModalOpen(true);
@@ -231,34 +231,31 @@ export default function Home() {
 
   return (
     <div className="bg-background text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed pb-0 font-body-md min-h-screen">
-      
+
       {/* Navigation Shell */}
-      <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled || isMobileMenuOpen
-          ? "bg-surface-bright/95 backdrop-blur-md border-b border-outline-variant/20 shadow-md shadow-primary/5 py-4"
-          : "bg-transparent border-b border-transparent py-6"
-      }`}>
+      <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled || isMobileMenuOpen
+        ? "bg-surface-bright/95 backdrop-blur-md border-b border-outline-variant/20 shadow-md shadow-primary/5 py-4"
+        : "bg-transparent border-b border-transparent py-6"
+        }`}>
         <div className="flex justify-between items-center max-w-[1280px] mx-auto px-margin-desktop">
-          <div className={`font-headline-md text-headline-md font-bold tracking-tight transition-colors duration-300 ${
-            isScrolled || isMobileMenuOpen ? "text-primary" : "text-white"
-          }`}>
+          <div className={`font-headline-md text-headline-md font-bold tracking-tight transition-colors duration-300 ${isScrolled || isMobileMenuOpen ? "text-primary" : "text-white"
+            }`}>
             Hotel z Lasów Corso
           </div>
-          
+
           {/* Desktop Navigation */}
           <div className="hidden md:flex gap-gutter items-center">
             {navLinks.map((link) => {
               const isActive = activeLink === link.label;
               const isExternal = link.href.startsWith("/");
-              const linkClasses = `font-label-md text-label-md transition-all duration-300 cursor-pointer ${
-                isActive
-                  ? isScrolled
-                    ? "text-primary border-b-2 border-secondary pb-1"
-                    : "text-white border-b-2 border-white pb-1"
-                  : isScrolled
-                    ? "text-on-surface-variant hover:text-secondary"
-                    : "text-white/80 hover:text-white"
-              }`;
+              const linkClasses = `font-label-md text-label-md transition-all duration-300 cursor-pointer ${isActive
+                ? isScrolled
+                  ? "text-primary border-b-2 border-secondary pb-1"
+                  : "text-white border-b-2 border-white pb-1"
+                : isScrolled
+                  ? "text-on-surface-variant hover:text-secondary"
+                  : "text-white/80 hover:text-white"
+                }`;
 
               if (isExternal) {
                 return (
@@ -288,11 +285,10 @@ export default function Home() {
                 setActiveLink("Rezerwacja");
                 document.querySelector("#booking")?.scrollIntoView({ behavior: "smooth" });
               }}
-              className={`px-6 py-2 rounded-lg font-label-md text-label-md active:scale-95 transition-all duration-300 cursor-pointer shadow-sm ${
-                isScrolled
-                  ? "bg-primary text-on-primary hover:bg-primary-container"
-                  : "bg-white text-primary hover:bg-white/90"
-              }`}
+              className={`px-6 py-2 rounded-lg font-label-md text-label-md active:scale-95 transition-all duration-300 cursor-pointer shadow-sm ${isScrolled
+                ? "bg-primary text-on-primary hover:bg-primary-container"
+                : "bg-white text-primary hover:bg-white/90"
+                }`}
             >
               Zarezerwuj Pobyt
             </button>
@@ -302,9 +298,8 @@ export default function Home() {
           <div className="md:hidden">
             <span
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`material-symbols-outlined cursor-pointer text-3xl select-none transition-colors duration-300 ${
-                isScrolled || isMobileMenuOpen ? "text-primary" : "text-white"
-              }`}
+              className={`material-symbols-outlined cursor-pointer text-3xl select-none transition-colors duration-300 ${isScrolled || isMobileMenuOpen ? "text-primary" : "text-white"
+                }`}
             >
               {isMobileMenuOpen ? "close" : "menu"}
             </span>
@@ -316,9 +311,8 @@ export default function Home() {
           <div className="md:hidden bg-surface-bright border-b border-outline-variant/20 px-margin-desktop py-6 flex flex-col gap-4 animate-fade-in shadow-lg">
             {navLinks.map((link) => {
               const isExternal = link.href.startsWith("/");
-              const linkClasses = `font-label-md text-label-md py-2 border-b border-surface-container-low transition-colors ${
-                activeLink === link.label ? "text-primary font-bold" : "text-on-surface-variant"
-              }`;
+              const linkClasses = `font-label-md text-label-md py-2 border-b border-surface-container-low transition-colors ${activeLink === link.label ? "text-primary font-bold" : "text-on-surface-variant"
+                }`;
 
               if (isExternal) {
                 return (
@@ -359,7 +353,7 @@ export default function Home() {
       </nav>
 
       <main>
-        
+
         {/* Hero Section */}
         <section className="relative h-[45vh] min-h-[420px] md:h-screen flex items-center overflow-hidden">
           <div className="absolute inset-0 z-0">
@@ -379,8 +373,8 @@ export default function Home() {
                 Drugi Dom Dla Twojego Przyjaciela
               </h1>
               <p className="font-body-lg text-[16px] md:text-[20px] lg:text-[22px] mb-stack-lg opacity-90 leading-relaxed max-w-xl">
-                Zapewniamy profesjonalną opiekę, miłość i bezpieczeństwo w luksusowych warunkach.
-                Bo każdy pies zasługuje na wakacje.
+                Zapewniamy troskliwą opiekę, leśne spacery, zabawę i odpoczynek w przytulnych, domowych warunkach.
+                Bo u nas każdy pies czuje się swobodnie i bezpiecznie.
               </p>
               <div className="flex flex-wrap gap-4">
                 <a
@@ -401,52 +395,95 @@ export default function Home() {
             </div>
           </div>
         </section>
- 
-         {/* O Nas Section */}
-         <section className="py-stack-lg bg-gradient-to-b from-[#eef4f0] to-surface-bright scroll-mt-20" id="about">
-          <div className="max-w-[1280px] mx-auto px-margin-desktop grid md:grid-cols-2 gap-stack-lg items-center">
-            <div className="relative">
-              <div className="absolute -top-4 -left-4 w-24 h-24 bg-secondary-container rounded-full -z-10 opacity-60"></div>
-              <img
-                className="rounded-xl soft-card-shadow w-auto max-w-full h-auto max-h-[450px] mx-auto block border border-surface-container"
-                alt="Zdjęcie przedstawiające opiekuna psa w hotelu Hotel z Lasów Corso"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAN9-Bme86Q3KNMiygotxrRjid40m_vfdPpk0Rtf-p12i66bENz-svowlgcfCHIRLAf-lROT4uwlEFWJfSaInxEf9HV55clcaihpPuH0qyADXiMBZ_xL0eOHE84AJ2JDA8VNYVYqnrd996XrOR5SYLu5jJfs9aQh5h3MLg1aDbzrQiD8-WW7ILHOSVTXM-FdpMBm8ari6F9GKI2wv_wic_lufweI39DtGwxB8x8c6V030klOkMLmgJ7egYY6AlcbkLF2zQZQHXt1Q"
-                loading="lazy"
-              />
-            </div>
-            <div className="space-y-4">
-              <span className="text-secondary font-label-md uppercase tracking-wider mb-2 block font-semibold">
-                Nasza Misja
-              </span>
-              <h2 className="font-headline-lg text-headline-lg text-primary leading-tight font-bold">
-                Z Miłości do Merdających Ogonów
-              </h2>
-              <p className="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-                Hotel z Lasów Corso powstał z pasji do psów i potrzeby stworzenia miejsca, które nie będzie
-                tylko przechowalnią, ale prawdziwym domem tymczasowym. Od 2018 roku dbamy o to, by każdy nasz
-                gość czuł się u nas jak u siebie.
-              </p>
-              <div className="grid grid-cols-2 gap-stack-sm pt-4 border-t border-surface-container-high/60">
-                <div className="flex items-start gap-3">
-                  <span className="material-symbols-outlined text-primary text-3xl select-none">pets</span>
-                  <div>
-                    <h4 className="font-label-md text-primary font-bold">Indywidualne podejście</h4>
-                    <p className="text-label-sm text-on-surface-variant mt-1 leading-snug">
-                      Znamy imię i nawyki każdego gościa.
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <span className="material-symbols-outlined text-primary text-3xl select-none">health_and_safety</span>
-                  <div>
-                    <h4 className="font-label-md text-primary font-bold">Certyfikowana kadra</h4>
-                    <p className="text-label-sm text-on-surface-variant mt-1 leading-snug">
-                      Opiekunowie z pasją i wiedzą medyczną.
-                    </p>
-                  </div>
+
+        {/* O Nas Section */}
+        <section className="py-stack-lg bg-gradient-to-b from-[#eef4f0] to-surface-bright scroll-mt-20" id="about">
+          <div className="max-w-[1280px] mx-auto px-margin-desktop space-y-12">
+            
+            {/* Top Grid: Narrative */}
+            <div className="grid md:grid-cols-2 gap-stack-lg items-center">
+              <div className="relative">
+                <div className="absolute -top-4 -left-4 w-24 h-24 bg-secondary-container rounded-full -z-10 opacity-60"></div>
+                <img
+                  className="rounded-xl soft-card-shadow w-auto max-w-full h-auto max-h-[480px] mx-auto block border border-surface-container"
+                  alt="Zdjęcie przedstawiające opiekuna psa w hotelu Hotel z Lasów Corso"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAN9-Bme86Q3KNMiygotxrRjid40m_vfdPpk0Rtf-p12i66bENz-svowlgcfCHIRLAf-lROT4uwlEFWJfSaInxEf9HV55clcaihpPuH0qyADXiMBZ_xL0eOHE84AJ2JDA8VNYVYqnrd996XrOR5SYLu5jJfs9aQh5h3MLg1aDbzrQiD8-WW7ILHOSVTXM-FdpMBm8ari6F9GKI2wv_wic_lufweI39DtGwxB8x8c6V030klOkMLmgJ7egYY6AlcbkLF2zQZQHXt1Q"
+                  loading="lazy"
+                />
+              </div>
+              <div className="space-y-6">
+                <h2 className="font-headline-lg text-headline-lg text-primary leading-tight font-bold">
+                  Dlaczego Hotel dla psów?
+                </h2>
+                <div className="space-y-4 text-on-surface-variant text-base leading-relaxed font-body-md">
+                  <p className="font-semibold text-primary text-lg leading-relaxed">
+                    Bo to świetna sprawa poznawać ciągle nowe psy, nowe zachowania, nowe charaktery, pracować z psami, poszerzać swoją wiedzę...
+                  </p>
+                  <p>
+                    Psami interesowaliśmy się od zawsze – zaczytywaliśmy się książkami w tym temacie, różnymi publikacjami, oglądaliśmy programy telewizyjne i szkoleniowe. 
+                    Pomysł na hotel pojawił się już kilkanaście lat temu, jak tylko zamieszkaliśmy w naszym wymarzonym domu na skraju sosnowego lasu, gdzie mogliśmy stworzyć fantastyczne warunki dla psów. Wokół cisza, zieleń, przestrzeń…
+                  </p>
+                  <p>
+                    Jako hodowcy psów rasowych, znający potrzeby zwierząt, wciąż poszerzający i zgłębiający wiedzę z zakresu behawioru, potrzeb oraz dobrostanu psów, w 2018 roku ostatecznie podjęliśmy decyzję o założeniu kameralnego hotelu dla psów. Z czasem nasza oferta się zmieniła, zmieniło się miejsce, poszerzyliśmy i trochę zmodyfikowaliśmy zakres działania. Wszystko po to, by w końcu wiosną 2026 roku móc gościć naszych hotelowych psich gości w dwóch komfortowych budynkach dostosowanych do indywidualnych potrzeb różnych psiaków.
+                  </p>
                 </div>
               </div>
             </div>
+
+            {/* Bottom Grid: Infrastructure & Benefits */}
+            <div className="grid md:grid-cols-2 gap-8 pt-8 border-t border-surface-container-high/60">
+              
+              {/* Infrastructure Card */}
+              <div className="bg-white rounded-3xl p-8 soft-card-shadow border border-outline-variant/10 space-y-6">
+                <div className="flex items-center gap-3">
+                  <span className="material-symbols-outlined text-primary text-3xl">home</span>
+                  <h3 className="font-headline-md text-primary font-bold text-xl">Standardy i budynki</h3>
+                </div>
+                <div className="space-y-4 text-on-surface-variant text-sm leading-relaxed">
+                  <p>
+                    W jednym budynku przygotowaliśmy duże, bezpieczne boksy dla większych psów. W drugim, mniejszym budynku, wygodne boksy przeznaczone są dla najmniejszych i średnich psiaków.
+                  </p>
+                  <p>
+                    Obydwa obiekty znajdują się bezpośrednio przy naszym budynku mieszkalnym, na ogrodzonej i w pełni zabezpieczonej posesji z dużymi komfortowymi wybiegami.
+                  </p>
+                  <p className="bg-primary/5 p-4 rounded-xl border-l-4 border-primary text-xs font-semibold text-primary">
+                    Nasz hotel jest całoroczny, dlatego oba budynki są ogrzewane zimą oraz wyposażone w klimatyzację latem, co gwarantuje optymalną temperaturę bez względu na porę roku.
+                  </p>
+                </div>
+              </div>
+
+              {/* Benefits Card */}
+              <div className="bg-white rounded-3xl p-8 soft-card-shadow border border-outline-variant/10 space-y-6">
+                <div className="flex items-center gap-3">
+                  <span className="material-symbols-outlined text-primary text-3xl">forest</span>
+                  <h3 className="font-headline-md text-primary font-bold text-xl">Co zapewniamy?</h3>
+                </div>
+                <div className="space-y-4 text-on-surface-variant text-sm leading-relaxed">
+                  <p>
+                    Nasz hotel „z Lasów Corso” usytuowany jest w uroczej okolicy, otoczony dużą ilością zieleni, lasów, łąk, oddalony od ulic i miejskiego zgiełku. Zapewniamy gościom wyjątkowe warunki:
+                  </p>
+                  <ul className="space-y-2.5 pl-2">
+                    {[
+                      { title: "Wykwalifikowana opieka", desc: "pod okiem pasjonatów i specjalistów" },
+                      { title: "Kameralna atmosfera", desc: "indywidualne podejście bez stresu i tłoku" },
+                      { title: "Wygodny odpoczynek", desc: "bezpieczne boksy z legowiskami" },
+                      { title: "Stały kontakt z człowiekiem", desc: "opieka behawioralna i psychologiczna" },
+                      { title: "Aktywność i ruch", desc: "codzienne spacery i wesoła zabawa" },
+                      { title: "Stymulacja umysłowa", desc: "zabawki edukacyjne i maty węchowe" },
+                    ].map((benefit, idx) => (
+                      <li key={idx} className="flex items-start gap-2 text-xs">
+                        <span className="text-primary font-bold shrink-0">•</span>
+                        <span>
+                          <strong className="text-primary font-semibold">{benefit.title}:</strong> {benefit.desc}.
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+            </div>
+
           </div>
         </section>
 
@@ -463,7 +500,7 @@ export default function Home() {
               </p>
             </div>
             <div className="grid md:grid-cols-2 gap-gutter">
-              
+
               {/* Zdrowie i Dokumenty Card */}
               <div className="bg-surface-container-lowest p-stack-md rounded-xl soft-card-shadow border-l-4 border-primary hover-card-shadow transition-all duration-300">
                 <h3 className="font-headline-md text-headline-md text-primary mb-stack-sm flex items-center gap-3 font-semibold">
@@ -473,8 +510,7 @@ export default function Home() {
                 <ul className="space-y-stack-sm">
                   {[
                     "Aktualna książeczka zdrowia z wpisem o szczepieniu przeciw wściekliźnie.",
-                    "Szczepienie przeciwko kaszlowi kenelowemu (zalecane).",
-                    "Profilaktyka przeciw pchłom i kleszczom (podana max 2 tyg. wcześniej).",
+                    "Profilaktyka przeciw pchłom i kleszczom.",
                     "Aktualne odrobaczenie (potwierdzone w książeczce zdrowia).",
                   ].map((req, idx) => (
                     <li key={idx} className="flex items-start gap-3 font-body-md text-on-surface-variant">
@@ -496,8 +532,8 @@ export default function Home() {
                 <ul className="space-y-stack-sm">
                   {[
                     { text: "Karma, którą pies je na co dzień (aby uniknąć rewolucji żołądkowych).", icon: "shopping_bag" },
-                    { text: "Ulubione legowisko lub kocyk (pachnący ciepłem domu).", icon: "bed" },
-                    { text: "Dwie ulubione zabawki pupila.", icon: "toys" },
+                    { text: "Ulubione legowisko lub kocyk.", icon: "bed" },
+                    { text: "Ulubione zabawki pupila.", icon: "toys" },
                     { text: "Instrukcja dawkowania karmy oraz ewentualnych leków.", icon: "info" },
                   ].map((item, idx) => (
                     <li key={idx} className="flex items-start gap-3 font-body-md text-on-surface-variant">
@@ -518,16 +554,14 @@ export default function Home() {
           <div className="max-w-[1280px] mx-auto px-margin-desktop">
             <div className="text-center mb-stack-md">
               <h2 className="font-headline-lg text-headline-lg text-primary font-bold">Cennik</h2>
-              <p className="font-label-sm text-on-surface-variant opacity-75 mt-2 italic font-semibold">
-                Przy pobytach powyżej 14 dni oferujemy 10% rabatu.
-              </p>
+
             </div>
-            
+
             <div className="flex flex-wrap justify-center gap-gutter pt-4">
               {[
-                { title: "Mały Pies", desc: "Waga do 10 kg", price: "80 PLN" },
-                { title: "Średni Pies", desc: "Waga 10 - 25 kg", price: "100 PLN" },
-                { title: "Duży Pies", desc: "Waga powyżej 25 kg", price: "120 PLN" },
+                { title: "Mały Pies", desc: "Waga do 15 kg", price: "70 PLN" },
+                { title: "Średni Pies", desc: "Waga 15 - 30 kg", price: "85 PLN" },
+                { title: "Duży Pies", desc: "Waga powyżej 30 kg", price: "100 PLN" },
               ].map((tier, idx) => (
                 <div
                   key={idx}
@@ -553,7 +587,7 @@ export default function Home() {
         <section className="py-stack-lg bg-surface-container relative overflow-hidden scroll-mt-20" id="booking">
           <div className="absolute top-0 right-0 w-96 h-96 bg-primary-fixed/20 rounded-full blur-3xl -mr-48 -mt-48 pointer-events-none"></div>
           <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary-container/20 rounded-full blur-3xl -ml-48 -mb-48 pointer-events-none"></div>
-          
+
           <div className="max-w-[1280px] mx-auto px-margin-desktop relative z-10">
             <div className="max-w-4xl mx-auto text-center mb-stack-lg space-y-2">
               <span className="text-secondary font-label-md uppercase tracking-[0.2em] mb-1 block font-semibold">
@@ -569,7 +603,7 @@ export default function Home() {
             </div>
 
             <div className="bg-surface-bright rounded-[2rem] shadow-2xl overflow-hidden border border-white/40 backdrop-blur-sm grid lg:grid-cols-12 gap-0 max-w-5xl mx-auto">
-              
+
               {/* Left Column: Interactive Calendar */}
               <div id="calendar-container" className="p-8 md:p-10 border-r border-outline-variant/20 lg:col-span-8 flex flex-col justify-between">
                 <div id="calendar-grid-container" className="transition-all duration-300 rounded-2xl p-2">
@@ -611,7 +645,7 @@ export default function Home() {
 
                   {/* Calendar Grid Body */}
                   <div className="grid grid-cols-7 gap-2 pt-2">
-                    
+
                     {/* Previous month days (greyed out) */}
                     {calendarData.prevDays.map((d, idx) => (
                       <div
@@ -671,7 +705,7 @@ export default function Home() {
                 <div>
                   <h3 className="font-headline-md text-primary mb-6 font-bold text-2xl">Uzupełnij Dane</h3>
                   <form onSubmit={handleSubmit} className="space-y-5">
-                    
+
                     {/* Owner name */}
                     <div className="space-y-2">
                       <label className="font-label-md text-on-surface-variant flex items-center gap-2 font-semibold">
@@ -698,9 +732,9 @@ export default function Home() {
                         type="tel"
                         value={phoneNumber}
                         onChange={(e) => setPhoneNumber(e.target.value)}
-                        placeholder="123 456 789"
+                        placeholder="504 239 097"
                         pattern="(?:\+\d{1,3}[ -]?)?(?:\d[ -]?){9,12}"
-                        title="Proszę wpisać poprawny numer telefonu (np. 123 456 789)"
+                        title="Proszę wpisać poprawny numer telefonu (np. 504 239 097)"
                         className="w-full bg-white border border-outline-variant/20 rounded-xl p-3.5 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all shadow-sm font-medium"
                         required
                       />
@@ -708,7 +742,7 @@ export default function Home() {
 
                     {/* Dates block */}
                     <div className="grid grid-cols-2 gap-4">
-                      
+
                       {/* Check-in input */}
                       <div className="space-y-2">
                         <label className="font-label-md text-on-surface-variant flex items-center gap-1.5 font-semibold text-xs">
@@ -769,7 +803,7 @@ export default function Home() {
                       <textarea
                         value={notes}
                         onChange={(e) => setNotes(e.target.value)}
-                        placeholder="Imię psa, rasa, wielkość, dieta, leki, charakterystyka..."
+                        placeholder="Imię psa, rasa, wielkość, dieta, leki, charakterystyka(opcjonalnie)"
                         className="w-full bg-white border border-outline-variant/20 rounded-xl p-4 h-24 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all shadow-sm resize-none font-medium text-sm leading-relaxed"
                       ></textarea>
                     </div>
@@ -791,18 +825,18 @@ export default function Home() {
         <section className="py-stack-lg bg-surface-bright scroll-mt-20" id="contact">
           <div className="max-w-[1280px] mx-auto px-margin-desktop">
             <div className="grid md:grid-cols-2 gap-stack-lg items-center">
-              
+
               {/* Contact details */}
               <div className="space-y-6">
                 <h2 className="font-headline-lg text-headline-lg text-primary font-bold">
                   Skontaktuj się z nami
                 </h2>
-                
+
                 <div className="space-y-5 pt-2">
                   {[
-                    { label: "Zadzwoń do nas", val: "+48 123 456 789", icon: "call" },
-                    { label: "Napisz maila", val: "kontakt@caninecomfort.pl", icon: "mail" },
-                    { label: "Adres", val: "Sosnowo 20, 56-500 Wioska", icon: "location_on" },
+                    { label: "Zadzwoń do nas", val: "+48 504 239 097", icon: "call" },
+                    { label: "Napisz maila", val: "kasiasiudy76@gmail.com", icon: "mail" },
+                    { label: "Adres", val: "Sosnowa 20, 56-500 Wioska", icon: "location_on" },
                   ].map((info, idx) => (
                     <div key={idx} className="flex gap-4 items-start">
                       <div className="w-12 h-12 bg-primary-fixed rounded-full flex items-center justify-center text-primary shrink-0">
@@ -827,7 +861,7 @@ export default function Home() {
                     className="inline-flex items-center gap-3 bg-secondary text-white px-5 py-3 rounded-xl font-label-md text-label-md hover:bg-secondary-container hover:text-on-secondary-container transition-all active:scale-95 shadow-md group cursor-pointer"
                   >
                     <svg className="w-5 h-5 fill-current transition-transform group-hover:scale-110" viewBox="0 0 24 24">
-                      <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75z"/>
+                      <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75z" />
                     </svg>
                     <span>Odwiedź nas na Facebooku</span>
                     <span className="material-symbols-outlined text-[16px]">open_in_new</span>
@@ -836,7 +870,7 @@ export default function Home() {
               </div>
 
               {/* Styled Map Widget */}
-              <div 
+              <div
                 onClick={() => setIsMapInteractive(true)}
                 onMouseLeave={() => setIsMapInteractive(false)}
                 className="h-[400px] bg-surface-container rounded-2xl overflow-hidden soft-card-shadow border-4 border-white relative group cursor-pointer"
@@ -862,6 +896,42 @@ export default function Home() {
                 )}
               </div>
             </div>
+
+            {/* Legal / Vet Info */}
+            <div className="mt-12 pt-8 border-t border-surface-container space-y-6 max-w-4xl mx-auto">
+              <div className="flex items-center gap-3">
+                <span className="material-symbols-outlined text-primary text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>gavel</span>
+                <div>
+                  <h3 className="font-headline-lg text-primary font-bold text-xl md:text-2xl">Zaufanie poparte legalnością i nadzorem</h3>
+                  <p className="text-xs text-on-surface-variant">Wiemy, jak ważne jest bezpieczeństwo prawne Twojego psa.</p>
+                </div>
+              </div>
+              
+              <div className="grid md:grid-cols-2 gap-6 text-sm text-on-surface-variant leading-relaxed">
+                <div className="space-y-2 bg-white p-5 rounded-2xl border border-outline-variant/15 soft-card-shadow">
+                  <h4 className="font-label-md text-primary font-bold flex items-center gap-2">
+                    <span className="material-symbols-outlined text-lg">pets</span>
+                    Nadzór Weterynaryjny (PLW)
+                  </h4>
+                  <p className="text-xs">
+                    Nasz hotel jest zgłoszony do rejestru <strong>Powiatowego Lekarza Weterynarii w Oleśnicy</strong> (podstawa prawna: Ustawa z dnia 21 listopada 2025 r. o zdrowiu zwierząt) jako zatwierdzony podmiot utrzymujący zwierzęta / zakład sprawujący opiekę nad zwierzętami domowymi.
+                  </p>
+                </div>
+
+                <div className="space-y-2 bg-white p-5 rounded-2xl border border-outline-variant/15 soft-card-shadow">
+                  <h4 className="font-label-md text-primary font-bold flex items-center gap-2">
+                    <span className="material-symbols-outlined text-lg">corporate_fare</span>
+                    Legalna Działalność
+                  </h4>
+                  <p className="text-xs">
+                    Działamy w pełni oficjalnie jako zarejestrowana działalność usługowa związana z opieką nad zwierzętami domowymi w zakresie wyżywienia, pilnowania oraz opieki. 
+                    <br />
+                    <strong className="block mt-2 text-primary">NIP: 8942025783</strong>
+                  </p>
+                </div>
+              </div>
+            </div>
+
           </div>
         </section>
       </main>
@@ -875,24 +945,27 @@ export default function Home() {
                 Hotel z Lasów Corso
               </div>
               <p className="font-body-md text-body-md text-on-surface-variant max-w-sm leading-relaxed">
-                Profesjonalny hotel dla psów, gdzie komfort i bezpieczeństwo Twojego pupila są naszym priorytetem.
+                Hotel dla psów, gdzie komfort i bezpieczeństwo Twojego pupila są naszym priorytetem.
               </p>
             </div>
-            
+
             <div className="flex flex-col items-center md:items-end gap-3 text-center md:text-right">
               <div className="flex gap-6">
                 <Link href="/certyfikaty" className="text-label-sm text-on-surface-variant hover:text-secondary underline transition-all font-medium">
                   Certyfikaty i Szkolenia
                 </Link>
-                <a href="#" className="text-label-sm text-on-surface-variant hover:text-secondary underline transition-all font-medium">
+                <Link href="/polityka-prywatnosci" className="text-label-sm text-on-surface-variant hover:text-secondary underline transition-all font-medium">
                   Polityka Prywatności
-                </a>
+                </Link>
                 <Link href="/regulamin" className="text-label-sm text-on-surface-variant hover:text-secondary underline transition-all font-medium">
                   Regulamin Usług
                 </Link>
+                <a href="/Umowa Powierzenia Psa.pdf" target="_blank" rel="noopener noreferrer" className="text-label-sm text-on-surface-variant hover:text-secondary underline transition-all font-medium">
+                  Umowa
+                </a>
               </div>
               <p className="font-label-sm text-label-sm text-on-surface-variant opacity-70">
-                © {new Date().getFullYear()} Hotel z Lasów Corso. Built with warmth and care.
+                © {new Date().getFullYear()} Hotel z Lasów Corso.
               </p>
             </div>
           </div>

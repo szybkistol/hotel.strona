@@ -250,21 +250,27 @@ export default function CertificatesPage() {
                 Hotel z Lasów Corso
               </div>
               <p className="font-body-md text-body-md text-on-surface-variant max-w-sm leading-relaxed">
-                Profesjonalny hotel dla psów, gdzie komfort i bezpieczeństwo Twojego pupila są naszym priorytetem.
+                Hotel dla psów, gdzie komfort i bezpieczeństwo Twojego pupila są naszym priorytetem.
               </p>
             </div>
             
             <div className="flex flex-col items-center md:items-end gap-3 text-center md:text-right">
               <div className="flex gap-6">
-                <Link href="#" className="text-label-sm text-on-surface-variant hover:text-secondary underline transition-all font-medium">
+                <Link href="/certyfikaty" className="text-label-sm text-on-surface-variant hover:text-secondary underline transition-all font-medium">
+                  Certyfikaty i Szkolenia
+                </Link>
+                <Link href="/polityka-prywatnosci" className="text-label-sm text-on-surface-variant hover:text-secondary underline transition-all font-medium">
                   Polityka Prywatności
                 </Link>
                 <Link href="/regulamin" className="text-label-sm text-on-surface-variant hover:text-secondary underline transition-all font-medium">
                   Regulamin Usług
                 </Link>
+                <a href="/Umowa Powierzenia Psa.pdf" target="_blank" rel="noopener noreferrer" className="text-label-sm text-on-surface-variant hover:text-secondary underline transition-all font-medium">
+                  Umowa
+                </a>
               </div>
               <p className="font-label-sm text-label-sm text-on-surface-variant opacity-70">
-                © {new Date().getFullYear()} Hotel z Lasów Corso. Built with warmth and care.
+                © {new Date().getFullYear()} Hotel z Lasów Corso.
               </p>
             </div>
           </div>

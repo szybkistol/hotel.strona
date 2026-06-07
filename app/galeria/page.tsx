@@ -58,31 +58,87 @@ export default function GalleryPage() {
   const hotelItems: GalleryItem[] = [
     {
       id: "hotel-1",
-      src: "/gallery-hotel-1.png",
+      src: "/hotel/20260602_210717.jpg",
       category: "hotel",
-      title: "Budynek Hotelu",
-      description: "Nowoczesny drewniany domek otoczony sosnowym lasem.",
+      title: "Komfortowa Strefa Relaksu",
+      description: "Wygodne legowiska i cicha atmosfera sprzyjająca odpoczynkowi.",
     },
     {
       id: "hotel-2",
-      src: "/gallery-hotel-2.png",
+      src: "/hotel/20260602_210745.jpg",
       category: "hotel",
-      title: "Luksusowy Pokój dla Psa",
-      description: "Przytulne i bezpieczne wnętrze dostosowane do potrzeb pupila.",
+      title: "Wnętrza Naszego Hotelu",
+      description: "Estetyczne i higieniczne przestrzenie stworzone z myślą o psach.",
     },
     {
       id: "hotel-3",
-      src: "/gallery-hotel-3.png",
+      src: "/hotel/20260602_210758.jpg",
       category: "hotel",
-      title: "Leśny Wybieg",
-      description: "Ogrodzony teren do bezpiecznych zabaw na świeżym powietrzu.",
+      title: "Przytulne Kąciki",
+      description: "Miejsca, w których nasi goście czują się jak w domu.",
     },
     {
       id: "hotel-4",
-      src: "/gallery-hotel-4.png",
+      src: "/hotel/20260602_214529.jpg",
       category: "hotel",
-      title: "Recepcja Hotelu",
-      description: "Przytulne lobby wykończone naturalnym drewnem.",
+      title: "Bezpieczna Przestrzeń",
+      description: "Starannie zaprojektowane pokoje zapewniające pełen spokój.",
+    },
+    {
+      id: "hotel-5",
+      src: "/hotel/IMG20260603215220.jpg",
+      category: "hotel",
+      title: "Ogrody i Wybiegi",
+      description: "Szerokie, leśne tereny do swobodnej eksploracji.",
+    },
+    {
+      id: "hotel-6",
+      src: "/hotel/IMG20260603215306.jpg",
+      category: "hotel",
+      title: "Zabawa na świeżym powietrzu",
+      description: "Aktywności ruchowe pod czujnym okiem opiekunów.",
+    },
+    {
+      id: "hotel-7",
+      src: "/h1.jpg",
+      category: "hotel",
+      title: "Udogodnienia Hotelowe #1",
+      description: "Nowoczesne i zadbane zaplecze dla komfortowego pobytu.",
+    },
+    {
+      id: "hotel-8",
+      src: "/h2.jpg",
+      category: "hotel",
+      title: "Udogodnienia Hotelowe #2",
+      description: "Nowoczesne i zadbane zaplecze dla komfortowego pobytu.",
+    },
+    {
+      id: "hotel-9",
+      src: "/h3.jpg",
+      category: "hotel",
+      title: "Udogodnienia Hotelowe #3",
+      description: "Nowoczesne i zadbane zaplecze dla komfortowego pobytu.",
+    },
+    {
+      id: "hotel-10",
+      src: "/h4.jpg",
+      category: "hotel",
+      title: "Udogodnienia Hotelowe #4",
+      description: "Nowoczesne i zadbane zaplecze dla komfortowego pobytu.",
+    },
+    {
+      id: "hotel-11",
+      src: "/h5.jpg",
+      category: "hotel",
+      title: "Udogodnienia Hotelowe #5",
+      description: "Nowoczesne i zadbane zaplecze dla komfortowego pobytu.",
+    },
+    {
+      id: "hotel-12",
+      src: "/h7.jpg",
+      category: "hotel",
+      title: "Udogodnienia Hotelowe #6",
+      description: "Nowoczesne i zadbane zaplecze dla komfortowego pobytu.",
     },
   ];
 
@@ -212,7 +268,7 @@ export default function GalleryPage() {
                 Galeria
               </h1>
               <p className="font-body-lg text-[16px] md:text-[20px] lg:text-[22px] opacity-90 leading-relaxed max-w-xl">
-                Zobacz jak spędzają czas nasi psi goście i jak wyglądają udogodnienia w naszym leśnym hotelu.
+                Zobacz codzienne zabawy naszych psich gości i to, jak spędzają u nas czas.
               </p>
             </div>
           </div>
@@ -294,7 +350,7 @@ export default function GalleryPage() {
                 Hotel z Lasów Corso
               </div>
               <p className="font-body-md text-body-md text-on-surface-variant max-w-sm leading-relaxed">
-                Profesjonalny hotel dla psów, gdzie komfort i bezpieczeństwo Twojego pupila są naszym priorytetem.
+                Hotel dla psów, gdzie komfort i bezpieczeństwo Twojego pupila są naszym priorytetem.
               </p>
             </div>
             
@@ -303,12 +359,18 @@ export default function GalleryPage() {
                 <Link href="/certyfikaty" className="text-label-sm text-on-surface-variant hover:text-secondary underline transition-all font-medium">
                   Certyfikaty i Szkolenia
                 </Link>
+                <Link href="/polityka-prywatnosci" className="text-label-sm text-on-surface-variant hover:text-secondary underline transition-all font-medium">
+                  Polityka Prywatności
+                </Link>
                 <Link href="/regulamin" className="text-label-sm text-on-surface-variant hover:text-secondary underline transition-all font-medium">
                   Regulamin Usług
                 </Link>
+                <a href="/Umowa Powierzenia Psa.pdf" target="_blank" rel="noopener noreferrer" className="text-label-sm text-on-surface-variant hover:text-secondary underline transition-all font-medium">
+                  Umowa
+                </a>
               </div>
               <p className="font-label-sm text-label-sm text-on-surface-variant opacity-70">
-                © {new Date().getFullYear()} Hotel z Lasów Corso. Built with warmth and care.
+                © {new Date().getFullYear()} Hotel z Lasów Corso.
               </p>
             </div>
           </div>
@@ -345,17 +407,6 @@ export default function GalleryPage() {
                 className="max-w-full max-h-full object-contain"
               />
             </div>
-            {/* Description Footer */}
-            {selectedItem.category !== "dogs" && (
-              <div className="p-6 bg-white border-t border-surface-container-high">
-                <h3 className="font-headline-md text-primary font-bold text-xl mb-1">
-                  {selectedItem.title}
-                </h3>
-                <p className="text-on-surface-variant text-sm md:text-base leading-relaxed">
-                  {selectedItem.description}
-                </p>
-              </div>
-            )}
           </div>
         </div>
       )}

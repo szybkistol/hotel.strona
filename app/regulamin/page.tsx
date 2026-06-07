@@ -43,58 +43,67 @@ export default function RegulationsPage() {
       id: "postanowienia-ogolne",
       title: "§ 1. Postanowienia Ogólne",
       paragraphs: [
-        "Niniejszy regulamin określa zasady świadczenia usług opieki nad psami przez Hotel z Lasów Corso, zwany dalej „Hotelem”.",
-        "Klientem hotelu może być każda osoba fizyczna, która jest właścicielem psa lub występuje w imieniu właściciela (zwana dalej „Właścicielem”).",
-        "Pozostawienie psa pod opieką Hotelu jest równoznaczne z akceptacją warunków określonych w niniejszym regulaminie.",
-        "Hotel zobowiązuje się do sprawowania opieki nad powierzonym psem z najwyższą starannością, dbając o jego bezpieczeństwo, zdrowie oraz dobre samopoczucie."
+        "Regulamin Hotelu określa warunki korzystania z usług, w tym przyjęcia, pobytu i opuszczenia przez zwierzę Hotelu Dla Psów „z Lasów Corso” mieszczącego się przy ul. Sosnowa 20, 56-500 Wioska, gm. Syców, reprezentowanego przez właściciela, Panią Katarzynę Siudy. Dla wspólnego dobra przebywających tam ludzi i zwierząt właściciel (lub inna osoba przekazująca zwierzę pod opiekę) zobowiązany jest do akceptacji regulaminu, jeśli chce, aby jego zwierzę korzystało z pobytu w hotelu.",
+        "1. Hotel Dla Psów „z Lasów Corso” zobowiązuje się otoczyć każde powierzone zwierzę najlepszą możliwą opieką, dbać o jego zdrowie, bezpieczeństwo i dobry nastrój.",
+        "2. Przed pozostawieniem zwierzęcia w hotelu właściciel/opiekun udziela prawdziwych informacji, dotyczących pozostawianego zwierzęcia."
       ]
     },
     {
       id: "warunki-przyjecia",
       title: "§ 2. Warunki Przyjęcia Psa do Hotelu",
       paragraphs: [
-        "Do Hotelu przyjmowane są wyłącznie psy zdrowe, posiadające aktualną książeczkę zdrowia z wpisem o szczepieniu przeciwko wściekliźnie oraz podstawowym chorobom zakaźnym (nosówka, parwowiroza, choroba Rubartha).",
-        "Właściciel ma obowiązek dostarczyć dowód wykonania odrobaczenia (nie starsze niż 3 miesiące) oraz zabezpieczenia psa przed pchłami i kleszczami.",
-        "Hotel nie przyjmuje psów wykazujących agresję wobec ludzi lub skrajnie agresywnych wobec innych psów, ze względu na bezpieczeństwo naszych pozostałych gości.",
-        "Właściciel zobowiązany jest poinformować obsługę Hotelu o wszelkich problemach zdrowotnych, lękach, alergiach oraz nietypowych nawykach psa przed rozpoczęciem pobytu."
+        "3. Do hotelu przyjmowane są zwierzęta zdrowe, posiadające książeczki zdrowia (aktualne szczepienie i odrobaczenie). W przypadku występowania choroby przewlekłej u zwierzęcia należy powiadomić o tym właściciela hotelu w dniu dokonywania rezerwacji.",
+        "4. Hotel Dla Psów „z Lasów Corso” może odmówić przyjęcia zwierzęcia, które zagraża zdrowiu lub bezpieczeństwu innych, a w szczególności odmówić przyjęcia osobników:",
+        "a. agresywnych w stosunku do ludzi lub zwierząt,",
+        "b. chorych (w tym zapchlonych) w sposób stwarzający groźbę zarażenia innych zwierząt,",
+        "c. w kondycji niebezpiecznej dla własnego życia i zdrowia zwierzęcia,",
+        "d. bez ważnych szczepień i zabezpieczeń przeciw pasożytom.",
+        "5. Hotel Dla Psów „z Lasów Corso” może odmówić przyjęcia zwierzęcia z powodu braku miejsca, a także bez podania przyczyny.",
+        "6. Właściciel/opiekun podpisuje umowę, w której zapewnia, że zwierzę jest zdrowe, określa termin przebywania zwierzęcia w hotelu oraz pozostawia kontakt telefoniczny do siebie.",
+        "11. Przed przyjęciem zwierząt do Hotelu Dla Psów „z Lasów Corso” zapraszamy na wcześniejszą wizytę, aby zwierzę zapoznało się z nami, oczywiście nie jest to wymóg konieczny.",
+        "21. Psy przyjmowane są z własną smyczą, obrożą, powinny posiadać swoje posłanie, kocyk, ulubione zabawki lub nawet miski (dwie ostatnie rzeczy nie są wymagane)."
       ]
     },
     {
       id: "rezerwacje-platnosci",
       title: "§ 3. Rezerwacja i Płatności",
       paragraphs: [
-        "Rezerwacja pobytu psa w Hotelu odbywa się drogą elektroniczną (formularz rezerwacji, e-mail) lub telefonicznie.",
-        "Cena za pobyt naliczana jest zgodnie z aktualnym cennikiem opublikowanym na stronie głównej.",
-        "Doba hotelowa rozpoczyna się i kończy w godzinach indywidualnie ustalonych przy rezerwacji. Przedłużenie doby wymaga wcześniejszego uzgodnienia z obsługą Hotelu.",
-        "W przypadku rezygnacji z rezerwacji na mniej niż 48 godzin przed planowanym rozpoczęciem pobytu, zadatek pobrany przy rezerwacji nie podlega zwrotowi."
+        "7. Płatność za pobyt w Hotelu Dla Psów „z Lasów Corso” przyjmuje się w dniu przybycia zwierzęcia do Hotelu.",
+        "13. Pobyt zwierzęcia w Hotelu Dla Psów może zostać przedłużony:",
+        "a. po uprzednim zgłoszeniu takiej potrzeby przez właściciela",
+        "b. jedynie za zgodą Hotelu Dla Psów",
+        "14. Za przedłużenie pobytu zwierzęcia w Hotelu Dla Psów pobierana jest standardowa opłata, określona w cenniku.",
+        "15. Doba hotelowa w Hotelu Dla Psów rozpoczyna się w momencie przyjazdu i kończy o tej samej godzinie następnego dnia pobytu.",
+        "16. Opłatę za przedłużenie pobytu po potwierdzeniu jej wysokości przez Hotel Dla Psów należy wnieść nie później niż w dniu opuszczenia przez zwierzę Hotelu.",
+        "17. Właściciel/opiekun może odebrać swoje zwierzę przed upływem ustalonego terminu pobytu po uprzednim poinformowaniu o tym Hotelu Dla Psów",
+        "18. W przypadku skrócenia terminu pobytu wniesiona opłata nie podlega zwrotowi."
       ]
     },
     {
       id: "wyzywienie-pielegnacja",
       title: "§ 4. Wyżywienie i Pielęgnacja",
       paragraphs: [
-        "W trosce o układ pokarmowy psa i uniknięcie problemów gastrycznych związanych z nagłą zmianą diety, Właściciel zobowiązany jest do dostarczenia własnej karmy na cały okres pobytu psa w ilości pokrywającej zapotrzebowanie.",
-        "Karma powinna być dostarczona w szczelnym opakowaniu wraz z dokładną instrukcją porcjowania i częstotliwości karmienia.",
-        "Hotel zapewnia stały dostęp do świeżej wody pitnej oraz realizuje codzienne spacery i zabawy na zabezpieczonym wybiegu dostosowane do wieku oraz kondycji fizycznej psa."
+        "19. Zwierzę pozostawione w naszym Hotelu otrzymuje minimum dwa posiłki, lub w zależności od indywidualnych potrzeb, ustalanych z właścicielem/opiekunem oraz ma zapewniony stały dostęp do wody.",
+        "20. Zapewniamy wyjścia na teren, zabawy oraz wybieg na ogrodzonym terenie Hotelu."
       ]
     },
     {
       id: "opieka-weterynaryjna",
-      title: "§ 5. Opieka Weterynaryjna",
+      title: "§ 5. Opieka Weterynaryjna i Odpowiedzialność",
       paragraphs: [
-        "W przypadku nagłego pogorszenia się stanu zdrowia psa, urazu lub objawów choroby, Hotel niezwłocznie informuje o tym Właściciela.",
-        "W sytuacjach wymagających pilnej pomocy medycznej, Hotel przetransportuje psa do współpracującej kliniki weterynaryjnej w celu podjęcia niezbędnego leczenia.",
-        "Wszelkie udokumentowane koszty opieki weterynaryjnej oraz transportu do lecznicy pokrywa w całości Właściciel psa po zakończeniu pobytu.",
-        "Hotel nie ponosi odpowiedzialności za ujawnienie się ukrytych chorób przewlekłych w trakcie pobytu psa, o których Właściciel nie poinformował przy przekazywaniu zwierzęcia."
+        "8. Za wszelkie szkody wyrządzone przez zwierzę innym zwierzętom lub ludziom odpowiada właściciel/opiekun i zobowiązuje się w razie konieczności do pokrycia ewentualnych kosztów.",
+        "9. Właściciel/opiekun zgadza się na pokrycie ewentualnych kosztów leczenia weterynaryjnego jego zwierzęcia, jeśli zaistnieje potrzeba jego stosowania.",
+        "10. Wszelkie przedmioty, a w szczególności zabawki, przywiezione ze zwierzęciem mogą ulec zniszczeniu lub zagubieniu i właściciel/opiekun nie będzie wnosić pretensji związanych z tego tytułu.",
+        "12. Właściciel/opiekun powinien być świadomy faktu, iż po upłynięciu terminu odbioru zwierzęcia i braku informacji o jego przedłużeniu oraz braku możliwości skontaktowania się z właścicielem/ opiekunem przez 7 kolejnych dni, równoznaczne jest to z porzuceniem zwierzęcia przez właściciela/ opiekuna. Prawne konsekwencje tego zdarzenia będą rozpatrywane na mocy Ustawy o Ochronie Praw Zwierząt z 21.08.1997 roku, która definiuje porzucenie zwierzęcia jako znęcanie się nad nim (art. 6 ust. 1 i ust. 2 pkt. 11) i nakłada na właściciela karę w postaci pozbawienia lub ograniczenia wolności albo grzywny (art. 35 ust. 1), przy czym sąd może zasądzić przepadek zwierzęcia (art. 35 ust. 3) i dalsze losy zwierzęcia reguluje art. 38 przywoływanej ustawy."
       ]
     },
     {
       id: "postanowienia-koncowe",
       title: "§ 6. Postanowienia Końcowe",
       paragraphs: [
-        "Właściciel oświadcza, że dane podane w formularzu rezerwacyjnym są zgodne z prawdą.",
-        "Sprawy nieuregulowane niniejszym regulaminem będą rozstrzygane polubownie, a w przypadku braku porozumienia – przez właściwy sąd powszechny.",
-        "Regulamin obowiązuje od dnia 1 stycznia 2024 roku."
+        "22. Właściciel wyraża zgodę na przetwarzanie jego danych osobowych zgodnie z Ustawą z dnia 10 maja 2018 r. o ochronie danych osobowych wyłącznie dla potrzeb niezbędnych do realizacji czynności, związanych z usługami, które zamówił w Hotelu Dla Psów .",
+        "23. W sprawach, których nie opisuje niniejszy regulamin, mają zastosowanie przepisy Kodeksu Cywilnego.",
+        "Właściciel/opiekun może wyrazić pisemną zgodę na bezpłatne umieszczenie zdjęć lub filmów z udziałem jego zwierzęcia w materiałach ilustrujących działania Hotelu Dla Psów w bazie klientów Hotelu, na jego stronie www oraz portalach społecznościowych. Zgoda taka podpisywana jest wraz z Umową Powierzenia Psa."
       ]
     }
   ];
@@ -273,12 +282,15 @@ export default function RegulationsPage() {
                       {section.title}
                     </h2>
                     <div className="space-y-4 text-on-surface-variant text-sm md:text-base leading-relaxed">
-                      {section.paragraphs.map((p, idx) => (
-                        <div key={idx} className="flex gap-3 items-start">
-                          <span className="text-secondary font-bold shrink-0 mt-0.5">•</span>
-                          <p>{p}</p>
-                        </div>
-                      ))}
+                      {section.paragraphs.map((p, idx) => {
+                        const isNumbered = /^\d+\./.test(p.trim()) || /^[a-z]\./.test(p.trim());
+                        return (
+                          <div key={idx} className="flex gap-3 items-start">
+                            {!isNumbered && <span className="text-secondary font-bold shrink-0 mt-0.5">•</span>}
+                            <p className={isNumbered ? "pl-0" : ""}>{p}</p>
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
                 ))}
@@ -300,7 +312,7 @@ export default function RegulationsPage() {
                 Hotel z Lasów Corso
               </div>
               <p className="font-body-md text-body-md text-on-surface-variant max-w-sm leading-relaxed">
-                Profesjonalny hotel dla psów, gdzie komfort i bezpieczeństwo Twojego pupila są naszym priorytetem.
+                Hotel dla psów, gdzie komfort i bezpieczeństwo Twojego pupila są naszym priorytetem.
               </p>
             </div>
             
@@ -309,12 +321,15 @@ export default function RegulationsPage() {
                 <Link href="/certyfikaty" className="text-label-sm text-on-surface-variant hover:text-secondary underline transition-all font-medium">
                   Certyfikaty i Szkolenia
                 </Link>
+                <Link href="/polityka-prywatnosci" className="text-label-sm text-on-surface-variant hover:text-secondary underline transition-all font-medium">
+                  Polityka Prywatności
+                </Link>
                 <Link href="/regulamin" className="text-label-sm text-on-surface-variant hover:text-secondary underline transition-all font-medium">
                   Regulamin Usług
                 </Link>
               </div>
               <p className="font-label-sm text-label-sm text-on-surface-variant opacity-70">
-                © {new Date().getFullYear()} Hotel z Lasów Corso. Built with warmth and care.
+                © {new Date().getFullYear()} Hotel z Lasów Corso.
               </p>
             </div>
           </div>
