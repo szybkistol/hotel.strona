@@ -355,7 +355,7 @@ export default function GalleryPage() {
             </div>
             
             <div className="flex flex-col items-center md:items-end gap-3 text-center md:text-right">
-              <div className="flex gap-6">
+              <div className="flex flex-wrap justify-center md:justify-end gap-x-6 gap-y-2">
                 <Link href="/certyfikaty" className="text-label-sm text-on-surface-variant hover:text-secondary underline transition-all font-medium">
                   Certyfikaty i Szkolenia
                 </Link>

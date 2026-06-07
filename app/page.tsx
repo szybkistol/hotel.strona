@@ -230,7 +230,7 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-background text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed pb-0 font-body-md min-h-screen">
+    <div className="bg-background text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed pb-0 font-body-md min-h-screen overflow-x-hidden">
 
       {/* Navigation Shell */}
       <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled || isMobileMenuOpen
@@ -942,7 +942,7 @@ export default function Home() {
             </div>
 
             <div className="flex flex-col items-center md:items-end gap-3 text-center md:text-right">
-              <div className="flex gap-6">
+              <div className="flex flex-wrap justify-center md:justify-end gap-x-6 gap-y-2">
                 <Link href="/certyfikaty" className="text-label-sm text-on-surface-variant hover:text-secondary underline transition-all font-medium">
                   Certyfikaty i Szkolenia
                 </Link>
