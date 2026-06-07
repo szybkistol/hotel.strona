@@ -355,7 +355,7 @@ export default function Home() {
       <main>
 
         {/* Hero Section */}
-        <section className="relative h-[45vh] min-h-[420px] md:h-screen flex items-center overflow-hidden">
+        <section className="relative min-h-screen md:h-screen flex items-center overflow-hidden">
           <div className="absolute inset-0 z-0">
             <img
               className="w-full h-full object-cover"
@@ -367,7 +367,7 @@ export default function Home() {
             {/* Smooth transition bottom fade to light green */}
             <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#eef4f0] to-transparent pointer-events-none"></div>
           </div>
-          <div className="relative z-10 max-w-[1280px] mx-auto px-margin-desktop w-full pt-28 md:pt-12">
+          <div className="relative z-10 max-w-[1280px] mx-auto px-margin-desktop w-full pt-32 pb-12 md:py-12">
             <div className="max-w-2xl text-on-primary">
               <h1 className="font-headline-xl text-[38px] md:text-[56px] lg:text-[68px] mb-stack-sm leading-tight">
                 Drugi Dom Dla Twojego Przyjaciela
