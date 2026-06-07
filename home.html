@@ -415,7 +415,7 @@
             <div
                 class="absolute bottom-0 left-0 w-96 h-96 bg-secondary-container/20 rounded-full blur-3xl -ml-48 -mb-48">
             </div>
-            <div class="max-w-[1280px] mx-auto px-margin-desktop relative z-10">
+            <div class="max-w-[1280px] mx-auto px-4 md:px-margin-desktop relative z-10">
                 <div class="max-w-4xl mx-auto text-center mb-stack-lg">
                     <span class="text-secondary font-label-md uppercase tracking-[0.2em] mb-3 block">Rezerwacja
                         Online</span>
@@ -428,7 +428,7 @@
                 <div
                     class="bg-surface-bright rounded-[2rem] shadow-2xl overflow-hidden border border-white/40 backdrop-blur-sm grid lg:grid-cols-12 gap-0">
                     <!-- Left: Interactive Calendar -->
-                    <div class="p-8 md:p-12 border-r border-outline-variant/20 lg:col-span-8" id="calendar-container">
+                    <div class="p-4 sm:p-8 md:p-12 border-r border-outline-variant/20 lg:col-span-8" id="calendar-container">
                         <div class="flex justify-between items-center mb-10">
                             <div>
                                 <h3 id="calendar-month-label" class="font-headline-md text-primary text-2xl"></h3>
@@ -446,16 +446,16 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="grid grid-cols-7 gap-3 mb-2">
-                            <div class="text-center font-label-md text-on-surface-variant/60 pb-4">Pon</div>
+                        <div class="grid grid-cols-7 gap-2 md:gap-3 mb-2 text-xs md:text-sm text-center">
+                            <div class="text-center font-label-md text-on-surface-variant/60 pb-4">Pn</div>
                             <div class="text-center font-label-md text-on-surface-variant/60 pb-4">Wt</div>
                             <div class="text-center font-label-md text-on-surface-variant/60 pb-4">Śr</div>
-                            <div class="text-center font-label-md text-on-surface-variant/60 pb-4">Czw</div>
+                            <div class="text-center font-label-md text-on-surface-variant/60 pb-4">Cz</div>
                             <div class="text-center font-label-md text-on-surface-variant/60 pb-4">Pt</div>
-                            <div class="text-center font-label-md text-on-surface-variant/60 pb-4">Sob</div>
-                            <div class="text-center font-label-md text-on-surface-variant/60 pb-4">Ndz</div>
+                            <div class="text-center font-label-md text-on-surface-variant/60 pb-4">Sb</div>
+                            <div class="text-center font-label-md text-on-surface-variant/60 pb-4">Nd</div>
                         </div>
-                        <div id="calendar-days-grid" class="grid grid-cols-7 gap-3 mb-4">
+                        <div id="calendar-days-grid" class="grid grid-cols-7 gap-2 md:gap-3 mb-4">
                             <!-- Dynamic days here -->
                         </div>
                         <div class="mt-8 pt-8 border-t border-outline-variant/20 flex flex-wrap gap-6">

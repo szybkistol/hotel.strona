@@ -588,7 +588,7 @@ export default function Home() {
           <div className="absolute top-0 right-0 w-96 h-96 bg-primary-fixed/20 rounded-full blur-3xl -mr-48 -mt-48 pointer-events-none"></div>
           <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary-container/20 rounded-full blur-3xl -ml-48 -mb-48 pointer-events-none"></div>
 
-          <div className="max-w-[1280px] mx-auto px-margin-desktop relative z-10">
+          <div className="max-w-[1280px] mx-auto px-4 md:px-margin-desktop relative z-10">
             <div className="max-w-4xl mx-auto text-center mb-stack-lg space-y-2">
               <span className="text-secondary font-label-md uppercase tracking-[0.2em] mb-1 block font-semibold">
                 Rezerwacja Online
@@ -605,7 +605,7 @@ export default function Home() {
             <div className="bg-surface-bright rounded-[2rem] shadow-2xl overflow-hidden border border-white/40 backdrop-blur-sm grid lg:grid-cols-12 gap-0 max-w-5xl mx-auto">
 
               {/* Left Column: Interactive Calendar */}
-              <div id="calendar-container" className="p-8 md:p-10 border-r border-outline-variant/20 lg:col-span-8 flex flex-col justify-between">
+              <div id="calendar-container" className="p-4 sm:p-8 md:p-10 border-r border-outline-variant/20 lg:col-span-8 flex flex-col justify-between">
                 <div id="calendar-grid-container" className="transition-all duration-300 rounded-2xl p-2">
                   <div className="flex justify-between items-center mb-8">
                     <div>
@@ -635,9 +635,9 @@ export default function Home() {
                   </div>
 
                   {/* Calendar Grid Header */}
-                  <div className="grid grid-cols-7 gap-2 mb-2 text-center">
-                    {["Pon", "Wt", "Śr", "Czw", "Pt", "Sob", "Ndz"].map((dayName) => (
-                      <div key={dayName} className="font-label-md text-on-surface-variant/60 font-semibold pb-2 border-b border-surface-container">
+                  <div className="grid grid-cols-7 gap-2 mb-2 text-center text-xs md:text-sm">
+                    {["Pn", "Wt", "Śr", "Cz", "Pt", "Sb", "Nd"].map((dayName) => (
+                      <div key={dayName} className="font-label-md text-on-surface-variant/60 font-semibold pb-2 border-b border-surface-container text-center">
                         {dayName}
                       </div>
                     ))}
