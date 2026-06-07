@@ -689,14 +689,6 @@ export default function Home() {
                     <span className="w-3 h-3 bg-secondary rounded-full shadow-sm shadow-secondary/50"></span>
                     <span className="text-label-sm text-on-surface-variant font-semibold">Twój wybór</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <span className="w-3 h-3 bg-error/40 rounded-full"></span>
-                    <span className="text-label-sm text-on-surface-variant font-semibold">Brak miejsc</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="w-3 h-3 bg-surface-container rounded-full border border-outline-variant/30"></span>
-                    <span className="text-label-sm text-on-surface-variant font-semibold">Dostępne</span>
-                  </div>
                 </div>
               </div>
 
