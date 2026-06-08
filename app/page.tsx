@@ -20,6 +20,9 @@ export default function Home() {
   // Submission status
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [validationError, setValidationError] = useState<string | null>(null);
 
   // Scroll state for transparent/colored navbar
   const [isScrolled, setIsScrolled] = useState(false);
@@ -137,15 +140,51 @@ export default function Home() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!ownerName || !phoneNumber || !checkIn || !checkOut) {
-      alert("Proszę wypełnić wszystkie wymagane pola.");
+      setValidationError("Proszę wypełnić wszystkie wymagane pola.");
       return;
     }
     const phoneRegex = /^(?:\+(?:\d{1,3})[ -]?)?(?:\d[ -]?){9,12}$/;
     if (!phoneRegex.test(phoneNumber.trim())) {
-      alert("Proszę podać poprawny numer telefonu (np. 504 239 097).");
+      setValidationError("Proszę podać poprawny numer telefonu (np. 123 456 789).");
       return;
     }
+    setSubmitError(null);
     setIsConfirmModalOpen(true);
+  };
+
+  const handleSendReservation = async () => {
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      const response = await fetch("/api/send", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ownerName,
+          phoneNumber,
+          checkIn,
+          checkOut,
+          notes,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "Wystąpił nieoczekiwany błąd podczas wysyłania.");
+      }
+
+      setIsConfirmModalOpen(false);
+      setIsSuccessModalOpen(true);
+    } catch (err: any) {
+      console.error(err);
+      setSubmitError(err.message || "Błąd połączenia z serwerem.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const navLinks = [
@@ -724,13 +763,15 @@ export default function Home() {
                         type="tel"
                         value={phoneNumber}
                         onChange={(e) => setPhoneNumber(e.target.value)}
-                        placeholder="504 239 097"
+                        placeholder="123 456 789"
                         pattern="(?:\+\d{1,3}[ -]?)?(?:\d[ -]?){9,12}"
-                        title="Proszę wpisać poprawny numer telefonu (np. 504 239 097)"
+                        title="Proszę wpisać poprawny numer telefonu (np. 123 456 789)"
                         className="w-full bg-white border border-outline-variant/20 rounded-xl p-3.5 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all shadow-sm font-medium"
                         required
                       />
                     </div>
+
+
 
                     {/* Dates block */}
                     <div className="grid grid-cols-2 gap-4">
@@ -868,7 +909,7 @@ export default function Home() {
                 className="h-[400px] bg-surface-container rounded-2xl overflow-hidden soft-card-shadow border-4 border-white relative group cursor-pointer"
               >
                 <iframe
-                  src="https://maps.google.com/maps?q=Sosnowo%2020,%2056-500%20Wioska&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                  src="https://maps.google.com/maps?q=Hotel%20dla%20Ps%C3%B3w%20%22z%20Las%C3%B3w%20Corso%22,%20Sosnowa%2020,%2056-500%20Wioska&t=&z=15&ie=UTF8&iwloc=&output=embed"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
@@ -982,24 +1023,43 @@ export default function Home() {
                 <div><strong>Przyjazd:</strong> <span>{checkIn}</span></div>
                 <div><strong>Wyjazd:</strong> <span>{checkOut}</span></div>
               </div>
+              {submitError && (
+                <div className="bg-error-container text-on-error-container border border-error/15 text-xs font-semibold p-3.5 rounded-2xl text-left leading-relaxed mt-3 flex items-start gap-2">
+                  <span className="material-symbols-outlined text-[16px] text-error shrink-0 mt-0.5">error</span>
+                  <span>{submitError}</span>
+                </div>
+              )}
             </div>
             <div className="flex gap-4 w-full">
               <button
                 type="button"
                 onClick={() => setIsConfirmModalOpen(false)}
-                className="w-1/2 border border-outline rounded-xl py-3 font-label-md text-on-surface-variant hover:bg-surface-container transition-all cursor-pointer font-bold active:scale-95"
+                disabled={isSubmitting}
+                className={`w-1/2 border border-outline rounded-xl py-3 font-label-md text-on-surface-variant transition-all font-bold active:scale-95 ${
+                  isSubmitting ? "opacity-50 cursor-not-allowed" : "hover:bg-surface-container cursor-pointer"
+                }`}
               >
                 Anuluj
               </button>
               <button
                 type="button"
-                onClick={() => {
-                  setIsConfirmModalOpen(false);
-                  setIsSuccessModalOpen(true);
-                }}
-                className="w-1/2 bg-primary text-on-primary rounded-xl py-3 font-label-md text-on-primary hover:bg-primary-container transition-all cursor-pointer font-bold shadow-md active:scale-95"
+                onClick={handleSendReservation}
+                disabled={isSubmitting}
+                className={`w-1/2 bg-primary text-on-primary rounded-xl py-3 font-label-md transition-all font-bold shadow-md active:scale-95 flex items-center justify-center gap-2 ${
+                  isSubmitting ? "opacity-75 cursor-not-allowed" : "hover:bg-primary-container cursor-pointer"
+                }`}
               >
-                Wyślij
+                {isSubmitting ? (
+                  <>
+                    <svg className="animate-spin h-5 w-5 text-on-primary shrink-0" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                    </svg>
+                    Wysyłanie...
+                  </>
+                ) : (
+                  "Wyślij"
+                )}
               </button>
             </div>
           </div>
@@ -1027,10 +1087,40 @@ export default function Home() {
               </p>
             </div>
             <button
-              onClick={() => setIsSuccessModalOpen(false)}
+              onClick={() => {
+                setIsSuccessModalOpen(false);
+                setCheckIn("");
+                setCheckOut("");
+                setOwnerName("");
+                setPhoneNumber("");
+                setNotes("");
+              }}
               className="bg-primary text-on-primary w-full py-3.5 rounded-xl font-label-md text-label-md active:scale-95 hover:bg-primary-container transition-all cursor-pointer font-bold shadow-md"
             >
               Zamknij okno
+            </button>
+          </div>
+        </div>
+      )}
+      {validationError && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center px-4 bg-black/60 backdrop-blur-sm animate-fade-in">
+          <div className="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl border border-surface-container text-center space-y-6 animate-scale-up">
+            <div className="w-16 h-16 bg-error-container rounded-full flex items-center justify-center text-error mx-auto">
+              <span className="material-symbols-outlined text-4xl select-none" style={{ fontVariationSettings: "'FILL' 1" }}>
+                warning
+              </span>
+            </div>
+            <div className="space-y-2">
+              <h3 className="font-headline-md text-primary font-bold text-2xl">Błąd walidacji</h3>
+              <p className="text-body-md text-on-surface-variant leading-relaxed">
+                {validationError}
+              </p>
+            </div>
+            <button
+              onClick={() => setValidationError(null)}
+              className="bg-primary text-on-primary w-full py-3.5 rounded-xl font-label-md text-label-md active:scale-95 hover:bg-primary-container transition-all cursor-pointer font-bold shadow-md"
+            >
+              Popraw dane
             </button>
           </div>
         </div>
