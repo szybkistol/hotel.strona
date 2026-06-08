@@ -23,11 +23,11 @@ export async function POST(request: Request) {
 
     const resend = new Resend(apiKey);
 
-    const fromEmail = process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev";
+    const fromEmail = process.env.RESEND_FROM_EMAIL || "rezerwacje@zlasowcorso.com";
     const toEmailsStr = process.env.RESEND_TO_EMAILS;
     const toEmails = toEmailsStr
       ? toEmailsStr.split(",").map((email) => email.trim()).filter(Boolean)
-      : ["jakub.siudy05@gmail.com", "kasiasiudy@o2.pl"];
+      : ["jakub.siudy05@gmail.com", "kasiasiudy76@gmail.com"];
 
     if (toEmails.length === 0) {
       return Response.json(
@@ -36,7 +36,7 @@ export async function POST(request: Request) {
       );
     }
 
-    // Formatter to show date beautifully in Polish (e.g. "3 grudnia 2024")
+    // Formatter to show date beautifully in Polish (e.g. "3 grudnia 2026")
     const formatPolishDate = (dateStr: string) => {
       if (!dateStr) return "";
       const [year, month, day] = dateStr.split("-");
