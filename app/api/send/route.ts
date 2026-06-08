@@ -23,6 +23,19 @@ export async function POST(request: Request) {
 
     const resend = new Resend(apiKey);
 
+    const fromEmail = process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev";
+    const toEmailsStr = process.env.RESEND_TO_EMAILS;
+    const toEmails = toEmailsStr
+      ? toEmailsStr.split(",").map((email) => email.trim()).filter(Boolean)
+      : ["jakub.siudy05@gmail.com", "kasiasiudy@o2.pl"];
+
+    if (toEmails.length === 0) {
+      return Response.json(
+        { error: "Brak zdefiniowanych odbiorców w zmiennej środowiskowej RESEND_TO_EMAILS." },
+        { status: 500 }
+      );
+    }
+
     // Formatter to show date beautifully in Polish (e.g. "3 grudnia 2024")
     const formatPolishDate = (dateStr: string) => {
       if (!dateStr) return "";
@@ -186,8 +199,8 @@ export async function POST(request: Request) {
     `;
 
     const data = await resend.emails.send({
-      from: "onboarding@resend.dev",
-      to: ["jakub.siudy05@gmail.com", "kasiasiudy@o2.pl"],
+      from: fromEmail,
+      to: toEmails,
       subject: `Nowe zgłoszenie rezerwacji - ${ownerName}`,
       html: emailHtml,
     });
