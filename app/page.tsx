@@ -446,7 +446,7 @@ export default function Home() {
                 <img
                   className="rounded-xl soft-card-shadow w-auto max-w-full h-auto max-h-[480px] mx-auto block border border-surface-container"
                   alt="Zdjęcie przedstawiające opiekuna psa w hotelu Hotel z Lasów Corso"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAN9-Bme86Q3KNMiygotxrRjid40m_vfdPpk0Rtf-p12i66bENz-svowlgcfCHIRLAf-lROT4uwlEFWJfSaInxEf9HV55clcaihpPuH0qyADXiMBZ_xL0eOHE84AJ2JDA8VNYVYqnrd996XrOR5SYLu5jJfs9aQh5h3MLg1aDbzrQiD8-WW7ILHOSVTXM-FdpMBm8ari6F9GKI2wv_wic_lufweI39DtGwxB8x8c6V030klOkMLmgJ7egYY6AlcbkLF2zQZQHXt1Q"
+                  src="/o nas.jpeg"
                   loading="lazy"
                 />
               </div>
