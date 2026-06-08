@@ -187,7 +187,7 @@ export async function POST(request: Request) {
 
     const data = await resend.emails.send({
       from: "onboarding@resend.dev",
-      to: "jakub.siudy05@gmail.com",
+      to: ["jakub.siudy05@gmail.com", "kasiasiudy@o2.pl"],
       subject: `Nowe zgłoszenie rezerwacji - ${ownerName}`,
       html: emailHtml,
     });
