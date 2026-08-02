@@ -593,31 +593,66 @@ export default function Home() {
           <div className="max-w-[1280px] mx-auto px-margin-desktop">
             <div className="text-center mb-stack-md">
               <h2 className="font-headline-lg text-headline-lg text-primary font-bold">Cennik</h2>
-
             </div>
 
             <div className="flex flex-wrap justify-center gap-gutter pt-4">
               {[
-                { title: "Mały Pies", desc: "Waga do 15 kg", price: "70 PLN" },
-                { title: "Średni Pies", desc: "Waga 15 - 30 kg", price: "85 PLN" },
-                { title: "Duży Pies", desc: "Waga powyżej 30 kg", price: "100 PLN" },
+                {
+                  title: "Małe psy",
+                  desc: "Waga do 15 kg",
+                  breeds: "(np. York, Chihuahua, Maltańczyk, Shih Tzu)",
+                  price: "70 PLN",
+                },
+                {
+                  title: "Średnie psy",
+                  desc: "Waga 15 - 30 kg",
+                  breeds: "(np. Cocker Spaniel, Border Collie, Beagle)",
+                  price: "90 PLN",
+                },
+                {
+                  title: "Duże psy",
+                  desc: "Waga powyżej 30 kg",
+                  breeds: "(np. Owczarek Niemiecki, Labrador, Golden Retriever, Husky)",
+                  price: "110 PLN",
+                },
               ].map((tier, idx) => (
                 <div
                   key={idx}
-                  className="bg-surface-container-low p-8 rounded-xl text-center flex flex-col items-center justify-center w-full max-w-[280px] border border-transparent hover:border-outline-variant hover:scale-[1.03] hover:bg-white soft-card-shadow transition-all duration-300"
+                  className="bg-surface-container-low p-8 rounded-2xl text-center flex flex-col items-center justify-between w-full max-w-[320px] border border-transparent hover:border-outline-variant hover:scale-[1.03] hover:bg-white soft-card-shadow transition-all duration-300"
                 >
-                  <h3 className="font-headline-md text-headline-md text-primary mb-1 font-bold">
-                    {tier.title}
-                  </h3>
-                  <p className="text-label-sm text-on-surface-variant mb-5 font-medium">
-                    {tier.desc}
-                  </p>
-                  <div className="text-headline-lg text-secondary font-bold">
+                  <div>
+                    <h3 className="font-headline-md text-headline-md text-primary mb-1 font-bold">
+                      {tier.title}
+                    </h3>
+                    <p className="text-label-sm text-on-surface-variant font-medium">
+                      {tier.desc}
+                    </p>
+                    <p className="text-xs text-on-surface-variant/80 italic mt-2 mb-6 min-h-[36px] flex items-center justify-center">
+                      {tier.breeds}
+                    </p>
+                  </div>
+                  <div className="text-headline-lg text-secondary font-bold pt-2 border-t border-outline-variant/15 w-full">
                     {tier.price}{" "}
                     <span className="text-body-md text-on-surface-variant font-normal">/ doba</span>
                   </div>
                 </div>
               ))}
+            </div>
+
+            {/* Dodatkowe informacje o cenniku i dobie */}
+            <div className="mt-10 max-w-3xl mx-auto bg-surface-container-low/70 border border-outline-variant/20 rounded-2xl p-6 space-y-3 soft-card-shadow">
+              <div className="flex items-start gap-3 text-on-surface-variant text-sm leading-relaxed">
+                <span className="material-symbols-outlined text-primary text-xl shrink-0 pt-0.5 select-none">info</span>
+                <div>
+                  <strong className="text-primary font-semibold">Molosy i psy powyżej 50 kg:</strong> dla molosów oraz psów o wadze powyżej 50 kg cena pobytu jest ustalana indywidualnie.
+                </div>
+              </div>
+              <div className="flex items-start gap-3 text-on-surface-variant text-sm leading-relaxed border-t border-outline-variant/15 pt-3">
+                <span className="material-symbols-outlined text-secondary text-xl shrink-0 pt-0.5 select-none">schedule</span>
+                <div>
+                  <strong className="text-secondary font-semibold">Doba hotelowa:</strong> doba hotelowa rozpoczyna się i kończy o tej samej godzinie – trwa 24h od momentu przyjazdu (np. jeśli pies przyjechał o 8:00, doba kończy się również o 8:00 kolejnego dnia).
+                </div>
+              </div>
             </div>
           </div>
         </section>
