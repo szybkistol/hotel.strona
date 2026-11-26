@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Quicksand, Plus_Jakarta_Sans } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const quicksand = Quicksand({
@@ -35,7 +36,10 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-full flex flex-col overflow-x-hidden">{children}</body>
+      <body className="min-h-full flex flex-col overflow-x-hidden">
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
